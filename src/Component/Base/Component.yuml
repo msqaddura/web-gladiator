@@ -1,0 +1,5 @@
+// {type:class}
+
+[Component|_name;_owner;_components|createComponent;createComponents;]
+
+[ViewComponent]-^[Component]
