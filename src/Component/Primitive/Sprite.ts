@@ -4,10 +4,11 @@ import { DisplayObject } from '../Primitive/DisplayObject';
 import { Component } from '../Base/Component';
 import { View } from '../Base/View';
 
-export class Container extends View{
+export class Sprite extends View{
     
- constructor({owner,name,componentList,config,vfl=[""]}){
+ constructor({owner,name,componentList,params,config,vfl=[""]}){
      super({owner,name,componentList,config,vfl});
-     this.$view = new PIXI.Container();
+     var texture = PIXI.utils.TextureCache["images/bunny.png"];
+     this.$view = new PIXI.Sprite(texture);
  }
 } 

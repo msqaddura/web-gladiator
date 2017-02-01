@@ -1,29 +1,46 @@
 import { DisplayObject } from '../Primitive/DisplayObject';
 import { IView } from './IView';
 import { Component } from './Component';
-
+import { AutoLayoutAdapter } from '../../Adapter/AutolayoutAdapter';
 export class View extends Component implements IView {
-    _view;
-
-    constructor(owner, ...paramsArr) {
-        super(owner, paramsArr[0]);
-
+    $view;
+    _vfl;
+    _autolayout;
+    readonly config:Object;
+    constructor({owner,name,componentList,config,vfl=[""]}) {
+        super({owner,name,componentList});
+        this.config=config;
+        this._vfl = vfl;
     }
 
-    preCreate() {
-        this.createView();
+    postInitialize(){
+        this.renderLayout();
     }
-    createView(): void {
+
+    renderLayout(){
+        this._autolayout = AutoLayoutAdapter.getInstance().parse(this._vfl);
+    }
+
+
+    createComponent(comp):Component{
+       const component = new comp["family"]({
+           owner:this, 
+           name:comp.name,
+           componentList:comp.componentList,
+           config:comp.config,
+           vfl:comp.vfl
+        });
+       return component;
     }
 
     addComponent(component) {
         super.addComponent(component);
-        this.addView(component);
-
-    }
-    addView(component) {
         if (component instanceof View)
-            this._view.addChild(component._view);
-    }
+            this.addView(component);
 
+    }
+    addView(view:View){
+        this.$view.addChild(view.$view);
+    }
 }
+

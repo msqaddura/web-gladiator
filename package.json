@@ -19,7 +19,8 @@
     "watchify": "^3.8.0",
     "pixi.js": "*",
     "@alizurchik/ts-mixin":"*",
-    "mixin": "*"
+    "mixin": "*",
+    "autolayout": "*"
   },
   "dependencies": {
     "@types/pixi.js": "*"

@@ -1,43 +1,52 @@
 import { IComponent } from './IComponent';
-
+import { MissingComponent } from './MissingComponent';
 export class Component implements IComponent{
-    public  _owner: Component;
-    readonly _name:string;
-    readonly _family:Component;
-    public _components:Object={};
+    readonly  owner: Component;
+    readonly name:string;
+    readonly componentList:Object;
+    readonly family;
+    public components:Object={};
 
-    constructor(owner=null ,{name="",family,params={},components={}}) {
-        this._owner = owner;
-        this._name = name;
-        this._family = family
-        this.initialize(params);
+    constructor({owner=null,name="N/A", componentList={}}) {
+        this.owner = owner;
+        this.name = name;
+        this.componentList=componentList;
 
-        this.preCreate();
-        this.createComponents(components);
-        this.postCreate();
+        //this.selfConstruct();
+
+        //this.preInitialize();
+        //this.initialize();
+        //this.postInitialize();
+
+        //this.preCreateComponents();
+        //this.createComponents(componentList);
+        //this.postCreateComponents();
     }
+    selfConstruct(){}
+    preInitialize(){}
+    initialize(){}
+    postInitialize(){}
 
-    initialize(params:Object):void{
-    }
+    preCreateComponents():void{}
 
-    preCreate():void{}
-    createComponents(components:Object):Object{
-        for(var key in components){
-            this.createComponent(components[key]);
+    createComponents():Object{
+        for(var key in this.componentList){
+            this.createComponent(this.componentList[key]);
         }
-        return this._components;
+        return this.components;
     }
     
-    createComponent(component:IComponent):void{
-       const comp = new component['family'](this,component);
-       this.addComponent(comp);
+    createComponent(comp:IComponent):Component{
+       const component = new comp["family"]({owner:this, name:comp.name, componentList:comp.componentList});
+       this.addComponent(component);
+       return component;
     }
 
     addComponent(component:Component):void{
-         this._components[component._name]=component;
+         this.components[component.name]=component;
     }
 
-    postCreate():void{};
+    postCreateComponents():void{};
     disposeComponent(component:Component){
         component.dispose();
     }
@@ -46,6 +55,11 @@ export class Component implements IComponent{
         component.destroy();
     }
 
+    iterate(fn:Function, list=this.componentList){
+        for(var key in list){
+            fn(list[key]);
+        }
+    }
 
     dispose(){}
     destroy(){}

@@ -12,29 +12,36 @@ import { Component } from "./Component/Base/Component";
 import { Container } from "./Component/Primitive/Container";
 import { Scene } from "./Component/Primitive/Scene";
 import { Application } from "./Component/Primitive/Application";
-import { PIXI_CONTAINER } from "./Component/Primitive/PIXI_Container"
-const full = {
-    "Application": {
+import { Sprite } from "./Component/Primitive/Sprite";
+import { AutoLayoutAdapter } from "./Adapter/AutolayoutAdapter";
+import { ComponentBuilder } from "./Builder/ComponentBuilder";
+
+  const  app = {
         "name": "Application",
         "family": Application,
-        "param": [12345],
-        "components": {
+        "config": null,
+        "componentList": {
             "Game": {
                 "name": "Game",
                 "family": Scene,
-                "params": [5555],
-                "components": {
+                "vfl": [
+                    'H:|[One(50%)][Two(50%)]|',
+                    'V:|[One(50%)][Two(50%)]|'
+                    ],
+                "componentList": {
                     "Container": {
                         "name": "One",
                         "family": Container,
-                        "vfl": "",
+                        "config": "",
                         "param": [1111],
-                        "components": {
+                        "vfl": ['H:|[view1(==view2)]-10-[view2]|',
+                            'V:|[view1,view2]|'],
+                        "componentList": {
                             "Container": {
                                 "name": "Two",
-                                "family": Container,
-                                "vfl": "",
-                                "param": [2222]
+                                "family": Sprite,
+                                "vfl": ['H:|[view1(==view2)]-10-[view2]|',
+                                    'V:|[view1,view2]|']
                             }
                         }
                     }
@@ -42,12 +49,28 @@ const full = {
             }
         }
     }
+
+
+PIXI.loader
+  .add([
+    "images/bunny.png",
+    "images/e.png"
+  ])
+  .on("progress", loadProgressHandler)
+  .load(setup);
+
+function loadProgressHandler() {
+  console.log("loading"); 
 }
 
-const app = new Application(null, full.Application);
-document.body.appendChild(app._view);
+function setup() {
+  console.log("setup");
+  const cb = new ComponentBuilder(app);
+  console.info(cb);
+  document.body.appendChild(cb.root.canvas);
+  console.info(AutoLayoutAdapter.getInstance());
+}
 
-const x = new PIXI_CONTAINER();
 
-console.info("yxxxay",app);
-alert("ONE");
+
+
