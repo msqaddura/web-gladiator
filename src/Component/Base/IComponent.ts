@@ -18,6 +18,9 @@ export interface IComponent {
     addComponent(component:Component,name):void;
     postCreateComponents():void;
     
+    preCreateNestedComponents():void;
+    createNestedComponents(level:Number);
+    postCreateNestedComponents():void;
     
     disposeComponent(component:Component);
     destroyComponent(component:Component);
