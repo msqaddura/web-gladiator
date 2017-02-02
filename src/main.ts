@@ -25,23 +25,22 @@ import { ComponentBuilder } from "./Builder/ComponentBuilder";
                 "name": "Game",
                 "family": Scene,
                 "vfl": [
-                    'H:|[One(50%)][Two(50%)]|',
-                    'V:|[One(50%)][Two(50%)]|'
+                    'H:|[One(100%)]|',
+                    'V:|[One(100%)]|'
                     ],
                 "componentList": {
                     "Container": {
                         "name": "One",
                         "family": Container,
                         "config": "",
-                        "param": [1111],
-                        "vfl": ['H:|[view1(==view2)]-10-[view2]|',
-                            'V:|[view1,view2]|'],
+                        "vfl": [
+                            'H:|~[Two(50)]~|',
+                            'V:|~[Two(50)]~|'
+                        ],
                         "componentList": {
                             "Container": {
                                 "name": "Two",
-                                "family": Sprite,
-                                "vfl": ['H:|[view1(==view2)]-10-[view2]|',
-                                    'V:|[view1,view2]|']
+                                "family": Sprite
                             }
                         }
                     }

@@ -31,15 +31,13 @@ export class Component implements IComponent{
 
     createComponents():Object{
         for(var key in this.componentList){
-            this.createComponent(this.componentList[key]);
+            this.addComponent(this.createComponent(this.componentList[key]));
         }
         return this.components;
     }
     
     createComponent(comp:IComponent):Component{
-       const component = new comp["family"]({owner:this, name:comp.name, componentList:comp.componentList});
-       this.addComponent(component);
-       return component;
+       return new comp["family"]({owner:this, name:comp.name, componentList:comp.componentList});
     }
 
     addComponent(component:Component):void{
@@ -49,6 +47,16 @@ export class Component implements IComponent{
     postCreateComponents():void{};
     disposeComponent(component:Component){
         component.dispose();
+    }
+
+    preCreateNestedComponents(){}
+    createNestedComponents(level:Number=100){
+        for(var key in this.components){
+            this.components[key].createComponents();
+        } 
+    }
+    postCreateNestedComponents(){
+
     }
 
     destroyComponent(component:Component){
