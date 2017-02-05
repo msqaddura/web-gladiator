@@ -71,4 +71,5 @@ export class Component implements IComponent{
 
     dispose(){}
     destroy(){}
+
 }

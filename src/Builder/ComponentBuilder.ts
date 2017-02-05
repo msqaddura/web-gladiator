@@ -1,10 +1,14 @@
-import { Component } from '../Component/Base/Component'
+import { Component } from '../Component/Base/Component';
+import { View } from '../Component/Base/View';
 export class ComponentBuilder {
     root;
     constructor(comp){
         console.info(comp);
-        this.root = new comp["family"]({owner:this,name:comp.name,componentList:comp.componentList});
+        window['cb']=this;
+        window.addEventListener("resize", this.resize.bind(this));
+        this.root = new comp["family"]({owner:this,name:comp.name,componentList:comp.componentList,vfl:comp.vfl});
         this._createComponents(this.root);
+        this.resize();
     }
 
     _createComponents(owner:Component) {
@@ -20,6 +24,8 @@ export class ComponentBuilder {
         //     //this._createComponent(componentList[key],owner);
         // }
         owner.postCreateComponents();
+        if(owner instanceof View)
+            owner.parseLayout();
         // owner.preCreateNestedComponents();
         // owner.createNestedComponents();
         // owner.postCreateNestedComponents();
@@ -42,4 +48,35 @@ export class ComponentBuilder {
         //if(component.componentList)
         //    this._createComponents(component.componentList,component);       
     }
+
+    resize(){
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+     
+    
+    //window['cb'].root.$width = width;
+    //window['cb'].root.$height = height;
+    this.root.renderer.resize(width,height);
+    this.root.$width=width;
+    this.root.$height=height;
+    this.updateLayout(this.root);
+    }
+    updateLayout(owner=this.root){
+        if(owner instanceof View){
+            owner.renderLayout();
+        }
+        for(const key in owner.components){
+            this.updateLayout(owner.components[key])
+        }
+    }
+
+    info(owner=this.root){
+        if(owner instanceof View){
+            owner.info();
+        }
+        for(const key in owner.components){
+            this.info(owner.components[key])
+        }
+    }
+
 }

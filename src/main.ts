@@ -20,6 +20,10 @@ import { ComponentBuilder } from "./Builder/ComponentBuilder";
         "name": "Application",
         "family": Application,
         "config": null,
+        "vfl": [
+                'H:|[Game(100%)]|',
+                'V:|[Game(100%)]|'
+        ],
         "componentList": {
             "Game": {
                 "name": "Game",
@@ -29,16 +33,16 @@ import { ComponentBuilder } from "./Builder/ComponentBuilder";
                     'V:|[One(100%)]|'
                     ],
                 "componentList": {
-                    "Container": {
+                    "One": {
                         "name": "One",
                         "family": Container,
                         "config": "",
                         "vfl": [
-                            'H:|~[Two(50)]~|',
-                            'V:|~[Two(50)]~|'
+                            'H:|~[Two(100)]~|',
+                            'V:|~[Two(100)]~|'
                         ],
                         "componentList": {
-                            "Container": {
+                            "Two": {
                                 "name": "Two",
                                 "family": Sprite
                             }
