@@ -8,7 +8,7 @@ export class Sprite extends View{
     
  constructor({owner,name,componentList,params,config,vfl=[""]}){
      super({owner,name,componentList,config,vfl});
-     var texture = PIXI.utils.TextureCache["images/bunny.png"];
+     var texture = PIXI.utils.TextureCache["images/squareC.png"];
      this.$view = new PIXI.Sprite(texture);
  }
 } 
