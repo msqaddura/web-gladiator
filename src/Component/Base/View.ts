@@ -48,27 +48,37 @@ export class View extends Component implements IView {
         this.$view.height = value;
         this._height = value;
     }
-
+    selfConstruct(){
+        this.$view.name = this.name;
+    }
     postCreateComponents() {
         super.postCreateComponents();
-
-        this.renderLayout();
     }
 
+
+    parseLayout(){
+        this._autolayout = AutoLayoutAdapter.getInstance().parseVFL(this._vfl);
+        this.renderLayout();
+    }
     renderLayout() {
-        this._autolayout = AutoLayoutAdapter.getInstance().parse(this._vfl);
-        for (const key in this._autolayout.subViews) {
+        //TODO: save LayoutViews and dont update if it is the same
+        const layoutViews = this._autolayout.setSize(this.$width,this.$height)
+        for (const key in layoutViews.subViews) {
             const component = this.components[key];
             if (component) {
-                const subView = this._autolayout.subViews[key];
+                const subView = layoutViews.subViews[key];
                 component.$x = subView.left;
                 component.$y = subView.top;
                 component.$width = subView.width;
                 component.$height = subView.height;
             }
         }
+        //this.renderComponentsLayout();
     }
-
+    renderComponentsLayout(){
+        for (const key in this.components)
+            this.components[key].updateLayout;
+    }
 
     createComponent(comp): Component {
         return new comp["family"]({
@@ -88,6 +98,24 @@ export class View extends Component implements IView {
     }
     addView(view: View) {
         this.$view.addChild(view.$view);
+    }
+
+        info(){
+        const info = {
+            x:this.$x,
+            y:this.$y,
+            w:this.$width,
+            h:this.$height,
+
+        }
+        const info2 = {
+            Px:this.$view.x,
+            Py:this.$view.y,
+            Ph:this.$view.height,
+            Pw:this.$view.width
+        }
+        console.info(this.name,info,info2);
+        return info;
     }
 }
 
