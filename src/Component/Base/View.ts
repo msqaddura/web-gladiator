@@ -8,6 +8,10 @@ export class View extends Component implements IView {
     _y;
     _width;
     _height;
+    _anchorX;
+    _anchorY;
+    _scaleX;
+    _scaleY;
     _vfl;
     _autolayout;
     readonly config: Object;
@@ -15,6 +19,7 @@ export class View extends Component implements IView {
         super({ owner, name, componentList });
         this.config = config;
         this._vfl = vfl;
+        this.$view.name = this.name;
     }
 
     get $x() {
@@ -49,26 +54,70 @@ export class View extends Component implements IView {
         this._height = value;
     }
 
-    postCreateComponents() {
-        super.postCreateComponents();
-
-        this.renderLayout();
+    get $anchorX(){
+        return this._anchorX;
+    }
+    set $anchorX(value){
+        this._anchorX = value;
+        this.$view.anchor.x = value;
     }
 
+    get $anchorY(){
+        return this._anchorY;
+    }
+    set $anchorY(value){
+        this._anchorY = value;
+        this.$view.anchor.y = value;
+    }
+
+
+    get $scaleX(){
+        return this._scaleX;
+    }
+    set $scaleX(value){
+        this._scaleX = value;
+        this.$view.scale.x *= value;
+    }
+
+    get $scaleY(){
+        return this._scaleY;
+    }
+    set $scaleY(value){
+        this._scaleY = value;
+        this.$view.scale.y *= value;
+    }
+
+    selfConstruct(){
+    }
+
+    postCreateComponents() {
+        super.postCreateComponents();
+    }
+
+
+    parseLayout(){
+        this._autolayout = AutoLayoutAdapter.getInstance().parseVFL(this._vfl);
+        this.renderLayout();
+    }
     renderLayout() {
-        this._autolayout = AutoLayoutAdapter.getInstance().parse(this._vfl);
-        for (const key in this._autolayout.subViews) {
+        //TODO: save LayoutViews and dont update if it is the same
+        const layoutViews = this._autolayout.setSize(this.$width,this.$height)
+        for (const key in layoutViews.subViews) {
             const component = this.components[key];
             if (component) {
-                const subView = this._autolayout.subViews[key];
+                const subView = layoutViews.subViews[key];
                 component.$x = subView.left;
                 component.$y = subView.top;
                 component.$width = subView.width;
                 component.$height = subView.height;
             }
         }
+        //this.renderComponentsLayout();
     }
-
+    renderComponentsLayout(){
+        for (const key in this.components)
+            this.components[key].updateLayout;
+    }
 
     createComponent(comp): Component {
         return new comp["family"]({
@@ -88,6 +137,24 @@ export class View extends Component implements IView {
     }
     addView(view: View) {
         this.$view.addChild(view.$view);
+    }
+
+        info(){
+        const info = {
+            x:this.$x,
+            y:this.$y,
+            w:this.$width,
+            h:this.$height,
+
+        }
+        const info2 = {
+            Px:this.$view.x,
+            Py:this.$view.y,
+            Ph:this.$view.height,
+            Pw:this.$view.width
+        }
+        console.info(this.name,info,info2);
+        return info;
     }
 }
 
