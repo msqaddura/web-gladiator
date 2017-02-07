@@ -19,7 +19,8 @@ PIXI.loader
   .add([
     "images/bunny.png",
     "images/squareC.png",
-    "images/e.png"
+    "images/e.png",
+    "images/fighter.json"
   ])
   .on("progress", loadProgressHandler)
   .load(setup);

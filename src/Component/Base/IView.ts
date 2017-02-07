@@ -8,6 +8,10 @@ export interface IView extends IComponent{
     _y;
     _width;
     _height;
+    _anchorX;
+    _anchorY;
+    _scaleX;
+    _scaleY;
     _vfl;
     _autolayout;
     readonly config:Object;   

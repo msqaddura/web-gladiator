@@ -8,6 +8,10 @@ export class View extends Component implements IView {
     _y;
     _width;
     _height;
+    _anchorX;
+    _anchorY;
+    _scaleX;
+    _scaleY;
     _vfl;
     _autolayout;
     readonly config: Object;
@@ -15,6 +19,7 @@ export class View extends Component implements IView {
         super({ owner, name, componentList });
         this.config = config;
         this._vfl = vfl;
+        this.$view.name = this.name;
     }
 
     get $x() {
@@ -48,9 +53,43 @@ export class View extends Component implements IView {
         this.$view.height = value;
         this._height = value;
     }
-    selfConstruct(){
-        this.$view.name = this.name;
+
+    get $anchorX(){
+        return this._anchorX;
     }
+    set $anchorX(value){
+        this._anchorX = value;
+        this.$view.anchor.x = value;
+    }
+
+    get $anchorY(){
+        return this._anchorY;
+    }
+    set $anchorY(value){
+        this._anchorY = value;
+        this.$view.anchor.y = value;
+    }
+
+
+    get $scaleX(){
+        return this._scaleX;
+    }
+    set $scaleX(value){
+        this._scaleX = value;
+        this.$view.scale.x *= value;
+    }
+
+    get $scaleY(){
+        return this._scaleY;
+    }
+    set $scaleY(value){
+        this._scaleY = value;
+        this.$view.scale.y *= value;
+    }
+
+    selfConstruct(){
+    }
+
     postCreateComponents() {
         super.postCreateComponents();
     }

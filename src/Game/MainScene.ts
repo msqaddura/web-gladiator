@@ -3,7 +3,7 @@ import { Container } from "../Component/Primitive/Container";
 import { Scene } from "../Component/Primitive/Scene";
 import { Application } from "../Component/Primitive/Application";
 import { Sprite } from "../Component/Primitive/Sprite";
-
+import { AnimatedSprite } from "../Component/Primitive/AnimatedSprite";
  export const  App = {
         "name": "Application",
         "family": Application,
@@ -135,11 +135,18 @@ import { Sprite } from "../Component/Primitive/Sprite";
                             "box22": {
                                 "name": "box22",
                                 "family": Container,
-                                "vfl":"HV:|[sprite]|",
+                                "vfl":[
+                                    "HV:|[sprite]|",
+                                    "HV:|[animatedSprite]|"
+                                    ],
                                 "componentList":{
                                     "sprite":{
                                         "name":"sprite",
                                         "family":Sprite
+                                    },
+                                    "animatedSprite":{
+                                        "name":"animatedSprite",
+                                        "family":AnimatedSprite
                                     }
                                 }
                             }
