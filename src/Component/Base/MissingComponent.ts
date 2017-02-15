@@ -1,7 +1,7 @@
 import { Component } from "./Component"
 export class MissingComponent extends Component{
-    constructor(owner=null,name="N/A",componentList={}){
-        super({owner,name,componentList});
+    constructor(owner, params){
+        super(owner, params);
         throw new Error(name);
     }
 }

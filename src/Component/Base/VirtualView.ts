@@ -5,8 +5,8 @@ import { View } from '../Base/View';
 
 export class VirtualView extends View{
     
- constructor({owner,name,componentList,config,vfl=[""]}){
-     super({owner,name,componentList,config,vfl});
+ constructor(owner,params){
+     super(owner,params);
  }
 
   set $width(value){

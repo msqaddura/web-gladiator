@@ -8,8 +8,8 @@ export class Application extends VirtualView{
  _application;
  canvas;
  renderer;
- constructor({owner=null,name="app",componentList={},config={},vfl=[""]}){
-     super({owner,name,componentList,config,vfl});
+ constructor(owner=null,params){
+     super(owner, params);
      this._application = new PIXI.Application(window.innerWidth,window.innerHeight);
      this.renderer = this._application.renderer;
      this.canvas = this._application.view;

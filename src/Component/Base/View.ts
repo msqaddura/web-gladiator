@@ -15,10 +15,10 @@ export class View extends Component implements IView {
     _vfl;
     _autolayout;
     readonly config: Object;
-    constructor({owner, name, componentList, config, vfl = [""]}) {
-        super({ owner, name, componentList });
-        this.config = config;
-        this._vfl = vfl;
+    constructor(owner, params) {
+        super( owner, {name:params.name, componentList:params.componentList} );
+        this.config = params.config || {};
+        this._vfl = params.vfl || [""];
         
     }
     bootstrap(){
@@ -61,8 +61,7 @@ export class View extends Component implements IView {
     }
 
     createComponent(comp): Component {
-        return new comp["family"]({
-            owner: this,
+        return new comp["family"](this,{
             name: comp.name,
             componentList: comp.componentList,
             config: comp.config,

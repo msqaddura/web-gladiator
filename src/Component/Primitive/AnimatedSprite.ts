@@ -6,8 +6,8 @@ import { View } from '../Base/View';
 
 export class AnimatedSprite extends View {
 
-    constructor({owner, name, componentList, params, config, vfl = [""]}) {
-        super({ owner, name, componentList, config, vfl });
+    constructor(owner, params) {
+        super( owner, params );
         var frames = [];
         for (var i = 0; i < 30; i++) {
             var val = i < 10 ? '0' + i : i;

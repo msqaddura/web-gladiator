@@ -7,7 +7,7 @@ export class Component implements IComponent{
     readonly family;
     public components:Object={};
 
-    constructor({owner=null,name="N/A", componentList={}}) {
+    constructor(owner=null,{name="N/A", componentList={}}) {
         this.owner = owner;
         this.name = name;
         this.componentList=componentList;
@@ -45,7 +45,7 @@ export class Component implements IComponent{
     }
     
     createComponent(comp:IComponent):Component{
-       return new comp["family"]({owner:this, name:comp.name, componentList:comp.componentList});
+       return new comp["family"](this,comp);
     }
 
     addComponent(component:Component):void{

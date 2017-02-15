@@ -6,11 +6,11 @@ export class ComponentBuilder {
         console.info(comp);
         window['cb']=this;
         window.addEventListener("resize", this.resize.bind(this));
-        this.root = new comp["family"]({owner:this,name:comp.name,componentList:comp.componentList,vfl:comp.vfl});
+        this.root = new comp["family"](this,comp);
         this._createComponents(this.root);
         this.resize();
     }
-
+  
     _createComponents(owner:Component) {
         owner.bootstrap();
         this._createNestedComponents(owner);
