@@ -9,12 +9,19 @@ export class AnimatedSprite extends View {
     constructor(owner, params) {
         super( owner, params );
         var frames = [];
-        for (var i = 0; i < 30; i++) {
-            var val = i < 10 ? '0' + i : i;
+        params.frameList.forEach(bag=>{
+            for (let i=bag.start; i<=bag.end;i++){
+                var val = i < 10 ? '0' + i : i;//TODO:use MathUtil
+                frames.push(PIXI.Texture.fromFrame(`${bag.prefix}${val}${bag.postfix}`));
+            }
+        });
+        this.$view = new PIXI.extras.AnimatedSprite(frames);
+    }
 
-            // magically works since the spritesheet was loaded with the pixi loader
-            frames.push(PIXI.Texture.fromFrame('rollSequence00' + val + '.png'));
-        }
-        this.$view = new PIXI.extras.AnimatedSprite(frames);;
+    play(){
+        this.$view.play();
+    }
+    stop(){
+        this.$view.stop();
     }
 } 

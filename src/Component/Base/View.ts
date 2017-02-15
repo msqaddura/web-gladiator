@@ -61,12 +61,7 @@ export class View extends Component implements IView {
     }
 
     createComponent(comp): Component {
-        return new comp["family"](this,{
-            name: comp.name,
-            componentList: comp.componentList,
-            config: comp.config,
-            vfl: comp.vfl
-        });
+        return new comp["family"](this,comp);
     }
 
     addComponent(component) {
