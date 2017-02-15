@@ -8,7 +8,7 @@
 // }
 
 // showHello("greeting", "TypeScript");
-import { App } from "./Game/MainScene";
+import { App } from "./Game/MainSceneStructure";
 import { AutoLayoutAdapter } from "./Adapter/AutolayoutAdapter";
 import { ComponentBuilder } from "./Builder/ComponentBuilder";
 
