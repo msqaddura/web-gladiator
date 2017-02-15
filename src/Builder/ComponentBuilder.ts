@@ -12,27 +12,8 @@ export class ComponentBuilder {
     }
 
     _createComponents(owner:Component) {
-        owner.selfConstruct();
-        owner.preInitialize();
-        owner.initialize();
-        owner.postInitialize();
-        owner.preCreateComponents();
-        owner.createComponents();
-        // for (const key in componentList){
-        //     const component:Component =  owner.createComponent(componentList[key]);
-        //     owner.addComponent(component);
-        //     //this._createComponent(componentList[key],owner);
-        // }
-        owner.postCreateComponents();
-        if(owner instanceof View)
-            owner.parseLayout();
-        // owner.preCreateNestedComponents();
-        // owner.createNestedComponents();
-        // owner.postCreateNestedComponents();
+        owner.bootstrap();
         this._createNestedComponents(owner);
-        // for (const key in owner.components){
-        //     this._createComponents(owner.components[key].componentList,owner.components[key]);
-        // }
     }
 
     _createNestedComponents(owner){

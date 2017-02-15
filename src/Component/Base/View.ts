@@ -19,75 +19,16 @@ export class View extends Component implements IView {
         super({ owner, name, componentList });
         this.config = config;
         this._vfl = vfl;
-        this.$view.name = this.name;
+        
     }
-
-    get $x() {
-        return this._x;
+    bootstrap(){
+        super.bootstrap();
+        this.parseLayout();
     }
-    set $x(value) {
-        this.$view.position.x = value;
-        this._x = value;
-    }
-
-    get $y() {
-        return this._y;
-    }
-    set $y(value) {
-        this.$view.position.y = value;
-        this._y = value;
-    }
-
-    get $width() {
-        return this._width;
-    }
-    set $width(value) {
-        this.$view.width = value;
-        this._width = value;
-    }
-
-    get $height() {
-        return this._height;
-    }
-    set $height(value) {
-        this.$view.height = value;
-        this._height = value;
-    }
-
-    get $anchorX(){
-        return this._anchorX;
-    }
-    set $anchorX(value){
-        this._anchorX = value;
-        this.$view.anchor.x = value;
-    }
-
-    get $anchorY(){
-        return this._anchorY;
-    }
-    set $anchorY(value){
-        this._anchorY = value;
-        this.$view.anchor.y = value;
-    }
-
-
-    get $scaleX(){
-        return this._scaleX;
-    }
-    set $scaleX(value){
-        this._scaleX = value;
-        this.$view.scale.x *= value;
-    }
-
-    get $scaleY(){
-        return this._scaleY;
-    }
-    set $scaleY(value){
-        this._scaleY = value;
-        this.$view.scale.y *= value;
-    }
+    
 
     selfConstruct(){
+        this.$view.name = this.name;
     }
 
     postCreateComponents() {
@@ -155,6 +96,70 @@ export class View extends Component implements IView {
         }
         console.info(this.name,info,info2);
         return info;
+    }
+    get $x() {
+        return this._x;
+    }
+    set $x(value) {
+        this.$view.position.x = value;
+        this._x = value;
+    }
+
+    get $y() {
+        return this._y;
+    }
+    set $y(value) {
+        this.$view.position.y = value;
+        this._y = value;
+    }
+
+    get $width() {
+        return this._width;
+    }
+    set $width(value) {
+        this.$view.width = value;
+        this._width = value;
+    }
+
+    get $height() {
+        return this._height;
+    }
+    set $height(value) {
+        this.$view.height = value;
+        this._height = value;
+    }
+
+    get $anchorX(){
+        return this._anchorX;
+    }
+    set $anchorX(value){
+        this._anchorX = value;
+        this.$view.anchor.x = value;
+    }
+
+    get $anchorY(){
+        return this._anchorY;
+    }
+    set $anchorY(value){
+        this._anchorY = value;
+        this.$view.anchor.y = value;
+    }
+
+
+    get $scaleX(){
+        return this._scaleX;
+    }
+    set $scaleX(value){
+        this._scaleX = value;
+        this.$view.scale.x *= value;
+    }
+
+    get $scaleY(){
+        return this._scaleY;
+    }
+    set $scaleY(value){
+        this._scaleY = value;
+        this.$view.scale.y *= value;
     }
 }
 
