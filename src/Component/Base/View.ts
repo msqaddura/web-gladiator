@@ -1,8 +1,11 @@
+import * as Rx from 'rxjs';
+
 import { DisplayObject } from '../Primitive/DisplayObject';
 import { IView } from './IView';
 import { Component } from './Component';
 import { AutoLayoutAdapter } from '../../Adapter/AutolayoutAdapter';
-export class View extends Component implements IView {
+import { Interactive } from './Interactive';
+export class View extends Component implements IView,Interactive {
     $view;
     _x;
     _y;
@@ -14,6 +17,7 @@ export class View extends Component implements IView {
     _scaleY;
     _vfl;
     _autolayout;
+    _registeredHIDEvents ={};
     readonly config: Object;
     constructor(owner, params) {
         super( owner, {name:params.name, componentList:params.componentList} );
@@ -24,8 +28,12 @@ export class View extends Component implements IView {
     bootstrap(){
         super.bootstrap();
         this.parseLayout();
+        this.listenToHIDEvents(false);
     }
     
+    listenToHIDEvents(isInteractive=true){
+        this.$view.interactive = isInteractive;
+    }
 
     selfConstruct(){
         this.$view.name = this.name;
@@ -72,6 +80,11 @@ export class View extends Component implements IView {
     }
     addView(view: View) {
         this.$view.addChild(view.$view);
+    }
+
+    registerHIDEvent(name:string){
+        this._registeredHIDEvents[name] = Rx.Observable.fromEvent(this.$view,name);
+        return this._registeredHIDEvents[name];
     }
 
         info(){
