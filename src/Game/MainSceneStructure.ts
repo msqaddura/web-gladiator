@@ -12,8 +12,8 @@ export const App = {
         'H:|[Game(100%)]|',
         'V:|[Game(100%)]|'
     ],
-    "componentList": {
-        "Game": {
+    "componentList": [
+        {
             "name": "Game",
             "family": Scene,
             "vfl": [
@@ -22,8 +22,8 @@ export const App = {
                 'V:|~[One(One.width)]~|',
                 'V:|~[One(<=80%)]~|',
             ],
-            "componentList": {
-                "One": {
+            "componentList": [
+                {
                     "name": "One",
                     "family": Container,
                     "config": "",
@@ -43,117 +43,117 @@ export const App = {
                         "HV:|[square(33.33%)]~|"
 
                     ],
-                    "componentList": {
-                        "box00": {
+                    "componentList": [
+                        {
                             "name": "box00",
                             "family": Container,
                             "vfl": "HV:|[sprite]|",
-                            "componentList": {
-                                "sprite": {
+                            "componentList": [
+                                {
                                     "name": "sprite",
                                     "family": Sprite,
                                     "source": "images/squareC.png"
                                 }
-                            }
+                            ]
                         },
-                        "box01": {
+                        {
                             "name": "box01",
                             "family": Container,
                             "vfl": "HV:|[sprite]|",
-                            "componentList": {
-                                "sprite": {
+                            "componentList": [
+                                {
                                     "name": "sprite",
                                     "family": Sprite,
                                     "source": "images/squareC.png"
                                 }
-                            }
+
+                            ]
                         },
-                        "box02": {
+                        {
                             "name": "box02",
                             "family": Container,
                             "vfl": "HV:|[sprite]|",
-                            "componentList": {
-                                "sprite": {
+                            "componentList": [
+                                {
                                     "name": "sprite",
                                     "family": Sprite,
                                     "source": "images/squareC.png"
                                 }
-                            }
+                            ]
                         },
-                        "box10": {
+                        {
                             "name": "box10",
                             "family": Container,
                             "vfl": "HV:|[sprite]|",
-                            "componentList": {
-                                "sprite": {
-                                    "name": "sprite",
-                                    "family": Sprite,
-                                    "source": "images/squareC.png"
-                                }
+                            "componentList": [{
+                                "name": "sprite",
+                                "family": Sprite,
+                                "source": "images/squareC.png"
                             }
+                            ]
                         },
-                        "box11": {
+                        {
                             "name": "box11",
                             "family": Container,
                             "vfl": "HV:|[sprite]|",
-                            "componentList": {
-                                "sprite": {
+                            "componentList": [
+                                {
                                     "name": "sprite",
                                     "family": Sprite,
                                     "source": "images/squareC.png"
                                 }
-                            }
+                            ]
                         },
-                        "box12": {
+                        {
                             "name": "box12",
                             "family": Container,
                             "vfl": "HV:|[sprite]|",
-                            "componentList": {
-                                "sprite": {
+                            "componentList": [
+                                {
                                     "name": "sprite",
                                     "family": Sprite,
                                     "source": "images/squareC.png"
                                 }
-                            }
+                            ]
                         },
-                        "box20": {
+                        {
                             "name": "box20",
                             "family": Container,
                             "vfl": "HV:|[sprite]|",
-                            "componentList": {
-                                "sprite": {
+                            "componentList": [
+                                {
                                     "name": "sprite",
                                     "family": Sprite,
                                     "source": "images/squareC.png"
                                 }
-                            }
+                            ]
                         },
-                        "box21": {
+                        {
                             "name": "box21",
                             "family": Container,
                             "vfl": "HV:|[sprite]|",
-                            "componentList": {
-                                "sprite": {
+                            "componentList": [
+                                {
                                     "name": "sprite",
                                     "family": Sprite,
                                     "source": "images/squareC.png"
                                 }
-                            }
+                            ]
                         },
-                        "box22": {
+                        {
                             "name": "box22",
                             "family": Container,
                             "vfl": [
                                 "HV:|[sprite]|",
                                 "HV:|[animatedSprite]|"
                             ],
-                            "componentList": {
-                                "sprite": {
+                            "componentList": [
+                                {
                                     "name": "sprite",
                                     "family": Sprite,
                                     "source": "images/squareC.png"
                                 },
-                                "animatedSprite": {
+                                {
                                     "name": "animatedSprite",
                                     "family": AnimatedSprite,
                                     "frameList": [
@@ -165,11 +165,11 @@ export const App = {
                                         }
                                     ]
                                 }
-                            }
+                            ]
                         }
-                    }
+                    ]
                 }
-            }
+            ]
         }
-    }
+    ]
 }

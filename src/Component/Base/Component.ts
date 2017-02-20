@@ -3,11 +3,11 @@ import { MissingComponent } from './MissingComponent';
 export class Component implements IComponent{
     readonly  owner: Component;
     readonly name:string;
-    readonly componentList:Object;
+    readonly componentList:Array<Component>;
     readonly family;
     public components:Object={};
 
-    constructor(owner=null,{name="N/A", componentList={}}) {
+    constructor(owner=null,{name="N/A", componentList=[]}) {
         this.owner = owner;
         this.name = name;
         this.componentList=componentList;
@@ -38,13 +38,13 @@ export class Component implements IComponent{
     preCreateComponents():void{}
 
     createComponents():Object{
-        for(var key in this.componentList){
-            this.addComponent(this.createComponent(this.componentList[key]));
-        }
+        this.componentList.forEach(comp=>{
+            this.addComponent(this.createComponent(comp))
+        })
         return this.components;
     }
     
-    createComponent(comp:IComponent):Component{
+    createComponent(comp:Component):Component{
        return new comp["family"](this,comp);
     }
 
