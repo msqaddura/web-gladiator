@@ -43,105 +43,22 @@ export const App = {
                         "HV:|[square(33.33%)]~|"
 
                     ],
-                    "componentList": [
+                    "repeatableList": [{
+                        "repeats": [
+                            {"name":"box00","id":0},
+                            {"name":"box01","id":1},
+                            {"name":"box02","id":2},
+                            {"name":"box10","id":3},
+                            {"name":"box11","id":4},
+                            {"name":"box12","id":5},
+                            {"name":"box20","id":6},
+                            {"name":"box21","id":7},
+                            {"name":"box22","id":8},
+                        ],
+                        "repeatable":
                         {
-                            "name": "box00",
-                            "family": Container,
-                            "vfl": "HV:|[sprite]|",
-                            "componentList": [
-                                {
-                                    "name": "sprite",
-                                    "family": Sprite,
-                                    "source": "images/squareC.png"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "box01",
-                            "family": Container,
-                            "vfl": "HV:|[sprite]|",
-                            "componentList": [
-                                {
-                                    "name": "sprite",
-                                    "family": Sprite,
-                                    "source": "images/squareC.png"
-                                }
-
-                            ]
-                        },
-                        {
-                            "name": "box02",
-                            "family": Container,
-                            "vfl": "HV:|[sprite]|",
-                            "componentList": [
-                                {
-                                    "name": "sprite",
-                                    "family": Sprite,
-                                    "source": "images/squareC.png"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "box10",
-                            "family": Container,
-                            "vfl": "HV:|[sprite]|",
-                            "componentList": [{
-                                "name": "sprite",
-                                "family": Sprite,
-                                "source": "images/squareC.png"
-                            }
-                            ]
-                        },
-                        {
-                            "name": "box11",
-                            "family": Container,
-                            "vfl": "HV:|[sprite]|",
-                            "componentList": [
-                                {
-                                    "name": "sprite",
-                                    "family": Sprite,
-                                    "source": "images/squareC.png"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "box12",
-                            "family": Container,
-                            "vfl": "HV:|[sprite]|",
-                            "componentList": [
-                                {
-                                    "name": "sprite",
-                                    "family": Sprite,
-                                    "source": "images/squareC.png"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "box20",
-                            "family": Container,
-                            "vfl": "HV:|[sprite]|",
-                            "componentList": [
-                                {
-                                    "name": "sprite",
-                                    "family": Sprite,
-                                    "source": "images/squareC.png"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "box21",
-                            "family": Container,
-                            "vfl": "HV:|[sprite]|",
-                            "componentList": [
-                                {
-                                    "name": "sprite",
-                                    "family": Sprite,
-                                    "source": "images/squareC.png"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "box22",
+                            "name": "repeatable",
+                            "repeatable": true,
                             "family": Container,
                             "vfl": [
                                 "HV:|[sprite]|",
@@ -167,7 +84,7 @@ export const App = {
                                 }
                             ]
                         }
-                    ]
+                    }]
                 }
             ]
         }

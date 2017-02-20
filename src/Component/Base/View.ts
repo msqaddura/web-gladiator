@@ -18,11 +18,13 @@ export class View extends Component implements IView,Interactive {
     _vfl;
     _autolayout;
     _registeredHIDEvents ={};
+    params;
     readonly config: Object;
     constructor(owner, params) {
-        super( owner, {name:params.name, componentList:params.componentList} );
+        super( owner, {name:params.name, componentList:params.componentList,repeatableList:params.repeatableList} );
         this.config = params.config || {};
         this._vfl = params.vfl || [""];
+        this.params = params;
         
     }
     bootstrap(){

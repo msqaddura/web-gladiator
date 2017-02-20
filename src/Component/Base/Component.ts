@@ -4,13 +4,15 @@ export class Component implements IComponent{
     readonly  owner: Component;
     readonly name:string;
     readonly componentList:Array<Component>;
+    readonly repeatableList;
     readonly family;
     public components:Object={};
 
-    constructor(owner=null,{name="N/A", componentList=[]}) {
+    constructor(owner=null,{name="N/A", componentList=[],repeatableList=[]}) {
         this.owner = owner;
         this.name = name;
         this.componentList=componentList;
+        this.repeatableList=repeatableList;
 
         //this.selfConstruct();
 
@@ -38,6 +40,13 @@ export class Component implements IComponent{
     preCreateComponents():void{}
 
     createComponents():Object{
+        this.repeatableList.forEach(tuple=>{
+            tuple.repeats.forEach(repeat=>{
+                this.addComponent(this.createComponent(Object.assign(tuple.repeatable,repeat)));
+            })
+        })
+
+
         this.componentList.forEach(comp=>{
             this.addComponent(this.createComponent(comp))
         })
