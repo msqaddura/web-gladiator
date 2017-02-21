@@ -7,8 +7,10 @@ import { AutoLayoutAdapter } from '../../Adapter/AutolayoutAdapter';
 import { Interactive } from './Interactive';
 export class View extends Component implements IView, Interactive {
     $view;
-    _x;
-    _y;
+    _x = 0;
+    _left = 0;
+    _y = 0;
+    _top =0;
     _width;
     _height;
     _anchorX;
@@ -57,8 +59,8 @@ export class View extends Component implements IView, Interactive {
             const component = this.components[key];
             if (component) {
                 const subView = layoutViews.subViews[key];
-                component.$x = subView.left;
-                component.$y = subView.top;
+                component.$left = subView.left;
+                component.$top = subView.top;
                 component.$width = subView.width;
                 component.$height = subView.height;
             }
@@ -110,16 +112,32 @@ export class View extends Component implements IView, Interactive {
         return this._x;
     }
     set $x(value) {
-        this.$view.position.x = value;
         this._x = value;
+        this.$left = this.$left;
+    }
+
+    get $left() {
+        return this._left;
+    }
+    set $left(value) {
+        this.$view.position.x = value + this.$x;
+        this._left = value;
     }
 
     get $y() {
         return this._y;
     }
     set $y(value) {
-        this.$view.position.y = value;
         this._y = value;
+        this.$top = this.$top;
+    }
+
+    get $top() {
+        return this._top;
+    }
+    set $top(value) {
+        this.$view.position.y = value + this.$y;
+        this._top = value;
     }
 
     get $width() {

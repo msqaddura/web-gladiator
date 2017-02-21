@@ -16,7 +16,7 @@ export class Application extends VirtualView{
      this.$view = this._application.stage; 
      this.$view.height = window.innerHeight;
      this.$view.width = window.innerWidth;
-     this.$x = 0;
-     this.$y = 0;
+     this.$left = 0;
+     this.$top = 0;
  }
 } 
