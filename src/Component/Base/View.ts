@@ -22,11 +22,13 @@ export class View extends Component implements IView, Interactive {
     _registeredHIDEvents = {};
     params;
     readonly config: Object;
-    constructor(owner, params) {
+    constructor(owner, params, bootstrap = false) {
         super(owner, { name: params.name, componentList: params.componentList, repeatableList: params.repeatableList });
         this.config = params.config || {};
         this._vfl = params.vfl || [""];
         this.params = params;
+        if(bootstrap)
+            this.bootstrap();
 
     }
     bootstrap() {
@@ -63,17 +65,20 @@ export class View extends Component implements IView, Interactive {
                 component.$top = subView.top;
                 component.$width = subView.width;
                 component.$height = subView.height;
+                
+                component.renderLayout();
             }
         }
         //this.renderComponentsLayout();
     }
     renderComponentsLayout() {
         for (const key in this.components)
-            this.components[key].updateLayout;
+            if(this.components[key] instanceof View)
+                this.components[key].renderLayout();
     }
 
     createComponent(comp): Component {
-        return new comp["family"](this, comp);
+        return new comp["family"](this, comp,true);
     }
 
     addComponent(component) {

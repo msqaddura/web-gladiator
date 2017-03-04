@@ -8,7 +8,7 @@ export class Component implements IComponent{
     readonly family;
     public components:Object={};
 
-    constructor(owner=null,{name="N/A", componentList=[],repeatableList=[]}) {
+    constructor(owner=null,{name="N/A", componentList=[],repeatableList=[]},bootstrap=false) {
         this.owner = owner;
         this.name = name;
         this.componentList=componentList;
@@ -23,6 +23,8 @@ export class Component implements IComponent{
         //this.preCreateComponents();
         //this.createComponents(componentList);
         //this.postCreateComponents();
+        if(bootstrap)
+            this.bootstrap();
     }
     bootstrap(){
         this.selfConstruct();
@@ -54,7 +56,7 @@ export class Component implements IComponent{
     }
     
     createComponent(comp:Component):Component{
-       return new comp["family"](this,comp);
+       return new comp["family"](this,comp,true);
     }
 
     addComponent(component:Component):void{
