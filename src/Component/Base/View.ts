@@ -77,8 +77,8 @@ export class View extends Component implements IView, Interactive {
                 this.components[key].renderLayout();
     }
 
-    createComponent(comp): Component {
-        return new comp["family"](this, comp,true);
+    createComponent(comp,bootstrap=true): Component {
+        return new comp["family"](this, comp,bootstrap);
     }
 
     addComponent(component) {

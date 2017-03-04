@@ -5,17 +5,8 @@ import { Application } from "../Component/Primitive/Application";
 import { Sprite } from "../Component/Primitive/Sprite";
 import { AnimatedSprite } from "../Component/Primitive/AnimatedSprite";
 
-export const App = {
-    "name": "Application",
-    "family": Application,
-    "config": null,
-    "vfl": [
-        'H:|[Game(100%)]|',
-        'V:|[Game(100%)]|'
-    ],
-    "componentList": [
-        {
-            "name": "Game",
+export const MainSceneStructure = {
+            "name": "MainScene",
             "family": Container,
             "manifest":"Resources/MainSceneManifest.json",
             "vfl": [
@@ -91,5 +82,3 @@ export const App = {
                 }
             ]
         }
-    ]
-}
