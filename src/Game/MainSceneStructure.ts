@@ -4,6 +4,7 @@ import { Scene } from "../Component/Primitive/Scene";
 import { Application } from "../Component/Primitive/Application";
 import { Sprite } from "../Component/Primitive/Sprite";
 import { AnimatedSprite } from "../Component/Primitive/AnimatedSprite";
+
 export const App = {
     "name": "Application",
     "family": Application,
@@ -15,13 +16,13 @@ export const App = {
     "componentList": [
         {
             "name": "Game",
-            "family": Scene,
-            "manifest":"MainSceneManifest.json",
+            "family": Container,
+            "manifest":"Resources/MainSceneManifest.json",
             "vfl": [
-                "//viewport aspect-ratio:1/1",
+                //"//viewport aspect-ratio:1/1",
                 'H:|~[One(One.height)]~|',
-                //'H:|~[One(<=80%)]~|',
-                //'V:|~[One(One.width)]~|',
+                'H:|~[One(<=80%)]~|',
+                'V:|~[One(One.width)]~|',
                 'V:|~[One(<=80%)]~|',
             ],
             "componentList": [
