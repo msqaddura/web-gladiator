@@ -11,16 +11,16 @@
 import { App } from "./Game/MainSceneStructure";
 import { AutoLayoutAdapter } from "./Adapter/AutolayoutAdapter";
 import { ComponentBuilder } from "./Builder/ComponentBuilder";
+import { ManifestLoader } from './Loader/ManifestLoader';
 
- 
-
-
+const ml = new ManifestLoader();
+console.info(ml);
 PIXI.loader
   .add([
-    "images/bunny.png",
-    "images/squareC.png",
-    "images/e.png",
-    "images/fighter.json"
+    "Resources/bunny.png",
+    "Resources/squareC.png",
+    "Resources/e.png",
+    "Resources/fighter.json"
   ])
   .on("progress", loadProgressHandler)
   .load(setup);

@@ -3,7 +3,7 @@ export class Texture extends Leaf{
     $loot;
     constructor(owner, params){
         super(owner, params);
-        this.$loot= PIXI.utils.TextureCache["images/squareC.png"];
+        this.$loot= PIXI.utils.TextureCache["Resources/squareC.png"];
     }
     
 }

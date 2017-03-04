@@ -21,7 +21,8 @@
     "@alizurchik/ts-mixin":"*",
     "mixin": "*",
     "autolayout": "*",
-    "rxjs": "*"
+    "rxjs": "*",
+    "resource-loader": "*"
   },
   "dependencies": {
     "@types/pixi.js": "*"

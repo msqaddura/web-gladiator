@@ -16,6 +16,7 @@ export const App = {
         {
             "name": "Game",
             "family": Scene,
+            "manifest":"MainSceneManifest.json",
             "vfl": [
                 "//viewport aspect-ratio:1/1",
                 'H:|~[One(One.height)]~|',
@@ -69,7 +70,7 @@ export const App = {
                                 {
                                     "name": "sprite",
                                     "family": Sprite,
-                                    "source": "images/squareC.png"
+                                    "source": "Resources/squareC.png"
                                 },
                                 {
                                     "name": "animatedSprite",
