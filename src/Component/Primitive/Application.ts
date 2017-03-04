@@ -34,14 +34,24 @@ export class Application extends VirtualView{
     this._loading=scene;
     PIXI.loader
     .add([
-        "Resources/bunny.png",
-        "Resources/squareC.png",
-        "Resources/e.png",
-        "Resources/fighter.json"
+        "Resources/MainSceneManifest.json"
     ])
-  .load(this.createScene.bind(this));
+  .load(this.preloadSceneAssets.bind(this));
  }
 
+ preloadSceneManifest(scene){
+    this._loading=scene;
+    PIXI.loader
+    .add([
+        "Resources/MainSceneManifest.json"
+    ])
+  .load(this.preloadSceneAssets.bind(this));
+ }
+
+
+ preloadSceneAssets(loader,resources){
+    loader.add(resources["Resources/MainSceneManifest.json"]["data"]).load(this.createScene.bind(this));
+ }
  createScene(...args){
      console.info("yup",args);
     this._currentScene = this.createComponent(this._loading,true);
