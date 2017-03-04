@@ -6,8 +6,11 @@ import { VirtualView } from '../Base/VirtualView';
 
 export class Container extends VirtualView {
     
- constructor(owner, params){
+ constructor(owner, params,bootstrap=false){
      super(owner,params);
      this.$view = new PIXI.Container();
+     
+     if(bootstrap)
+        this.bootstrap();
  }
 } 

@@ -8,7 +8,7 @@ import { View } from '../Base/View';
 
 export class AnimatedSprite extends View {
 
-    constructor(owner, params) {
+    constructor(owner, params,bootstrap = false) {
         super( owner, params );
         var frames = [];
         params.frameList.forEach(bag=>{
@@ -18,7 +18,9 @@ export class AnimatedSprite extends View {
             }
         });
         
-        this.$view = new PIXI.extras.AnimatedSprite(frames);     
+        this.$view = new PIXI.extras.AnimatedSprite(frames);
+        if(bootstrap)
+            this.bootstrap();     
     }
     listenToHIDEvents(){
         super.listenToHIDEvents();

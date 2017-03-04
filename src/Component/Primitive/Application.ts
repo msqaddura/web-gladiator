@@ -8,7 +8,7 @@ export class Application extends VirtualView{
  _application;
  canvas;
  renderer;
- constructor(owner=null,params){
+ constructor(owner=null,params,bootstrap=false){
      super(owner, params);
      this._application = new PIXI.Application(window.innerWidth,window.innerHeight);
      this.renderer = this._application.renderer;
@@ -16,7 +16,9 @@ export class Application extends VirtualView{
      this.$view = this._application.stage; 
      this.$view.height = window.innerHeight;
      this.$view.width = window.innerWidth;
-     this.$x = 0;
-     this.$y = 0;
+     this.$left = 0;
+     this.$top = 0;
+     if(bootstrap)
+        this.bootstrap();
  }
 } 

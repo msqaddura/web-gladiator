@@ -5,8 +5,10 @@ import { View } from '../Base/View';
 
 export class VirtualView extends View{
     
- constructor(owner,params){
+ constructor(owner,params,bootstrap=false){
      super(owner,params);
+          if(bootstrap)
+        this.bootstrap();
  }
 
   set $width(value){

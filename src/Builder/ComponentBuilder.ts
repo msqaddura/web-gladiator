@@ -7,7 +7,8 @@ export class ComponentBuilder {
         window['cb']=this;
         window.addEventListener("resize", this.resize.bind(this));
         this.root = new comp["family"](this,comp);
-        this._createComponents(this.root);
+        this.root.bootstrap();
+        //this._createComponents(this.root);
         this.resize();
     }
   
@@ -46,9 +47,9 @@ export class ComponentBuilder {
         if(owner instanceof View){
             owner.renderLayout();
         }
-        for(const key in owner.components){
-            this.updateLayout(owner.components[key])
-        }
+        // for(const key in owner.components){
+        //     this.updateLayout(owner.components[key])
+        // }
     }
 
     info(owner=this.root){

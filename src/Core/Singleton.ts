@@ -1,13 +1,12 @@
-class Singleton {
-    private static instance: Singleton;
-    private constructor() {
-        // do something construct...
+export class Singleton {
+    protected static instance: Singleton;
+    protected constructor() {
     }
     static getInstance() {
-        if (!Singleton.instance) {
-            Singleton.instance = new Singleton();
+        if (!this.instance) {
+            this.instance = new Singleton();
             // ... any one time initialization goes here ...
         }
-        return Singleton.instance;
+        return this.instance;
     }
 }

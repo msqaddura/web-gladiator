@@ -4,10 +4,14 @@ var source = require('vinyl-source-stream');
 var watchify = require("watchify");
 var tsify = require("tsify");
 var gutil = require("gulp-util");
-var paths = {
-    pages: ['src/*.html']
+var srcs = {
+    pages: ['src/*.html'],
+    resources:['src/Resources/*']
 };
-
+var dists = {
+    pages:'dist',
+    resources:'dist/Resources'
+}
 var watchedBrowserify = watchify(browserify({
     basedir: '.',
     debug: true,
@@ -17,8 +21,13 @@ var watchedBrowserify = watchify(browserify({
 }).plugin(tsify));
 
 gulp.task("copy-html", function () {
-    return gulp.src(paths.pages)
-        .pipe(gulp.dest("dist"));
+    return gulp.src(srcs.pages)
+        .pipe(gulp.dest(dists.pages));
+});
+
+gulp.task("copy-resources", function () {
+    return gulp.src(srcs.resources)
+        .pipe(gulp.dest(dists.resources));
 });
 
 function bundle() {
@@ -28,6 +37,6 @@ function bundle() {
         .pipe(gulp.dest("dist"));
 }
 
-gulp.task("default", ["copy-html"], bundle);
+gulp.task("default", ["copy-html","copy-resources"], bundle);
 watchedBrowserify.on("update", bundle);
 watchedBrowserify.on("log", gutil.log);

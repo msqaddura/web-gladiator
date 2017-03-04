@@ -5,7 +5,9 @@ import { View } from './View';
 export interface IView extends IComponent{
     $view;
     _x;
+    _left;
     _y;
+    _top;
     _width;
     _height;
     _anchorX;
