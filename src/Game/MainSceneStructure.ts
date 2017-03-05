@@ -7,7 +7,7 @@ import { AnimatedSprite } from "../Component/Primitive/AnimatedSprite";
 
 export const MainSceneStructure = {
             "name": "MainScene",
-            "family": Container,
+            "family": Scene,
             "manifest":"Resources/MainSceneManifest.json",
             "vfl": [
                 //"//viewport aspect-ratio:1/1",
