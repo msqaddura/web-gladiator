@@ -117,8 +117,8 @@ export class View extends Component implements IView, Interactive {
         return this._x;
     }
     set $x(value) {
+        this.$view.position.x = value + this.$left;
         this._x = value;
-        this.$left = this.$left;
     }
 
     get $left() {
@@ -133,8 +133,9 @@ export class View extends Component implements IView, Interactive {
         return this._y;
     }
     set $y(value) {
+        this.$view.position.y = value + this.$top;
         this._y = value;
-        this.$top = this.$top;
+        
     }
 
     get $top() {

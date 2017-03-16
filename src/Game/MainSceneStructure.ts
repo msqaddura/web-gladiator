@@ -11,31 +11,24 @@ export const MainSceneStructure = {
             "manifest":"Resources/MainSceneManifest.json",
             "vfl": [
                 //"//viewport aspect-ratio:1/1",
-                'H:|~[One(One.height)]~|',
-                'H:|~[One(<=80%)]~|',
-                'V:|~[One(One.width)]~|',
-                'V:|~[One(<=80%)]~|',
+                'H:|~[Grid(Grid.height)]~|',
+                'H:|~[Grid(<=80%)]~|',
+                'V:|~[Grid(Grid.width)]~|',
+                'V:|~[Grid(<=80%)]~|',
             ],
             "componentList": [
                 {
-                    "name": "One",
+                    "name": "Grid",
                     "family": Container,
                     "config": "",
                     "vfl": [
                         "H:|[box00(square)][box01(square)][box02(square)]|",
                         "H:|[box10(square)][box11(square)][box12(square)]|",
                         "H:|[box20(square)][box21(square)][box22(square)]|",
-                        "V:|[box00(square)]~|",
-                        "V:|[box01(square)]~|",
-                        "V:|[box02(square)]~|",
-                        "V:|~[box10(square)]~|",
-                        "V:|~[box11(square)]~|",
-                        "V:|~[box12(square)]~|",
-                        "V:|~[box20(square)]|",
-                        "V:|~[box21(square)]|",
-                        "V:|~[box22(square)]|",
+                        "V:|[box00(square)][box10(square)][box20(square)]|",
+                        "V:|[box01(square)][box11(square)][box21(square)]|",
+                        "V:|[box02(square)][box12(square)][box22(square)]|",
                         "HV:|[square(33.33%)]~|"
-
                     ],
                     "repeatableList": [{
                         "repeats": [
