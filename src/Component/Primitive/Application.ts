@@ -4,8 +4,8 @@ import { DisplayObject } from '../Primitive/DisplayObject';
 import { Component } from '../Base/Component';
 import { VirtualView } from '../Base/VirtualView';
 import { MainSceneStructure } from '../../Game/MainSceneStructure';
-import { ManifestLoader } from './Loader/ManifestLoader';
-
+import { ManifestLoader } from '../../Loader/ManifestLoader';
+import { RenderAdapter } from '../../Adapter/RenderAdapter';
 
 
 export class Application extends VirtualView{
@@ -14,6 +14,7 @@ export class Application extends VirtualView{
  _currentScene;
  canvas;
  renderer;
+ canResize = true;
  constructor(owner=null,params,bootstrap=false){
      super(owner, params);
      this._application = new PIXI.Application(window.innerWidth,window.innerHeight);
@@ -25,7 +26,7 @@ export class Application extends VirtualView{
 
 
      document.body.appendChild(this.canvas);
-     window.addEventListener("resize", this.resize.bind(this));
+     RenderAdapter.getInstance().getResizeObs().subscribe(this.resize.bind(this))
      window["app"] = this;
  }
 
@@ -56,16 +57,15 @@ export class Application extends VirtualView{
      console.info("yup",args);
     this._currentScene = this.createComponent(this._loading,true);
     this.addComponent(this._currentScene);
-    this.parseLayout();
- }
-
- resize(){
     const width = window.innerWidth;
     const height = window.innerHeight;
-    this.renderer.resize(width,height);
-    this.$width=width;
-    this.$height=height;
-    this.renderLayout();
+    this.parseLayout(width,height,0,0);
+ }
+
+ resize(dimensions){
+    if(!this.canResize)return;
+    this.renderer.resize(dimensions.width,dimensions.height);
+    this.renderLayout(dimensions.width,dimensions.height,0,0);
  }
 
 } 

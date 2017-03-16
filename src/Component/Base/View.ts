@@ -50,23 +50,23 @@ export class View extends Component implements IView, Interactive {
     }
 
 
-    parseLayout() {
+    parseLayout(width, height, left, top) {
         this._autolayout = AutoLayoutAdapter.getInstance().parseVFL(this._vfl);
-        this.renderLayout();
+        this.renderLayout(width,height,left,top);
     }
-    renderLayout() {
+    renderLayout(width,height,left,top) {
         //TODO: save LayoutViews and dont update if it is the same
+        this.$width = width;
+        this.$height = height;
+        this.$left = left;
+        this.$top = top;
         const layoutViews = this._autolayout.setSize(this.$width, this.$height)
         for (const key in layoutViews.subViews) {
             const component = this.components[key];
             if (component) {
-                const subView = layoutViews.subViews[key];
-                component.$left = subView.left;
-                component.$top = subView.top;
-                component.$width = subView.width;
-                component.$height = subView.height;
-                
-                component.renderLayout();
+                const {width,height,left,top} = layoutViews.subViews[key];
+               
+                component.renderLayout(width,height,left,top);
             }
         }
         //this.renderComponentsLayout();

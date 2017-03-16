@@ -1,5 +1,7 @@
 import { Component } from "../Component/Base/Component";
 import { Container } from "../Component/Primitive/Container";
+import { ScaleContainer } from "../Component/Primitive/ScaleContainer";
+import { SpaceContainer } from "../Component/Primitive/SpaceContainer";
 import { Scene } from "../Component/Primitive/Scene";
 import { Application } from "../Component/Primitive/Application";
 import { Sprite } from "../Component/Primitive/Sprite";
