@@ -29,7 +29,8 @@ function setup() {
   // document.body.appendChild(cb.root.canvas);
   // console.info(AutoLayoutAdapter.getInstance());
   let app = new Application(null,{
-    vfl:["HV:|[MainScene(100%)]|"]
+    vfl:["HV:|[MainScene(100%)]|"],
+    name:"Application"
   });
   
   app.preloadScene(MainSceneStructure);
