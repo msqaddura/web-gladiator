@@ -1,50 +1,36 @@
 import { Component } from "../Component/Base/Component";
 import { Container } from "../Component/Primitive/Container";
+import { ScaleContainer } from "../Component/Primitive/ScaleContainer";
+import { SpaceContainer } from "../Component/Primitive/SpaceContainer";
 import { Scene } from "../Component/Primitive/Scene";
 import { Application } from "../Component/Primitive/Application";
 import { Sprite } from "../Component/Primitive/Sprite";
 import { AnimatedSprite } from "../Component/Primitive/AnimatedSprite";
 
-export const App = {
-    "name": "Application",
-    "family": Application,
-    "config": null,
-    "vfl": [
-        'H:|[Game(100%)]|',
-        'V:|[Game(100%)]|'
-    ],
-    "componentList": [
-        {
-            "name": "Game",
-            "family": Container,
+export const MainSceneStructure = {
+            "name": "MainScene",
+            "family": Scene,
             "manifest":"Resources/MainSceneManifest.json",
             "vfl": [
                 //"//viewport aspect-ratio:1/1",
-                'H:|~[One(One.height)]~|',
-                'H:|~[One(<=80%)]~|',
-                'V:|~[One(One.width)]~|',
-                'V:|~[One(<=80%)]~|',
+                'H:|~[Grid(Grid.height)]~|',
+                'H:|~[Grid(<=80%)]~|',
+                'V:|~[Grid(Grid.width)]~|',
+                'V:|~[Grid(<=80%)]~|',
             ],
             "componentList": [
                 {
-                    "name": "One",
-                    "family": Container,
+                    "name": "Grid",
+                    "family": ScaleContainer,
                     "config": "",
                     "vfl": [
                         "H:|[box00(square)][box01(square)][box02(square)]|",
                         "H:|[box10(square)][box11(square)][box12(square)]|",
                         "H:|[box20(square)][box21(square)][box22(square)]|",
-                        "V:|[box00(square)]~|",
-                        "V:|[box01(square)]~|",
-                        "V:|[box02(square)]~|",
-                        "V:|~[box10(square)]~|",
-                        "V:|~[box11(square)]~|",
-                        "V:|~[box12(square)]~|",
-                        "V:|~[box20(square)]|",
-                        "V:|~[box21(square)]|",
-                        "V:|~[box22(square)]|",
+                        "V:|[box00(square)][box10(square)][box20(square)]|",
+                        "V:|[box01(square)][box11(square)][box21(square)]|",
+                        "V:|[box02(square)][box12(square)][box22(square)]|",
                         "HV:|[square(33.33%)]~|"
-
                     ],
                     "repeatableList": [{
                         "repeats": [
@@ -62,7 +48,7 @@ export const App = {
                         {
                             "name": "repeatable",
                             "repeatable": true,
-                            "family": Container,
+                            "family": SpaceContainer,
                             "vfl": [
                                 "HV:|[sprite]|",
                                 "HV:|[animatedSprite]|"
@@ -91,5 +77,3 @@ export const App = {
                 }
             ]
         }
-    ]
-}

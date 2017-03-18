@@ -29,6 +29,7 @@ export class Component implements IComponent{
     bootstrap(){
         this.selfConstruct();
         this.preInitialize();
+        this.initialize();
         this.postInitialize();
         this.preCreateComponents();
         this.createComponents();
@@ -41,22 +42,22 @@ export class Component implements IComponent{
 
     preCreateComponents():void{}
 
-    createComponents():Object{
+    createComponents(bootstrap=true):Object{
         this.repeatableList.forEach(tuple=>{
             tuple.repeats.forEach(repeat=>{
-                this.addComponent(this.createComponent(Object.assign(tuple.repeatable,repeat)));
+                this.addComponent(this.createComponent(Object.assign(tuple.repeatable,repeat),bootstrap));
             })
         })
 
 
         this.componentList.forEach(comp=>{
-            this.addComponent(this.createComponent(comp))
+            this.addComponent(this.createComponent(comp,bootstrap))
         })
         return this.components;
     }
     
-    createComponent(comp:Component):Component{
-       return new comp["family"](this,comp,true);
+    createComponent(comp:Component,bootstrap=true):Component{
+       return new comp["family"](this,comp,bootstrap);
     }
 
     addComponent(component:Component):void{

@@ -24,13 +24,6 @@ export class AnimatedSprite extends View {
     }
     listenToHIDEvents(){
         super.listenToHIDEvents();
-        this.registerHIDEvent('pointertap').startWith(false).scan((prev,curr)=>!prev)
-        .subscribe((value)=>{
-            if(value)
-                this.play();
-            else
-                this.stop();
-        })
 
         Rx.Observable.merge(
         this.registerHIDEvent('mouseover').mapTo(true),
