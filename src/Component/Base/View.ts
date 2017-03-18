@@ -6,18 +6,19 @@ import { Component } from './Component';
 import { AutoLayoutAdapter } from '../../Adapter/AutolayoutAdapter';
 import { Interactive } from './Interactive';
 export class View extends Component implements IView, Interactive {
+    $$$scaleOnly = false;
     $view;
     _x = 0;
     _left = 0;
     _y = 0;
     _top =0;
-    _width;
-    _height;
+    _width = 0;
+    _height = 0;
     _anchorX;
     _anchorY;
     _scaleX = 1;
     _scaleY = 1;
-    _vfl;
+    _vfl=[""];
     _autolayout;
     _registeredHIDEvents = {};
     params;
@@ -25,15 +26,20 @@ export class View extends Component implements IView, Interactive {
     constructor(owner, params, bootstrap = false) {
         super(owner, { name: params.name, componentList: params.componentList, repeatableList: params.repeatableList });
         this.config = params.config || {};
-        this._vfl = params.vfl || [""];
+        this._vfl = params.vfl || this._vfl;
         this.params = params;
         if(bootstrap)
             this.bootstrap();
 
     }
     bootstrap() {
-        super.bootstrap();
-        this.parseLayout();
+        this.selfConstruct();
+        this.preInitialize();
+        this.initialize();
+        this.postInitialize();
+        this.preCreateComponents();
+        this.createComponents();
+        this.postCreateComponents();
         this.listenToHIDEvents(false);
     }
 
@@ -50,31 +56,29 @@ export class View extends Component implements IView, Interactive {
     }
 
 
-    parseLayout(width, height, left, top) {
-        this._autolayout = AutoLayoutAdapter.getInstance().parseVFL(this._vfl);
-        this.renderLayout(width,height,left,top);
-    }
-    renderLayout(width,height,left,top) {
-        //TODO: save LayoutViews and dont update if it is the same
+    parseLayout(width,height,left,top) {
+        
         this.$width = width;
         this.$height = height;
         this.$left = left;
         this.$top = top;
+        this._autolayout = AutoLayoutAdapter.getInstance()
+        .parseVFL(this._vfl)
+        this.parseComponentsLayout();
+        
+        
+    }
+    parseComponentsLayout() {
+        //TODO: save LayoutViews and dont update if it is the same
         const layoutViews = this._autolayout.setSize(this.$width, this.$height)
         for (const key in layoutViews.subViews) {
             const component = this.components[key];
             if (component) {
                 const {width,height,left,top} = layoutViews.subViews[key];
                
-                component.renderLayout(width,height,left,top);
+                component.parseLayout(width,height,left,top);
             }
         }
-        //this.renderComponentsLayout();
-    }
-    renderComponentsLayout() {
-        for (const key in this.components)
-            if(this.components[key] instanceof View)
-                this.components[key].renderLayout();
     }
 
     createComponent(comp,bootstrap=true): Component {

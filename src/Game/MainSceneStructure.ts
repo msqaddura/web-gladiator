@@ -21,7 +21,7 @@ export const MainSceneStructure = {
             "componentList": [
                 {
                     "name": "Grid",
-                    "family": Container,
+                    "family": ScaleContainer,
                     "config": "",
                     "vfl": [
                         "H:|[box00(square)][box01(square)][box02(square)]|",
@@ -48,7 +48,7 @@ export const MainSceneStructure = {
                         {
                             "name": "repeatable",
                             "repeatable": true,
-                            "family": Container,
+                            "family": SpaceContainer,
                             "vfl": [
                                 "HV:|[sprite]|",
                                 "HV:|[animatedSprite]|"

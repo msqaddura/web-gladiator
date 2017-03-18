@@ -1,6 +1,6 @@
-import {Container} from "./Container"
+import {SpaceContainer} from "./SpaceContainer"
 import {ManifestLoader} from '../../Loader/ManifestLoader';
-export class Scene extends Container{
+export class Scene extends SpaceContainer{
  _manifest;
  constructor(owner, params,bootstrap){
      super(owner, params);

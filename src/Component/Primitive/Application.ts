@@ -2,13 +2,13 @@ import * as PIXI from 'pixi.js'
 
 import { DisplayObject } from '../Primitive/DisplayObject';
 import { Component } from '../Base/Component';
-import { VirtualView } from '../Base/VirtualView';
+import { SpaceContainer } from "./SpaceContainer";
 import { MainSceneStructure } from '../../Game/MainSceneStructure';
 import { ManifestLoader } from '../../Loader/ManifestLoader';
 import { RenderAdapter } from '../../Adapter/RenderAdapter';
 
 
-export class Application extends VirtualView{
+export class Application extends SpaceContainer{
  _application;
  _loading;
  _currentScene;
@@ -65,7 +65,7 @@ export class Application extends VirtualView{
  resize(dimensions){
     if(!this.canResize)return;
     this.renderer.resize(dimensions.width,dimensions.height);
-    this.renderLayout(dimensions.width,dimensions.height,0,0);
+    this.parseLayout(dimensions.width,dimensions.height,0,0);
  }
 
 } 

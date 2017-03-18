@@ -29,6 +29,7 @@ export class Component implements IComponent{
     bootstrap(){
         this.selfConstruct();
         this.preInitialize();
+        this.initialize();
         this.postInitialize();
         this.preCreateComponents();
         this.createComponents();
