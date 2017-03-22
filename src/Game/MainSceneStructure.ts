@@ -6,7 +6,7 @@ import { Scene } from "../Component/Primitive/Scene";
 import { Application } from "../Component/Primitive/Application";
 import { Sprite } from "../Component/Primitive/Sprite";
 import { AnimatedSprite } from "../Component/Primitive/AnimatedSprite";
-
+import { Rocket } from '../MarketPlace/Rocket';
 export const MainSceneStructure = {
             "name": "MainScene",
             "family": Scene,
@@ -61,7 +61,7 @@ export const MainSceneStructure = {
                                 },
                                 {
                                     "name": "animatedSprite",
-                                    "family": AnimatedSprite,
+                                    "family": Rocket,
                                     "frameList": [
                                         {
                                             prefix: "rollSequence00",

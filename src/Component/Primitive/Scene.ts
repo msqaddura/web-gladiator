@@ -4,15 +4,15 @@ import { Bus } from '../../Communication/Bus';
 export class Scene extends SpaceContainer{
  _manifest;
  _bus;
- constructor(owner, params,bootstrap){
+ constructor(owner, params,bootstrap=false){
      super(owner, params);
      this._manifest=params.manifest;
      this._scene=this;
      this._bus = new Bus();
 
      //ManifestLoader.getInstance().preload(this._manifest,this.preloadAssits.bind(this));
-     if(bootstrap)
-        this.bootstrap();
+     
+        this.bootstrap(bootstrap);
 }
 
 

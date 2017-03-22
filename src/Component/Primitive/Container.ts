@@ -10,7 +10,6 @@ export class Container extends VirtualView {
      super(owner,params);
      this.$view = new PIXI.Container();
      
-     if(bootstrap)
-        this.bootstrap();
+     this.bootstrap(bootstrap);
  }
 } 

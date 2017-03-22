@@ -7,8 +7,8 @@ export class VirtualView extends View{
     
  constructor(owner,params,bootstrap=false){
      super(owner,params);
-          if(bootstrap)
-        this.bootstrap();
+    
+     this.bootstrap(bootstrap);
  }
 
   set $width(value){

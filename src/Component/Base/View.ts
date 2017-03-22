@@ -33,11 +33,13 @@ export class View extends Component implements IView, Interactive {
         this._vfl = params.vfl || this._vfl;
         this.params = params;
         this._scene = owner && owner._scene? owner._scene: null;
-        if(bootstrap)
-            this.bootstrap();
+        
+        this.bootstrap(bootstrap);
 
     }
-    bootstrap() {
+    bootstrap(bootstrap) {
+        if(!bootstrap)
+            return;
         this.selfConstruct();
         this.preInitialize();
         this.initialize();

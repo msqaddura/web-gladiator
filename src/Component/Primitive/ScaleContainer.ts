@@ -9,8 +9,7 @@ export class ScaleContainer extends View {
      super(owner,params);
      this.$view = new PIXI.Container();
      
-     if(bootstrap)
-        this.bootstrap();
+     this.bootstrap(bootstrap);
  }
     get $width() {
         return this._width;

@@ -1,5 +1,4 @@
 import * as PIXI from 'pixi.js'
-import * as Rx from 'rxjs';
 
 import { DisplayObject } from '../Primitive/DisplayObject';
 import { Component } from '../Base/Component';
@@ -8,43 +7,26 @@ import { View } from '../Base/View';
 
 export class AnimatedSprite extends View {
 
-    constructor(owner, params,bootstrap = false) {
-        super( owner, params );
+    constructor(owner, params, bootstrap = false) {
+        super(owner, params);
         var frames = [];
-        params.frameList.forEach(bag=>{
-            for (let i=bag.start; i<=bag.end;i++){
+        params.frameList.forEach(bag => {
+            for (let i = bag.start; i <= bag.end; i++) {
                 var val = i < 10 ? '0' + i : i;//TODO:use MathUtil
                 frames.push(PIXI.Texture.fromFrame(`${bag.prefix}${val}${bag.postfix}`));
             }
         });
-        
+
         this.$view = new PIXI.extras.AnimatedSprite(frames);
-        if(bootstrap)
-            this.bootstrap();     
+        this.bootstrap(bootstrap);
     }
-    listenToHIDEvents(){
-        super.listenToHIDEvents();
-
-        Rx.Observable.merge(
-        this.registerHIDEvent('mouseover').mapTo(true),
-        this.registerHIDEvent('mouseout').mapTo(false)
-        ).debounceTime(20).startWith(false)
-        
-        .subscribe((value)=>{
-            if(value)
-                this.play();
-            else
-                this.stop();
-        })
-
-    }
-    play(){
+    play() {
         this.$view.play();
     }
-    pause(){
+    pause() {
         this.$view.pause();
     }
-    stop(){
+    stop() {
         this.$view.stop();
     }
 } 
