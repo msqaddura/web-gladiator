@@ -5,8 +5,12 @@ import { IView } from './IView';
 import { Component } from './Component';
 import { AutoLayoutAdapter } from '../../Adapter/AutolayoutAdapter';
 import { Interactive } from './Interactive';
+import { Scene } from '../Primitive/Scene';
+import { Application } from '../Primitive/Application';
 export class View extends Component implements IView, Interactive {
     $$$scaleOnly = false;
+    _registeredMessages;
+    _scene:Scene;
     $view;
     _x = 0;
     _left = 0;
@@ -28,6 +32,7 @@ export class View extends Component implements IView, Interactive {
         this.config = params.config || {};
         this._vfl = params.vfl || this._vfl;
         this.params = params;
+        this._scene = owner && owner._scene? owner._scene: null;
         if(bootstrap)
             this.bootstrap();
 
@@ -41,6 +46,7 @@ export class View extends Component implements IView, Interactive {
         this.createComponents();
         this.postCreateComponents();
         this.listenToHIDEvents(false);
+        this.listenToBusEvents();
     }
 
     listenToHIDEvents(isInteractive = true) {
@@ -98,6 +104,14 @@ export class View extends Component implements IView, Interactive {
     registerHIDEvent(name: string) {
         this._registeredHIDEvents[name] = Rx.Observable.fromEvent(this.$view, name);
         return this._registeredHIDEvents[name];
+    }
+    listenToBusEvents(){}
+
+    registerMessage(ctor){
+       return this._scene._bus.registerMessage(ctor);
+    }
+    sendMessage(obj){
+        this._scene._bus.sendMessage(obj);
     }
 
     info() {

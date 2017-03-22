@@ -4,6 +4,7 @@ import {Component} from './Component';
 import { View } from './View';
 export interface IView extends IComponent{
     $view;
+    _scene;
     _x;
     _left;
     _y;
