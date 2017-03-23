@@ -7,13 +7,13 @@ export class ComponentBuilder {
         window['cb']=this;
         window.addEventListener("resize", this.resize.bind(this));
         this.root = new comp["family"](this,comp);
-        this.root.bootstrap();
+        this.root.bootstrap(true);
         //this._createComponents(this.root);
         this.resize();
     }
   
     _createComponents(owner:Component) {
-        owner.bootstrap();
+        owner.bootstrap(true);
         this._createNestedComponents(owner);
     }
 

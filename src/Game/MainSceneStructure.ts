@@ -5,6 +5,7 @@ import { SpaceContainer } from "../Component/Primitive/SpaceContainer";
 import { Scene } from "../Component/Primitive/Scene";
 import { Application } from "../Component/Primitive/Application";
 import { Sprite } from "../Component/Primitive/Sprite";
+import { TilingSprite } from "../Component/Primitive/TilingSprite";
 import { AnimatedSprite } from "../Component/Primitive/AnimatedSprite";
 import { Rocket } from '../MarketPlace/Rocket';
 export const MainSceneStructure = {
@@ -16,7 +17,7 @@ export const MainSceneStructure = {
                 'H:|~[Grid(Grid.height)]~|',
                 'H:|~[Grid(<=80%)]~|',
                 'V:|~[Grid(Grid.width)]~|',
-                'V:|~[Grid(<=80%)]~|',
+                'V:|~[Grid(<=80%)]~|'
             ],
             "componentList": [
                 {
