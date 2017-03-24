@@ -5,7 +5,7 @@ export class Leaf extends Component{
     readonly  owner: Component;
     readonly name:string;
     readonly componentList:Object;
-    readonly family;
+    readonly ctor;
     public components:Object={};
 
     constructor(owner, params){

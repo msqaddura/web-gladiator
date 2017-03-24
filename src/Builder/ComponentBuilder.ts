@@ -6,7 +6,7 @@ export class ComponentBuilder {
         console.info(comp);
         window['cb']=this;
         window.addEventListener("resize", this.resize.bind(this));
-        this.root = new comp["family"](this,comp);
+        this.root = new comp["ctor"](this,comp);
         this.root.bootstrap(true);
         //this._createComponents(this.root);
         this.resize();

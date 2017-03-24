@@ -5,7 +5,7 @@ export class Component implements IComponent{
     readonly name:string;
     readonly componentList:Array<Component>;
     readonly repeatableList;
-    readonly family;
+    readonly ctor;
     public components:Object={};
 
     constructor(owner=null,{name="N/A", componentList=[],repeatableList=[]},bootstrap=false) {
@@ -58,7 +58,7 @@ export class Component implements IComponent{
     }
     
     createComponent(comp:Component,bootstrap=true):Component{
-       return new comp["family"](this,comp,bootstrap);
+       return new comp["ctor"](this,comp,bootstrap);
     }
 
     addComponent(component:Component):void{

@@ -10,7 +10,7 @@ import { AnimatedSprite } from "../Component/Primitive/AnimatedSprite";
 import { Rocket } from '../MarketPlace/Rocket';
 export const MainSceneStructure = {
             "name": "MainScene",
-            "family": Scene,
+            "ctor": Scene,
             "manifest":"Resources/MainSceneManifest.json",
             "vfl": [
                 //"//viewport aspect-ratio:1/1",
@@ -19,13 +19,16 @@ export const MainSceneStructure = {
                 'V:|~[Grid(Grid.width)]~|',
                 'V:|~[Grid(<=80%)]~|'
             ],
-            "componentList": [
+            "componentList": [ //<--wrong naming should be entityList or entities
                 {
                     "name": "Grid",
-                    "family": ScaleContainer,
+                    "ctor": ScaleContainer, //<-- extends Container
                     "config": "",
+                    "scripts":[ //<-- not implemented, yet should be named component
+                        {"name":"draggable","boundary":"window"}
+                    ],
                     "vfl": [
-                        "H:|[box00(square)][box01(square)][box02(square)]|",
+                        "H:|[box00(square)][box01(square)][box02(square)]|",    
                         "H:|[box10(square)][box11(square)][box12(square)]|",
                         "H:|[box20(square)][box21(square)][box22(square)]|",
                         "V:|[box00(square)][box10(square)][box20(square)]|",
@@ -49,7 +52,7 @@ export const MainSceneStructure = {
                         {
                             "name": "repeatable",
                             "repeatable": true,
-                            "family": SpaceContainer,
+                            "ctor": ScaleContainer, //<-- extends Container
                             "vfl": [
                                 "HV:|[sprite]|",
                                 "HV:|[animatedSprite]|"
@@ -57,12 +60,12 @@ export const MainSceneStructure = {
                             "componentList": [
                                 {
                                     "name": "sprite",
-                                    "family": Sprite,
+                                    "ctor": Sprite,
                                     "source": "Resources/squareC.png"
                                 },
                                 {
                                     "name": "animatedSprite",
-                                    "family": Rocket,
+                                    "ctor": Rocket, //<-- extends AnimatedSprite
                                     "frameList": [
                                         {
                                             prefix: "rollSequence00",

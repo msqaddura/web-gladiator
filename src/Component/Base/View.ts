@@ -52,6 +52,7 @@ export class View extends Component implements IView, Interactive {
     }
 
     listenToHIDEvents(isInteractive = true) {
+        this.$view.buttonMode = isInteractive;
         this.$view.interactive = isInteractive;
     }
 
@@ -90,7 +91,7 @@ export class View extends Component implements IView, Interactive {
     }
 
     createComponent(comp,bootstrap=true): Component {
-        return new comp["family"](this, comp,bootstrap);
+        return new comp["ctor"](this, comp,bootstrap);
     }
 
     addComponent(component) {
