@@ -3,7 +3,7 @@ import * as PIXI from 'pixi.js'
 import { DisplayObject } from '../Primitive/DisplayObject';
 import { Component } from '../Base/Component';
 import { SpaceContainer } from "./SpaceContainer";
-import { MainSceneStructure } from '../../Game/MainSceneStructure';
+import { MainSceneBlueprint } from '../../Game/MainSceneBlueprint';
 import { ManifestLoader } from '../../Loader/ManifestLoader';
 import { RenderAdapter } from '../../Adapter/RenderAdapter';
 

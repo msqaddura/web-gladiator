@@ -8,7 +8,7 @@
 // }
 
 // showHello("greeting", "TypeScript");
-import { MainSceneStructure } from "./Game/MainSceneStructure";
+import { MainSceneBlueprint } from "./Game/MainSceneBlueprint";
 import { AutoLayoutAdapter } from "./Adapter/AutolayoutAdapter";
 import { ComponentBuilder } from "./Builder/ComponentBuilder";
 import { ManifestLoader } from './Loader/ManifestLoader';
@@ -33,7 +33,7 @@ function setup() {
     name:"Application"
   });
   
-  app.preloadScene(MainSceneStructure);
+  app.preloadScene(MainSceneBlueprint);
   console.info(app);
 }
 setup();
