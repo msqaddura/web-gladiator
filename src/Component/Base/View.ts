@@ -12,6 +12,7 @@ export class View extends Component implements IView, Interactive {
     _registeredMessages;
     _scene:Scene;
     $view;
+    _interactive;
     _x = 0;
     _left = 0;
     _y = 0;
@@ -25,6 +26,7 @@ export class View extends Component implements IView, Interactive {
     _vfl=[""];
     _autolayout;
     _registeredHIDEvents = {};
+    _visible:boolean;
     params;
     readonly config: Object;
     constructor(owner, params, bootstrap = false) {
@@ -52,12 +54,13 @@ export class View extends Component implements IView, Interactive {
     }
 
     listenToHIDEvents(isInteractive = true) {
-        this.$view.buttonMode = isInteractive;
-        this.$view.interactive = isInteractive;
+        this.$interactive = isInteractive;
     }
 
     selfConstruct() {
         this.$view.name = this.name;
+        if(this.params.hasOwnProperty("visible"))
+            this.$visible = this.params.visible;
     }
 
     postCreateComponents() {
@@ -199,7 +202,6 @@ export class View extends Component implements IView, Interactive {
         this.$view.anchor.y = value;
     }
 
-
     get $scaleX() {
         return this._scaleX;
     }
@@ -214,6 +216,22 @@ export class View extends Component implements IView, Interactive {
     set $scaleY(value) {
         this._scaleY = value;
         this.$view.height = this.$height * this._scaleY;
+    }
+
+    get $visible(){
+        return this._visible;
+    }
+    set $visible(value:boolean){
+        this._visible = value;
+        this.$view.visible =value;
+    }
+    set $interactive(value:boolean){
+        this._interactive=value;
+        this.$view.interactive=value;
+        this.$view.buttonMode=value;
+    }
+    get $interactive(){
+        return this._interactive;
     }
 }
 

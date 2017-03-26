@@ -17,5 +17,6 @@ export interface IView extends IComponent{
     _scaleY;
     _vfl;
     _autolayout;
+    _visible:boolean;
     readonly config:Object;   
 }
