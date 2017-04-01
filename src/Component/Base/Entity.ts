@@ -1,13 +1,13 @@
 import * as Rx from 'rxjs';
 
 import { DisplayObject } from '../Primitive/DisplayObject';
-import { IView } from './IView';
+import { IEntity } from './IEntity';
 import { Component } from './Component';
 import { AutoLayoutAdapter } from '../../Adapter/AutolayoutAdapter';
 import { Interactive } from './Interactive';
 import { Scene } from '../Primitive/Scene';
 import { Application } from '../Primitive/Application';
-export class View extends Component implements IView, Interactive {
+export class Entity extends Component implements IEntity, Interactive {
     $$$scaleOnly = false;
     _registeredMessages;
     _scene:Scene;
@@ -99,11 +99,11 @@ export class View extends Component implements IView, Interactive {
 
     addComponent(component) {
         super.addComponent(component);
-        if (component instanceof View)
+        if (component instanceof Entity)
             this.addView(component);
 
     }
-    addView(view: View) {
+    addView(view: Entity) {
         this.$view.addChild(view.$view);
     }
 

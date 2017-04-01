@@ -1,8 +1,8 @@
 import * as PIXI from 'pixi.js'
 import { IComponent} from './IComponent';
 import {Component} from './Component';
-import { View } from './View';
-export interface IView extends IComponent{
+import { Entity } from './Entity';
+export interface IEntity extends IComponent{
     $view;
     _scene;
     _x;

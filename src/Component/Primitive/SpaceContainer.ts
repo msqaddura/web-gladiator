@@ -1,9 +1,9 @@
 import * as PIXI from 'pixi.js'
 
 
-import { View } from '../Base/View';
+import { Entity } from '../Base/Entity';
 
-export class SpaceContainer extends View {
+export class SpaceContainer extends Entity {
     
  constructor(owner, params,bootstrap=false){
      super(owner,params);

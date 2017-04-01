@@ -2,9 +2,9 @@ import * as PIXI from 'pixi.js'
 
 import { DisplayObject } from '../Primitive/DisplayObject';
 import { Component } from '../Base/Component';
-import { View } from '../Base/View';
+import { Entity } from '../Base/Entity';
 
-export class TilingSprite extends View{
+export class TilingSprite extends Entity{
     
  constructor(owner, params,bootstrap=false){
      super(owner, params);

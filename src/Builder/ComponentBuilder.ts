@@ -1,5 +1,5 @@
 import { Component } from '../Component/Base/Component';
-import { View } from '../Component/Base/View';
+import { Entity } from '../Component/Base/Entity';
 export class ComponentBuilder {
     root;
     constructor(comp){

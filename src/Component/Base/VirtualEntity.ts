@@ -1,9 +1,9 @@
 import * as PIXI from 'pixi.js'
 
 import { Component } from '../Base/Component';
-import { View } from '../Base/View';
+import { Entity } from '../Base/Entity';
 
-export class VirtualView extends View{
+export class VirtualEntity extends Entity{
     
  constructor(owner,params,bootstrap=false){
      super(owner,params);
