@@ -7,17 +7,20 @@ export const STATES = {
 }
 export class GameDataSource {
     protected static instance: GameDataSource;
-    obsData = new Rx.Subject();
-    private _data={
-        playerTurn : 0,
-        matrix:[
-            [{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.DISABLED,player:0}],
-            [{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.DISABLED,player:0}],
-            [{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.DISABLED,player:0}],
-            [{state:STATES.ENABLED,player:0},{state:STATES.DISABLED,player:0},{state:STATES.DISABLED,player:0},{state:STATES.DISABLED,player:0}]
-        ]
-    };
+    public obsData;
+    private _data;
     private constructor() {
+        this.obsData = new Rx.ReplaySubject(1);
+        this._data = {
+            playerTurn : 0,
+            matrix:[
+                [{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.DISABLED,player:0}],
+                [{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.DISABLED,player:0}],
+                [{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.DISABLED,player:0}],
+                [{state:STATES.DISABLED,player:0},{state:STATES.DISABLED,player:0},{state:STATES.DISABLED,player:0},{state:STATES.DISABLED,player:0}]
+            ]
+        };
+        this.startWithPlayer(1);
     }
     static getInstance() {
         if (!this.instance) {
@@ -31,6 +34,7 @@ export class GameDataSource {
     }
     startWithPlayer(playerTurn = 1){
         this._data.playerTurn = playerTurn;
+        this._invalidate();
     }
     changePlayerTurn(){
         this._data.playerTurn = this._data.playerTurn%2+1;

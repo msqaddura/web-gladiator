@@ -1,7 +1,9 @@
 import * as Rx from 'rxjs';
 import { ScaleContainer } from "../Component/Primitive/ScaleContainer";
-import { CellPlayedMessage } from './CellPlayedMessage'
+import { CellPlayedMessage } from './CellPlayedMessage';
+import { GameDataSource } from "./GameDataSource";
 const STATES = {
+    UNDONE:"UNDONE",
     ENABLED: "ENABLED",
     DISABLED: "DISABLED",
     PLAYED:"PLAYED"
@@ -14,23 +16,30 @@ export class Cell extends ScaleContainer {
         super(owner, params);
         this.i = params.i;
         this.j = params.j;
-        this.stateMachine = new Rx.Subject();
-        this.stateMachine.next(STATES.DISABLED)
+        this.stateMachine = new Rx.ReplaySubject(1);
+        this.stateMachine.next(STATES.UNDONE);
         this.bootstrap(bootstrap);
         this.attachStateMachine();
     }
 
+    initialize(){
+        GameDataSource.getInstance().obsData
+        .map(data=>data.matrix[this.i][this.j])
+        .subscribe(value=>{
+            this.stateMachine.next(value.state);
+        })
+    }
     attachStateMachine() {
         this.stateMachine.subscribe(value => {
             switch (value) {
                 case STATES.DISABLED:
-                    this.$interactive = false;
+                    this.$visible = false;
                     break;
                 case STATES.ENABLED:
-                    this.$interactive = true;
+                    this.components["animatedSprite"].gotoAndStop(20);
                     break;
                 case STATES.PLAYED:
-                    this.$interactive = false;
+                    this.components["animatedSprite"].gotoAndStop(30);
                     break;
             }
         })
