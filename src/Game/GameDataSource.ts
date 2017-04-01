@@ -2,18 +2,19 @@ import * as Rx from "rxjs";
 
 export const STATES = {
     DISABLED:"DISABLED",
-    ENABLED:"ENABLED"
+    ENABLED:"ENABLED",
+    PLAYED:"PLAYED"
 }
-class GameDataSource {
+export class GameDataSource {
     protected static instance: GameDataSource;
     obsData = new Rx.Subject();
     private _data={
         playerTurn : 0,
         matrix:[
-            [{state:STATES.ENABLED},{state:STATES.ENABLED},{state:STATES.ENABLED},{state:STATES.DISABLED}],
-            [{state:STATES.ENABLED},{state:STATES.ENABLED},{state:STATES.ENABLED},{state:STATES.DISABLED}],
-            [{state:STATES.ENABLED},{state:STATES.ENABLED},{state:STATES.ENABLED},{state:STATES.DISABLED}],
-            [{state:STATES.ENABLED},{state:STATES.DISABLED},{state:STATES.DISABLED},{state:STATES.DISABLED}]
+            [{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.DISABLED,player:0}],
+            [{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.DISABLED,player:0}],
+            [{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.ENABLED,player:0},{state:STATES.DISABLED,player:0}],
+            [{state:STATES.ENABLED,player:0},{state:STATES.DISABLED,player:0},{state:STATES.DISABLED,player:0},{state:STATES.DISABLED,player:0}]
         ]
     };
     private constructor() {
@@ -31,13 +32,14 @@ class GameDataSource {
     startWithPlayer(playerTurn = 1){
         this._data.playerTurn = playerTurn;
     }
-    changePlayer(){
+    changePlayerTurn(){
         this._data.playerTurn = this._data.playerTurn%2+1;
         this._invalidate();
     }
-    updateMatrix(i,j,state){
-        this._data.matrix[i,j].state = state;
+    applyPlayerAction(i,j){
+        this._data.matrix[i][j].state = STATES.PLAYED;
+        this._data.matrix[i][j].player = this._data.playerTurn;
         this._invalidate();
     }
+    
 }
-export gameDataSource = GameDataSource.getInstance();

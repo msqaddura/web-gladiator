@@ -29,7 +29,7 @@ export class Cell extends ScaleContainer {
                 case STATES.ENABLED:
                     this.$interactive = true;
                     break;
-                case STATES.SELECTED:
+                case STATES.PLAYED:
                     this.$interactive = false;
                     break;
             }

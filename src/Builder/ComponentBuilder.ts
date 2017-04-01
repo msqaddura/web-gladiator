@@ -44,7 +44,7 @@ export class ComponentBuilder {
     this.updateLayout(this.root);
     }
     updateLayout(owner=this.root){
-        if(owner instanceof View){
+        if(owner instanceof Entity){
             owner.renderLayout();
         }
         // for(const key in owner.components){
@@ -53,7 +53,7 @@ export class ComponentBuilder {
     }
 
     info(owner=this.root){
-        if(owner instanceof View){
+        if(owner instanceof Entity){
             owner.info();
         }
         for(const key in owner.components){
