@@ -9,13 +9,14 @@ import { TilingSprite } from "../Component/Primitive/TilingSprite";
 import { AnimatedSprite } from "../Component/Primitive/AnimatedSprite";
 import { Rocket } from '../MarketPlace/Rocket';
 import { Cell } from './Cell';
+import {MainScene} from './MainScene'
 import { MatrixContainer } from './MatrixContainer';
 export const MainSceneBlueprint = {
     "name": "MainScene",
-    "ctor": Scene,
+    "ctor": MainScene,
     "manifest": "Resources/MainSceneManifest.json",
     "vfl": [
-        "V:|[col:[Header(50)]-[Content]-[Footer(50)]]|",
+        "V:|[col:[Header(50)][Content][Footer(50)]]|",
         "H:|[col]|"
     ],
     "componentList": [
@@ -34,7 +35,7 @@ export const MainSceneBlueprint = {
             "ctor": SpaceContainer,
             "vfl": [
                 //"//viewport aspect-ratio:1/1",
-                'HV:|~[Grid(<=100%)]~|',
+                'HV:|~[Grid(<=98%)]~|',
                 //'C:Grid.height(Grid.width)',
                 'C:Grid.width(Grid.height)'
 
