@@ -3,7 +3,7 @@
         "src/*.ts"
     ],
     "compilerOptions": {
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "experimentalDecorators": true,
         "target": "es5"
     }
