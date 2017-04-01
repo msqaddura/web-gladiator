@@ -6,7 +6,9 @@ export class RenderAdapter {
     resizeObs:Rx.Subject<Object> = new Rx.Subject();
     private constructor() {
         // do something construct...
-        Rx.Observable.fromEvent(window,"resize").debounceTime(100).subscribe(()=>{
+        Rx.Observable.fromEvent(window,"resize")
+        .debounceTime(100)
+        .subscribe(()=>{
             const width = window.innerWidth;
             const height = window.innerHeight;
             this.resizeObs.next({width,height});
