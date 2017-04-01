@@ -15,7 +15,7 @@ export const MainSceneBlueprint = {
     "ctor": Scene,
     "manifest": "Resources/MainSceneManifest.json",
     "vfl": [
-        "V:|-[col:[Header(50)]-[Content]-[Footer(50)]]-|",
+        "V:|[col:[Header(50)]-[Content]-[Footer(50)]]|",
         "H:|[col]|"
     ],
     "componentList": [
@@ -35,7 +35,7 @@ export const MainSceneBlueprint = {
             "vfl": [
                 //"//viewport aspect-ratio:1/1",
                 'HV:|~[Grid(<=100%)]~|',
-                'C:Grid.height(Grid.width)',
+                //'C:Grid.height(Grid.width)',
                 'C:Grid.width(Grid.height)'
 
             ],
