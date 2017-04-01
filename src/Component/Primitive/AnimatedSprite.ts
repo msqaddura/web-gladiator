@@ -29,4 +29,7 @@ export class AnimatedSprite extends Entity {
     stop() {
         this.$view.stop();
     }
+    gotoAndStop(frameNumber=0){
+        this.$view.gotoAndStop(frameNumber)
+    }
 } 
