@@ -22,19 +22,24 @@ var watchedBrowserify = watchify(browserify({
 
 gulp.task("copy-html", function () {
     return gulp.src(srcs.pages)
-        .pipe(gulp.dest(dists.pages));
+        .pipe(gulp.dest(dists.pages))
+        .on('error', gutil.log);
 });
 
 gulp.task("copy-resources", function () {
     return gulp.src(srcs.resources)
-        .pipe(gulp.dest(dists.resources));
+        .pipe(gulp.dest(dists.resources))
+        .on('error', gutil.log);
 });
 
 function bundle() {
     return watchedBrowserify
         .bundle()
+        .on('error', gutil.log)
         .pipe(source('bundle.js'))
-        .pipe(gulp.dest("dist"));
+        .on('error', gutil.log)
+        .pipe(gulp.dest("dist"))
+        .on('error', gutil.log);
 }
 
 gulp.task("default", ["copy-html","copy-resources"], bundle);
