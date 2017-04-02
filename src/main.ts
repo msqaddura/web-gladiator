@@ -9,13 +9,8 @@
 
 // showHello("greeting", "TypeScript");
 import { MainSceneBlueprint } from "./Game/MainSceneBlueprint";
-//import { AutoLayoutAdapter } from "./Adapter/AutolayoutAdapter";
-import { ComponentBuilder } from "./Builder/ComponentBuilder";
-import { ManifestLoader } from './Loader/ManifestLoader';
-import { Application } from "./Component/Primitive/Application";
+import { Application } from './Foundation/GameObjects/Application';
 
-const ml = new ManifestLoader();
-console.info(ml);
 
 
 function loadProgressHandler() {

@@ -1,4 +1,4 @@
-import {Scene} from "../Component/Primitive/Scene";
+import {Scene} from "../Foundation/GameObjects/Scene";
 
 export class MainScene extends Scene{
  constructor(owner, params,bootstrap=false){

@@ -1,13 +1,13 @@
-import { Component } from "../Component/Base/Component";
-import { Container } from "../Component/Primitive/Container";
-import { ScaleContainer } from "../Component/Primitive/ScaleContainer";
-import { SpaceContainer } from "../Component/Primitive/SpaceContainer";
-import { Scene } from "../Component/Primitive/Scene";
-import { Application } from "../Component/Primitive/Application";
-import { Sprite } from "../Component/Primitive/Sprite";
-import { TilingSprite } from "../Component/Primitive/TilingSprite";
-import { AnimatedSprite } from "../Component/Primitive/AnimatedSprite";
-import { Rocket } from '../MarketPlace/Rocket';
+
+import { Container } from "../Foundation/GameObjects/Container";
+import { ScaleContainer } from "../Foundation/GameObjects/ScaleContainer";
+import { SpaceContainer } from "../Foundation/GameObjects/SpaceContainer";
+import { Scene } from "../Foundation/GameObjects/Scene";
+import { Application } from "../Foundation/GameObjects/Application";
+import { Sprite } from "../Foundation/GameObjects/Sprite";
+import { TilingSprite } from "../Foundation/GameObjects/TilingSprite";
+import { AnimatedSprite } from "../Foundation/GameObjects/AnimatedSprite";
+
 import { Cell } from './Cell';
 import {MainScene} from './MainScene'
 import { MatrixContainer } from './MatrixContainer';
