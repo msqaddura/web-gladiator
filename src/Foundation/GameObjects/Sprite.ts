@@ -1,8 +1,6 @@
 import * as PIXI from 'pixi.js'
 
-import { DisplayObject } from '../Primitive/DisplayObject';
-import { Component } from '../Base/Component';
-import { Entity } from '../Base/Entity';
+import { Entity } from '../Core/Entity';
 
 export class Sprite extends Entity{
     

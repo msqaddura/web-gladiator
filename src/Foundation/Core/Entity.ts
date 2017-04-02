@@ -1,12 +1,12 @@
 import * as Rx from 'rxjs';
 
-import { DisplayObject } from '../Primitive/DisplayObject';
+
 import { IEntity } from './IEntity';
 import { Component } from './Component';
 import { LayoutFacade } from '../../Engine/Layout/LayoutFacade';
 import { Interactive } from './Interactive';
-import { Scene } from '../Primitive/Scene';
-import { Application } from '../Primitive/Application';
+import { Scene } from '../GameObjects/Scene';
+
 export class Entity extends Component implements IEntity, Interactive {
     $$$scaleOnly = false;
     _registeredMessages;

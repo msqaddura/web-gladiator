@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 
-import { Component } from '../Base/Component';
-import { Entity } from '../Base/Entity';
+
+import { Entity } from './Entity';
 
 export class VirtualEntity extends Entity{
     

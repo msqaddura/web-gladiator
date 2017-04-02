@@ -1,10 +1,7 @@
 import * as PIXI from 'pixi.js'
 
-import { DisplayObject } from '../Primitive/DisplayObject';
-import { Component } from '../Base/Component';
 import { SpaceContainer } from "./SpaceContainer";
-import { MainSceneBlueprint } from '../../Game/MainSceneBlueprint';
-import { ManifestLoader } from '../../Loader/ManifestLoader';
+import { ResourceFacade } from '../../Engine/Resource/ResourceFacade';
 import { DeviceFacade } from "../../Engine/Device/DeviceFacade";
 
 
@@ -33,11 +30,9 @@ export class Application extends SpaceContainer{
 
  preloadScene(scene){
     this._loading=scene;
-    PIXI.loader
-    .add([
+    ResourceFacade.getInstance().preloadManifest([
         "Resources/MainSceneManifest.json"
-    ])
-  .load(this.preloadSceneAssets.bind(this));
+    ],this.createScene.bind(this))
  }
 
 //  preloadSceneManifest(scene){
@@ -50,9 +45,9 @@ export class Application extends SpaceContainer{
 //  }
 
 
- preloadSceneAssets(loader,resources){
-    loader.add(resources["Resources/MainSceneManifest.json"]["data"]).load(this.createScene.bind(this));
- }
+//  preloadSceneAssets(loader,resources){
+//     loader.add(resources["Resources/MainSceneManifest.json"]["data"]).load(this.createScene.bind(this));
+//  }
  createScene(...args){
      console.info("yup",args);
     this._currentScene = this.createComponent(this._loading,true);

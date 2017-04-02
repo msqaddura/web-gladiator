@@ -1,9 +1,8 @@
 import * as PIXI from 'pixi.js'
 
+import { Entity } from '../Core/Entity';
 
-import { Entity } from '../Base/Entity';
-
-export class SpaceContainer extends Entity {
+export class ScaleContainer extends Entity {
     
  constructor(owner, params,bootstrap=false){
      super(owner,params);
@@ -11,10 +10,12 @@ export class SpaceContainer extends Entity {
      
      this.bootstrap(bootstrap);
  }
-     get $width() {
+    get $width() {
         return this._width;
     }
     set $width(value) {
+        if(this.$$$scaleOnly)
+            this.$view.width = value;
         this._width = value;
     }
 
@@ -22,6 +23,13 @@ export class SpaceContainer extends Entity {
         return this._height;
     }
     set $height(value) {
+        if(this.$$$scaleOnly)
+            this.$view.height = value;
         this._height = value;
+    }
+    parseComponentsLayout() {
+        if(!this.$$$scaleOnly)
+            super.parseComponentsLayout();
+        this.$$$scaleOnly = true;
     }
 } 

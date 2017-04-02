@@ -1,4 +1,4 @@
-import { ScaleContainer } from "../Component/Primitive/ScaleContainer";
+import { ScaleContainer } from '../Foundation/GameObjects/ScaleContainer';
 import { CellPlayedMessage } from "./CellPlayedMessage";
 import { GameDataSource } from "./GameDataSource";
 export class MatrixContainer extends ScaleContainer {
