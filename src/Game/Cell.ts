@@ -33,7 +33,7 @@ export class Cell extends ScaleContainer {
         this.stateMachine.subscribe(value => {
             switch (value) {
                 case STATES.DISABLED:
-                    this.$visible = false;
+                    //this.$visible = false;
                     break;
                 case STATES.ENABLED:
                     this.components["animatedSprite"].gotoAndStop(20);

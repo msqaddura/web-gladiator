@@ -3,7 +3,7 @@ import * as Rx from 'rxjs';
 import { DisplayObject } from '../Primitive/DisplayObject';
 import { IEntity } from './IEntity';
 import { Component } from './Component';
-import { AutoLayoutAdapter } from '../../Adapter/AutolayoutAdapter';
+import { LayoutFacade } from '../../Engine/Layout/LayoutFacade';
 import { Interactive } from './Interactive';
 import { Scene } from '../Primitive/Scene';
 import { Application } from '../Primitive/Application';
@@ -74,8 +74,8 @@ export class Entity extends Component implements IEntity, Interactive {
         this.$height = height;
         this.$left = left;
         this.$top = top;
-        this._autolayout = AutoLayoutAdapter.getInstance()
-        .parseVFL(this._vfl)
+        this._autolayout = LayoutFacade.getInstance()
+        .parseEVFL(this._vfl)
         this.parseComponentsLayout();
         
         
