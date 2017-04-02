@@ -5,7 +5,7 @@ import { Component } from '../Base/Component';
 import { SpaceContainer } from "./SpaceContainer";
 import { MainSceneBlueprint } from '../../Game/MainSceneBlueprint';
 import { ManifestLoader } from '../../Loader/ManifestLoader';
-import { RenderAdapter } from '../../Adapter/RenderAdapter';
+import { DeviceFacade } from "../../Engine/Device/DeviceFacade";
 
 
 export class Application extends SpaceContainer{
@@ -26,7 +26,7 @@ export class Application extends SpaceContainer{
 
 
      document.body.appendChild(this.canvas);
-     RenderAdapter.getInstance().getResizeObs().subscribe(this.resize.bind(this))
+     DeviceFacade.getInstance().getResizeObs().subscribe(this.resize.bind(this))
      window["app"] = this;
  }
 
@@ -40,14 +40,14 @@ export class Application extends SpaceContainer{
   .load(this.preloadSceneAssets.bind(this));
  }
 
- preloadSceneManifest(scene){
-    this._loading=scene;
-    PIXI.loader
-    .add([
-        "Resources/MainSceneManifest.json"
-    ])
-  .load(this.preloadSceneAssets.bind(this));
- }
+//  preloadSceneManifest(scene){
+//     this._loading=scene;
+//     PIXI.loader
+//     .add([
+//         "Resources/MainSceneManifest.json"
+//     ])
+//   .load(this.preloadSceneAssets.bind(this));
+//  }
 
 
  preloadSceneAssets(loader,resources){
