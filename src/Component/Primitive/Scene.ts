@@ -1,6 +1,6 @@
 import {SpaceContainer} from "./SpaceContainer"
 import {ManifestLoader} from '../../Loader/ManifestLoader';
-import { Bus } from '../../Communication/Bus';
+import { Bus } from '../../Engine/Communication/Bus';
 export class Scene extends SpaceContainer{
  _manifest;
  _bus;
