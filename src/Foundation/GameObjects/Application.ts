@@ -14,12 +14,19 @@ export class Application extends SpaceContainer{
  canResize = true;
  constructor(owner=null,params,bootstrap=false){
      super(owner, params);
-     this._application = new PIXI.Application(window.innerWidth,window.innerHeight);
+     this._application = new PIXI.Application(window.innerWidth,window.innerHeight,
+     {
+        antialiasing: false,
+        transparent: false,
+        
+        autoResize: true
+    }
+        );
      this.renderer = this._application.renderer;
      this.canvas = this._application.view;
      this.$view = this._application.stage; 
-     this.$height = window.innerHeight;
-     this.$width = window.innerWidth;
+     //this.$height = window.innerHeight;
+     //this.$width = window.innerWidth;
 
 
      document.body.appendChild(this.canvas);
