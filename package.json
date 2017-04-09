@@ -20,9 +20,11 @@
   },
   "dependencies": {
     "@types/pixi.js": "*",
-    "pixi.js": "*",
     "autolayout": "*",
+    "pixi.js": "*",
+    "resource-loader": "*",
     "rxjs": "*",
-    "resource-loader": "*"
+    "socket.io": "*",
+    "socket.io-client": "^1.7.3"
   }
 }
