@@ -16,15 +16,15 @@
     "tsify": "^3.0.0",
     "typescript": "*",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.8.0"
+    "watchify": "^3.8.0",
+    "@types/pixi.js": "*",
+    "@types/socket.io-client": "*"
   },
   "dependencies": {
-    "@types/pixi.js": "*",
     "autolayout": "*",
     "pixi.js": "*",
     "resource-loader": "*",
     "rxjs": "*",
-    "socket.io": "*",
-    "socket.io-client": "^1.7.3"
+    "socket.io-client": "*"
   }
 }
