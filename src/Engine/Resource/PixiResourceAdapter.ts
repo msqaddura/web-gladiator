@@ -1,4 +1,5 @@
 //import * as Loader from 'resource-loader';
+import * as Rx from 'rxjs';
 export class PixiResourceAdapter {
 
     _loader;
@@ -15,12 +16,24 @@ export class PixiResourceAdapter {
 
     preloadManifest(manifest, cb) {
         var self = this;
-        this._loader
-            .add(manifest)
-            .load(function (loader, resources) {
-                self._loader
+        return Rx.Observable.create(observer=>{
+            this._loader
+                .add(manifest)
+                .load(function (loader, resources) {
+                    loader.progress = 0;
+                    loader.onProgress.add(function(loader,resource){
+                        //console.info(loader.progress);
+                        observer.next(loader.progress);
+                    })
+                    loader.onComplete.add(function(loader,resObj){
+                        //console.info(loader.progress)
+                        observer.complete();
+                    })
+                    loader
                     .add(resources[manifest]["data"])
-                    .load(cb)
+                    .load(function (loader, resources){});
+            })    
+
             });
     }
 

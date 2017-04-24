@@ -14,8 +14,8 @@ export class ResourceFacade  {
         return this.instance;
     }
 
-    preloadManifest(manifest,cb){
-      this._resourceAdapter.preloadManifest(manifest,cb);
+    preloadManifest(manifest){
+      return this._resourceAdapter.preloadManifest(manifest);
     }
     
 }

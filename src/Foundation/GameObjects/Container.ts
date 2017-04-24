@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js'
 
 import { VirtualEntity } from '../Core/VirtualEntity';
+import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
 
 export class Container extends VirtualEntity {
     
@@ -11,3 +12,5 @@ export class Container extends VirtualEntity {
      this.bootstrap(bootstrap);
  }
 } 
+
+GameObjectBuilder.getInstance().registerGameObject('Container',Container);

@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 
 import { Entity } from '../Core/Entity';
-
+import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
 
 export class AnimatedSprite extends Entity {
 
@@ -31,3 +31,5 @@ export class AnimatedSprite extends Entity {
         this.$view.gotoAndStop(frameNumber)
     }
 } 
+
+GameObjectBuilder.getInstance().registerGameObject('AnimatedSprite',AnimatedSprite);

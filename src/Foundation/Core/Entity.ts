@@ -6,7 +6,8 @@ import { Component } from './Component';
 import { LayoutFacade } from '../../Engine/Layout/LayoutFacade';
 import { Interactive } from './Interactive';
 import { Scene } from '../GameObjects/Scene';
-
+import { GameObjectBuilder } from "../Builder/GameObjectBuilder";
+import { EventFacade } from '../../Engine/Communication/EventFacade';
 export class Entity extends Component implements IEntity, Interactive {
     $$$scaleOnly = false;
     _registeredMessages;
@@ -94,7 +95,8 @@ export class Entity extends Component implements IEntity, Interactive {
     }
 
     createComponent(comp,bootstrap=true): Component {
-        return new comp["ctor"](this, comp,bootstrap);
+        return GameObjectBuilder.getInstance().createGameObject(comp["ctor"],this,comp,bootstrap)
+        //return new comp["ctor"](this, comp,bootstrap);
     }
 
     addComponent(component) {
@@ -114,10 +116,10 @@ export class Entity extends Component implements IEntity, Interactive {
     listenToBusEvents(){}
 
     registerMessage(ctor){
-       return this._scene._bus.registerMessage(ctor);
+       return EventFacade.getInstance().registerMessage(ctor);
     }
     sendMessage(obj){
-        this._scene._bus.sendMessage(obj);
+        EventFacade.getInstance().sendMessage(obj);
     }
 
     info() {

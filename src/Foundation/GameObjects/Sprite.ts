@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js'
 
 import { Entity } from '../Core/Entity';
+import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
 
 export class Sprite extends Entity{
     
@@ -12,3 +13,5 @@ export class Sprite extends Entity{
      this.bootstrap(bootstrap);
  }
 } 
+
+GameObjectBuilder.getInstance().registerGameObject('Sprite',Sprite);

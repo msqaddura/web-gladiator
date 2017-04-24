@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js'
 
 import { Entity } from '../Core/Entity';
+import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
 
 export class ScaleContainer extends Entity {
     
@@ -33,3 +34,5 @@ export class ScaleContainer extends Entity {
         this.$$$scaleOnly = true;
     }
 } 
+
+GameObjectBuilder.getInstance().registerGameObject('ScaleContainer',ScaleContainer);

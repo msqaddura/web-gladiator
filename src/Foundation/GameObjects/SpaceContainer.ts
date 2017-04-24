@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js'
 
 import { Entity } from '../Core/Entity';
+import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
 
 export class SpaceContainer extends Entity {
     
@@ -24,3 +25,5 @@ export class SpaceContainer extends Entity {
         this._height = value;
     }
 } 
+
+GameObjectBuilder.getInstance().registerGameObject('SpaceContainer',SpaceContainer);

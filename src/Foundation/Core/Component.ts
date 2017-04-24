@@ -5,15 +5,16 @@ export class Component implements IComponent{
     readonly name:string;
     readonly componentList:Array<Component>;
     readonly repeatableList;
+    readonly lazyList;
     readonly ctor;
     public components:Object={};
 
-    constructor(owner=null,{name="N/A", componentList=[],repeatableList=[]},bootstrap=false) {
+    constructor(owner=null,{name="N/A", componentList=[],repeatableList=[],lazyList={}},bootstrap=false) {
         this.owner = owner;
         this.name = name;
         this.componentList=componentList;
         this.repeatableList=repeatableList;
-
+        this.lazyList=lazyList;
         //this.selfConstruct();
 
         //this.preInitialize();
@@ -42,7 +43,9 @@ export class Component implements IComponent{
     postInitialize(){}
 
     preCreateComponents():void{}
-
+    createLazyChild(child,bootstrap=true){
+        this.addComponent(this.createComponent(child,bootstrap));
+    }
     createComponents(bootstrap=true):Object{
         this.repeatableList.forEach(tuple=>{
             tuple.repeats.forEach(repeat=>{
