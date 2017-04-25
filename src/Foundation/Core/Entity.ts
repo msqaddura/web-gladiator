@@ -20,6 +20,7 @@ export class Entity extends Component implements IEntity, Interactive {
     _top =0;
     _width = 0;
     _height = 0;
+    _alpha = 1;
     _anchorX;
     _anchorY;
     _scaleX = 1;
@@ -234,6 +235,14 @@ export class Entity extends Component implements IEntity, Interactive {
     }
     get $interactive(){
         return this._interactive;
+    }
+
+    set $alpha(value){
+        this._alpha=value;
+        this.$view.alpha=value;
+    }
+    get $alpha(){
+        return this._alpha;
     }
 }
 
