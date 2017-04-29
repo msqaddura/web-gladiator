@@ -2,10 +2,9 @@ import * as Rx from 'rxjs';
 import { DeviceAdapter } from "./DeviceAdapter"
 export class DeviceFacade {
     private static instance: DeviceFacade;
-    _deviceAdapter:DeviceAdapter;
+    _adapter = null;
     private constructor() {
         // do something construct...
-        this._deviceAdapter = new DeviceAdapter();
     }
     static getInstance() {
         if (!this.instance) {
@@ -14,7 +13,10 @@ export class DeviceFacade {
         }
         return this.instance;
     }
+    use(adapter){
+        this._adapter = adapter;
+    }
     getResizeObs(){
-        return this._deviceAdapter.getResizeObs();
+        return this._adapter.getResizeObs();
     }
 } 

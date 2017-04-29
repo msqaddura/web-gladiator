@@ -1,5 +1,5 @@
 import * as Rx from 'rxjs';
-
+//makes no sense here 
 export class Bus{
     _registeredMessages={}
     

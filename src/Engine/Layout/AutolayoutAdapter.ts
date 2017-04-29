@@ -1,6 +1,6 @@
 import * as AutoLayout from 'autolayout';
 
-export default class AutoLayoutAdapter {
+export class AutolayoutAdapter {
     constructor() {}
 
     parseEVFL(evfl=['']){

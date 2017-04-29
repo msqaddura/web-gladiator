@@ -1,11 +1,10 @@
 import * as AutoLayout from 'autolayout';
-import AutoLayoutAdapter from "./AutolayoutAdapter";
 export class LayoutFacade {
     private static instance: LayoutFacade;
-    layoutAdapter;
+    _adapter;
     private constructor() {
         // do something construct...
-        this.layoutAdapter = new AutoLayoutAdapter();
+        //this.layoutAdapter = new AutoLayoutAdapter();
     }
     static getInstance() {
         if (!this.instance) {
@@ -15,7 +14,10 @@ export class LayoutFacade {
         }
         return this.instance;
     }
+    use(adapter){
+        this._adapter = adapter;
+    }
     parseEVFL(vfl=['']){
-        return this.layoutAdapter.parseEVFL(vfl)
+        return this._adapter.parseEVFL(vfl)
     }
 } 

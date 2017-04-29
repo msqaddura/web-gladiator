@@ -2,20 +2,22 @@
 import { PixiResourceAdapter } from './PixiResourceAdapter';
 export class ResourceFacade  {
     static instance: ResourceFacade;
-    _resourceAdapter;
+    _adapter;
     constructor() {
     }
     static getInstance() {
         if (!this.instance) {
             this.instance = new ResourceFacade();
-            this.instance._resourceAdapter = new PixiResourceAdapter();
+            //this.instance._adapter = new PixiResourceAdapter();
             // ... any one time initialization goes here ...
         }
         return this.instance;
     }
-
+    use(adapter){
+        this._adapter = adapter;
+    }
     preloadManifest(manifest){
-      return this._resourceAdapter.preloadManifest(manifest);
+      return this._adapter.preloadManifest(manifest);
     }
     
 }

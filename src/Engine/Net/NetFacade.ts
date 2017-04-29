@@ -6,17 +6,19 @@ export class NetFacade  {
     static getInstance() {
         if (!this.instance) {
             this.instance = new NetFacade();
-            this.instance._adapter = new SocketIOAdapter();
+            //this.instance._adapter = new SocketIOAdapter();
             // ... any one time initialization goes here ...
         }
         return this.instance;
     }
-
+    use(adapter){
+        this._adapter = adapter;
+    }
     getStream(){
         return this._adapter.getStream();
     }
-    connect(url = 'http://localhost:3001'){
-        this._adapter.connect(url);
+    connect(){
+        this._adapter.connect();
     }
     
 }
