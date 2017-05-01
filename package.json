@@ -25,6 +25,6 @@
     "pixi.js": "*",
     "resource-loader": "*",
     "rxjs": "*",
-    "socket.io-client": "*"
+    "colyseus.js": "*"
   }
 }
