@@ -20,5 +20,8 @@ export class NetFacade  {
     connect(){
         this._adapter.connect();
     }
+    send(data){
+        this._adapter.send(data);
+    }
     
 }

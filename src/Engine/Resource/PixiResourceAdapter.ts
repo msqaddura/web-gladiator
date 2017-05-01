@@ -1,5 +1,7 @@
 //import * as Loader from 'resource-loader';
 import * as Rx from 'rxjs';
+import * as PIXI from 'pixi.js';
+
 export class PixiResourceAdapter {
 
     _loader;
