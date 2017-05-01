@@ -65,9 +65,7 @@ export class Entity extends Component implements IEntity, Interactive {
             this.$visible = this.params.visible;
     }
 
-    postCreateComponents() {
-        super.postCreateComponents();
-    }
+
 
 
     parseLayout(width,height,left,top) {
