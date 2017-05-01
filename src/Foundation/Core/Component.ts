@@ -94,6 +94,10 @@ export class Component implements IComponent{
     }
 
     dispose(){}
-    destroy(){}
+    destroy(){
+        for (const key in this.components){
+            this.components[key].destroy();
+        }
+    }
 
 }

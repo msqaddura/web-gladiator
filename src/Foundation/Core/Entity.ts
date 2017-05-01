@@ -10,7 +10,7 @@ import { GameObjectBuilder } from "../Builder/GameObjectBuilder";
 import { EventFacade } from '../../Engine/Communication/EventFacade';
 export class Entity extends Component implements IEntity, Interactive {
     $$$scaleOnly = false;
-    _registeredMessages;
+    _registeredMessages={};
     _scene:Scene;
     $view;
     _interactive;
@@ -117,12 +117,24 @@ export class Entity extends Component implements IEntity, Interactive {
     listenToBusEvents(){}
 
     registerMessage(ctor){
-       return EventFacade.getInstance().registerMessage(ctor);
+        this._registeredMessages[ctor.name] = EventFacade.getInstance().registerMessage(ctor)
+        return this._registeredMessages[ctor.name];
     }
     sendMessage(obj){
         EventFacade.getInstance().sendMessage(obj);
     }
-
+    destroy(){
+        super.destroy();
+        for (const key in this._registeredMessages){
+            this._registeredMessages[key].unsubscribe();
+            delete this._registeredMessages[key];
+        }
+        for (const key in this._registeredHIDEvents){
+            this._registeredHIDEvents[key].unsubscribe();
+            delete this._registeredHIDEvents[key];
+        }
+        this.$view.parent.removeChild(this.$view);
+    }
     info() {
         const info = {
             x: this.$x,
