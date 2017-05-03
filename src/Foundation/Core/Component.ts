@@ -92,11 +92,14 @@ export class Component implements IComponent{
             fn(list[key]);
         }
     }
-
+    removeComponent(name){
+        delete this.componentList[name];
+    }
     dispose(){}
     destroy(){
         for (const key in this.components){
             this.components[key].destroy();
+            this.removeComponent(key);
         }
     }
 
