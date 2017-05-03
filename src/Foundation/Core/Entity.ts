@@ -128,7 +128,7 @@ export class Entity extends Component implements IEntity, Interactive {
             delete this._registeredMessages[key];
         }
         for (const key in this._registeredHIDEvents){
-            this._registeredHIDEvents[key].unsubscribe();
+            //this._registeredHIDEvents[key].unsubscribe();
             delete this._registeredHIDEvents[key];
         }
         this.$view.parent.removeChild(this.$view);

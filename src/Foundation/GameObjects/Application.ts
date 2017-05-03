@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js'
 
 import { SpaceContainer } from "./SpaceContainer";
 import { ResourceFacade } from '../../Engine/Resource/ResourceFacade';
+import { SceneManager } from '../../Foundation/Manager/SceneManager';
 import { DeviceFacade } from "../../Engine/Device/DeviceFacade";
 import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
 import { NetFacade } from '../../Engine/Net/NetFacade';
@@ -11,12 +12,14 @@ export class Application extends SpaceContainer {
     _loading;
     _currentScene;
     _blueprints;
+    _sceneMap;
     canvas;
     renderer;
     canResize = true;
     constructor(owner = null, params, bootstrap = false) {
         super(owner, params);
         this._blueprints = params.blueprints;
+        this._sceneMap = params.sceneMap;
         this._application = new PIXI.Application(window.innerWidth, window.innerHeight,
             {
                 antialiasing: false,
@@ -35,6 +38,9 @@ export class Application extends SpaceContainer {
         this.bootstrap(bootstrap);
     }
 
+    createComponents(bootstrap=false){
+        super.createComponents(bootstrap);
+    }
     preloadScene(blueprint) {
         this._loading = blueprint;
          return ResourceFacade.getInstance().preloadManifest(blueprint.manifest);
@@ -48,7 +54,13 @@ export class Application extends SpaceContainer {
         const height = window.innerHeight;
         this.parseLayout(width, height, 0, 0);
     }
-
+    refresh(){
+        let dimensions = {
+            width:window.innerWidth,
+            height:window.innerHeight
+        }
+        this.resize(dimensions);
+    }
     resize(dimensions) {
         if (!this.canResize) return;
         this.renderer.resize(dimensions.width, dimensions.height);
