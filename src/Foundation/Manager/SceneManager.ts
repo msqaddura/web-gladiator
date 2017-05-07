@@ -20,6 +20,7 @@ export class SceneManager {
     
     setTarget(target){
         this._target = target;
+        this._sceneMap = target.sceneMap;
     }
     registerScene(name,scene){
         this._sceneMap[name]=scene;
@@ -27,8 +28,8 @@ export class SceneManager {
     getScene(name){
         return this._sceneMap[name];
     }
-    preloadScene(blueprint) {  
-         return ResourceFacade.getInstance().preloadManifest(blueprint.manifest);
+    preloadScene(name:string) {  
+         return ResourceFacade.getInstance().preloadManifest(this._sceneMap[name].manifest);
     }
     
     switchScenesTo(inScene,outScene){
@@ -37,8 +38,8 @@ export class SceneManager {
         this.loadScene(inScene,true);
     }
 
-    loadScene(blueprint, bootstrap = true){
-        this._activeScene = BlueprintBuilder.getInstance().createAndAddObject(this._target,blueprint,bootstrap);
+    loadScene(name, bootstrap = true){
+        this._activeScene = BlueprintBuilder.getInstance().createAndAddObject(this._target,this._sceneMap[name],bootstrap);
         //this._target.addNode(this._target.createNode(blueprint,bootstrap))
         //this._activeScene = this._target.createTree(blueprint,bootstrap);
         //this._target.addComponent(this._activeScene);

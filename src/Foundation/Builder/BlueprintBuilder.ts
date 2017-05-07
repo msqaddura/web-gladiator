@@ -1,10 +1,10 @@
 //not to confuse with the name... this more like parser/iterator
 import { WGObject } from '../Core/WGObject';
 import { WGObjectBuilder } from './WGObjectBuilder';
-
+import { Strategy } from '../Base/Strategy';
 import { GameObject } from '../Core/GameObject';
 import { GameObjectBuilder } from './GameObjectBuilder';
-
+import { StrategyBuilder } from './StrategyBuilder';
 export class BlueprintBuilder {
     private static instance: BlueprintBuilder;
     
@@ -32,6 +32,8 @@ export class BlueprintBuilder {
             builder = GameObjectBuilder.getInstance()
         else if(WGObject.isPrototypeOf(blueprint.ctor))
             builder = WGObjectBuilder.getInstance()
+        else if(Strategy.isPrototypeOf(blueprint.ctor))
+            builder = StrategyBuilder.getInstance()
         else 
             throw new Error('congrats bitch!');
 

@@ -14,19 +14,15 @@ export class Scene extends SpaceContainer{
     
 }
 
-load(){
-    this.bootstrap(true);
-}
-show(){
+    load(){
+        
+    }
+    show(){
 
-}
-hide(){
+    }
+    hide(){
 
-}
- preloadAssits(loader,asset){
-     console.info(loader,asset);
-     //super.bootstrap();
- }
+    }
 
 }
 

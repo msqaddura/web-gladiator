@@ -1,14 +1,10 @@
 import { IComposite } from './IComposite';
-
-export class Composite implements IComposite{
-    readonly  owner: Composite;
-    readonly name:string;
+import { NodeX } from './NodeX';
+export class Composite extends NodeX implements IComposite{
     private tree:Object={};
 
-
     constructor(owner=null,name="NoNameGiven") {
-        this.owner = owner;
-        this.name = name;
+        super(owner,name);
     }
     
     addNode(node:Composite){
@@ -28,8 +24,5 @@ export class Composite implements IComposite{
         for(var key in this.tree){
             fn(this.tree[key]);
         }
-    }
-    destroy(){
-        //NOT SURE A BOUT IT HERE     
     }
 }
