@@ -1,5 +1,3 @@
-
-import { SocketIOAdapter } from './SocketIOAdapter';
 export class NetFacade  {
     static instance: NetFacade;
     _adapter;

@@ -1,3 +1,4 @@
+import { GameObject } from '../Core/GameObject';
 export class GameObjectBuilder {
     private static instance: GameObjectBuilder;
     
@@ -13,13 +14,23 @@ export class GameObjectBuilder {
     registerGameObject(ctorName,ctor){
         this._registeredGameObjects[ctorName]=ctor;
     }
-    createGameObject(ctor,owner,params,bootstrap=true){
-        let gameObject = new ctor(owner,params,bootstrap);
+    
+    createObject(owner,blueprint,bootstrap=true){
+        let obj:GameObject = new blueprint.ctor(owner,blueprint);
+        obj.initialize();
+        if(bootstrap){
+            obj.preCreateTree();
+            obj.createTree();
+            obj.postCreateTree();
+            obj.listenToBusEvents();
+            obj.listenToHIDEvents(false);
+            obj.start();
+        }
         //return new this._registeredGameObjects[ctorName]()
         //.setOwner(owner)
         //.setParams(params)
         //.bootstrap(bootstrap);
-        return gameObject;
+        return obj;
     }
     
 } 

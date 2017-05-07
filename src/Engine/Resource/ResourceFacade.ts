@@ -1,5 +1,3 @@
-
-import { PixiResourceAdapter } from './PixiResourceAdapter';
 export class ResourceFacade  {
     static instance: ResourceFacade;
     _adapter;

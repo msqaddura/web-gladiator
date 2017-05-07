@@ -1,16 +1,16 @@
-import { MainSceneBlueprint } from "./Game/MainSceneBlueprint";
-import { Application } from './Foundation/GameObjects/Application';
 
-function setup() {
-  let app = new Application(null,{
-    vfl:["HV:|[MainScene(100%)]|"],
-    name:"Application"
-  });
+// import { Application } from './Foundation/GameObjects/Application';
+
+// function setup() {
+//   let app = new Application(null,{
+//     vfl:["HV:|[MainScene(100%)]|"],
+//     name:"Application"
+//   });
   
-  app.preloadScene(MainSceneBlueprint);
-  console.info(app);
-}
-setup();
+//   app.preloadScene(MainSceneBlueprint);
+//   console.info(app);
+// }
+// setup();
 
 
 
