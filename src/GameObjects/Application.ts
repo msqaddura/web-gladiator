@@ -1,11 +1,10 @@
 import * as PIXI from 'pixi.js'
 
 import { SpaceContainer } from "./SpaceContainer";
-import { ResourceFacade } from '../Engine/Resource/ResourceFacade';
 import { SceneManager } from '../Foundation/Manager/SceneManager';
 import { DeviceFacade } from "../Engine/Device/DeviceFacade";
 import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
-import { NetFacade } from '../Engine/Net/NetFacade';
+
 
 export class Application extends SpaceContainer {
 
@@ -37,20 +36,6 @@ export class Application extends SpaceContainer {
         SceneManager.getInstance().setTarget(this);
     }
 
-
-    preloadScene(blueprint) {
-        this._loading = blueprint;
-         return ResourceFacade.getInstance().preloadManifest(blueprint.manifest);
-    }
-
-
-    createScene(blueprint) {
-        this._currentScene = this.createNode(blueprint, true);
-        this.addNode(this._currentScene);
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        this.parseLayout(width, height, 0, 0);
-    }
     refresh(){
         let dimensions = {
             width:window.innerWidth,
