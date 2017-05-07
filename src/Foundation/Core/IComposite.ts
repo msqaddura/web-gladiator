@@ -5,7 +5,8 @@ export interface IComposite extends INode{
     //private tree:Object
   
 
-
+    getNode(name:string);
+    getNodeByName(name:string);
     addNode(node:Composite):void;    
     removeNode(name:string):void;
     

@@ -19,7 +19,12 @@ export class Composite extends NodeX implements IComposite{
             delete this.tree[key];
         }
     }
-
+    getNode(name){
+        return this.getNodeByName(name);
+    }
+    getNodeByName(name){
+        return this.tree[name];
+    }
     iterateTree(fn:Function){
         for(var key in this.tree){
             fn(this.tree[key]);

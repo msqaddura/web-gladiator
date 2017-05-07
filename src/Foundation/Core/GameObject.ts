@@ -89,11 +89,10 @@ export class GameObject extends WGObject implements IGameObject, IHID {
     }
 
     addNode(node) {
-        
+        super.addNode(node);
         if (node instanceof GameObject)
             this.addGameObject(node);
-        else
-            super.addNode(node);
+            
 
     }
     addGameObject(gameObject: GameObject) {
