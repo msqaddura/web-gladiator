@@ -1,7 +1,7 @@
 import { IWGObject } from './IWGObject';
 import { Composite } from './Composite';
 
-import { WGObjectBuilder } from '../Builder/WGObjectBuilder';
+import { BlueprintBuilder } from '../Builder/BlueprintBuilder';
 
 
 export class WGObject extends Composite implements IWGObject{
@@ -41,7 +41,7 @@ export class WGObject extends Composite implements IWGObject{
 
 
     createNode(blueprint,bootstrap = true){
-        return WGObjectBuilder.getInstance().createObject(this,blueprint,bootstrap);
+        return BlueprintBuilder.getInstance().createObject(this,blueprint,bootstrap);
     }
 
 

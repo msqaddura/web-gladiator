@@ -8,16 +8,17 @@ import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
 import { NetFacade } from '../Engine/Net/NetFacade';
 
 export class Application extends SpaceContainer {
+
     _application;
     _loading;
     _currentScene;
-    _sceneMap;
+    sceneMap;
     canvas;
     renderer;
     canResize = true;
     constructor(owner = null, params) {
         super(owner, params);
-        this._sceneMap = params.sceneMap;
+        this.sceneMap = params.sceneMap;
         this._application = new PIXI.Application(window.innerWidth, window.innerHeight,
             {
                 antialiasing: false,
@@ -33,7 +34,7 @@ export class Application extends SpaceContainer {
         //this.$width = window.innerWidth;
         document.body.appendChild(this.canvas);
         DeviceFacade.getInstance().getResizeObs().subscribe(this.resize.bind(this))
-        
+        SceneManager.getInstance().setTarget(this);
     }
 
 
