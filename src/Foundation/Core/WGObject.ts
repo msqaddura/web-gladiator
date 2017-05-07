@@ -2,16 +2,14 @@ import { IWGObject } from './IWGObject';
 import { Composite } from './Composite';
 
 import { WGObjectBuilder } from '../Builder/WGObjectBuilder';
-import { IEvent } from '../../Engine/Event/IEvent';
-import { EventFacade } from '../../Engine/Event/EventFacade';
 
-export class WGObject extends Composite implements IWGObject,IEvent{
-    readonly owner: WGObject;
-    readonly name:string;
+
+export class WGObject extends Composite implements IWGObject{
+    
     readonly blueprint;
     readonly blueprints;
     readonly repeatableBlueprints;
-    registeredEvents={};
+    
     constructor(owner=null,{name="N/A", blueprints=[],repeatableBlueprints=[]}) {
         super(owner,name);
         this.blueprints = blueprints;
@@ -46,25 +44,9 @@ export class WGObject extends Composite implements IWGObject,IEvent{
         return WGObjectBuilder.getInstance().createObject(this,blueprint,bootstrap);
     }
 
-    listenToBusEvents(){}
 
-    registerEvent(ctor){
-        this.registeredEvents[ctor.name] = EventFacade.getInstance().registerEvent(ctor)
-        return this.registeredEvents[ctor.name];
-    }
-    sendEvent(obj){
-        EventFacade.getInstance().sendEvent(obj);
-    }
 
     start(){
         
-    }
-
-    destroy(){
-        for (const key in this.registeredEvents){
-            this.registeredEvents[key].unsubscribe();
-            delete this.registeredEvents[key];
-        }
-        super.destroy();
     }
 }

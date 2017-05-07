@@ -1,7 +1,6 @@
 import {Composite} from './Composite';
-export interface IComposite {
-    readonly owner: Composite;
-    readonly name:string;
+import {INode} from './INode';
+export interface IComposite extends INode{
     
     //private tree:Object
   
@@ -16,4 +15,5 @@ export interface IComposite {
 
     //specialFunctions
     iterateTree(fn:Function);
+    
 }
