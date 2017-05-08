@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js'
 
 import { SpaceContainer } from "./SpaceContainer";
 import { SceneManager } from '../Foundation/Manager/SceneManager';
-import { DeviceFacade } from "../Engine/Device/DeviceFacade";
+import { Engine } from "../Engine/Engine";
 import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
 
 
@@ -32,7 +32,7 @@ export class Application extends SpaceContainer {
         //this.$height = window.innerHeight;
         //this.$width = window.innerWidth;
         document.body.appendChild(this.canvas);
-        DeviceFacade.getInstance().getResizeObs().subscribe(this.resize.bind(this))
+        Engine.getInstance().getSystem("device").getResizeObs().subscribe(this.resize.bind(this))
         SceneManager.getInstance().setTarget(this);
     }
 
