@@ -5,10 +5,7 @@ import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
 
 export class ScaleContainer extends Entity {
     
- constructor(owner, params){
-     super(owner,params);
-     this.$view = new PIXI.Container();
- }
+
     get $width() {
         return this._width;
     }
