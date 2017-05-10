@@ -6,23 +6,26 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Mohamad Qaddura",
+  "license": "UNLICENSED",
+  "private": true,
   "devDependencies": {
     "browserify": "^13.1.1",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.1.3",
     "gulp-util": "^3.0.8",
     "tsify": "^3.0.0",
-    "typescript": "^2.1.4",
+    "typescript": "*",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.8.0",
-    "pixi.js": "*",
-    "@alizurchik/ts-mixin":"*",
-    "mixin": "*",
-    "autolayout": "*"
+    "@types/pixi.js": "*",
+    "@types/socket.io-client": "*"
   },
   "dependencies": {
-    "@types/pixi.js": "*"
+    "autolayout": "*",
+    "pixi.js": "*",
+    "resource-loader": "*",
+    "rxjs": "*",
+    "colyseus.js": "*"
   }
 }
