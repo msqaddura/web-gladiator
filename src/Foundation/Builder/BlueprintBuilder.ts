@@ -2,7 +2,7 @@
 import { WGObject } from '../Core/WGObject';
 import { WGObjectBuilder } from './WGObjectBuilder';
 import { Strategy } from '../Base/Strategy';
-import { GameObject } from '../Core/GameObject';
+import { View } from '../Core/View';
 import { GameObjectBuilder } from './GameObjectBuilder';
 import { StrategyBuilder } from './StrategyBuilder';
 export class BlueprintBuilder {
@@ -28,7 +28,7 @@ export class BlueprintBuilder {
     createObject(owner,blueprint,bootstrap=true){
         let builder = null;
 
-        if (GameObject.isPrototypeOf(blueprint.ctor))
+        if (View.isPrototypeOf(blueprint.ctor))
             builder = GameObjectBuilder.getInstance()
         else if(WGObject.isPrototypeOf(blueprint.ctor))
             builder = WGObjectBuilder.getInstance()

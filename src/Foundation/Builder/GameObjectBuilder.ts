@@ -1,4 +1,4 @@
-import { GameObject } from '../Core/GameObject';
+import { View } from '../Core/View';
 export class GameObjectBuilder {
     private static instance: GameObjectBuilder;
     
@@ -16,7 +16,7 @@ export class GameObjectBuilder {
     }
     
     createObject(owner,blueprint,bootstrap=true){
-        let obj:GameObject = new blueprint.ctor(owner,blueprint);
+        let obj:View = new blueprint.ctor(owner,blueprint);
         obj.initialize();
         if(bootstrap){
             obj.preCreateTree();

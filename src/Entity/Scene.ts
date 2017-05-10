@@ -1,8 +1,8 @@
 
-import {SpaceContainer} from "./SpaceContainer";
+import {Entity} from "./Entity";
 import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
 
-export class Scene extends SpaceContainer{
+export class Scene extends Entity{
  _manifest;
  _blueprint
  constructor(owner, params){
