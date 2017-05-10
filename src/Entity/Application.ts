@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js'
 
 import { Entity } from "./Entity";
 import { SceneManager } from '../Foundation/Manager/SceneManager';
-import { Engine } from "../Engine/Engine";
+import { System } from "../System/System";
 import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
 
 
@@ -32,7 +32,7 @@ export class Application extends Entity {
         //this.$height = window.innerHeight;
         //this.$width = window.innerWidth;
         document.body.appendChild(this.canvas);
-        Engine.getInstance().getSystem("device").getResizeObs().subscribe(this.resize.bind(this))
+        System.getInstance().getSystem("device").getResizeObs().subscribe(this.resize.bind(this))
         SceneManager.getInstance().setTarget(this);
     }
 

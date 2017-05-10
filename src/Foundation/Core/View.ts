@@ -3,11 +3,11 @@ import * as Rx from 'rxjs';
 
 import { IView } from './IView';
 import { WGObject } from './WGObject';
-import { LayoutFacade } from '../../Engine/Layout/LayoutFacade';
-import { IHID } from '../../Engine/HID/IHID';
+import { LayoutFacade } from '../../System/Layout/LayoutFacade';
+import { IHID } from '../../System/HID/IHID';
 import { Scene } from '../../Entity/Scene';
 import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
-import { EventFacade } from '../../Engine/Event/EventFacade';
+import { EventFacade } from '../../System/Event/EventFacade';
 export class View extends WGObject implements IView, IHID {
     
     _proxy=["x","y","width","height","scaleX","scaleY","anchorX","anchorY","visible","alpha","interactive"]

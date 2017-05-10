@@ -5,8 +5,8 @@
  */
 
 import { INode } from './INode';
-import { IEvent } from '../../Engine/Event/IEvent';
-import { EventFacade } from '../../Engine/Event/EventFacade';
+import { IEvent } from '../../System/Event/IEvent';
+import { EventFacade } from '../../System/Event/EventFacade';
 import { IStateMachine } from '../Base/IStateMachine';
 
 export class NodeX implements INode, IEvent,IStateMachine{

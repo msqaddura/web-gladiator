@@ -5,8 +5,8 @@ import { NetFacade } from './Net/NetFacade';
 import { EventFacade } from './Event/EventFacade';
 import { DeviceFacade} from './Device/DeviceFacade';
 
-export class Engine  {
-    static instance: Engine;
+export class System  {
+    static instance: System;
     
     _instances={
         net:NetFacade.getInstance(),
@@ -18,7 +18,7 @@ export class Engine  {
     }
     static getInstance() {
         if (!this.instance) {
-            this.instance = new Engine();
+            this.instance = new System();
             //this.instance._adapter = new SocketIOAdapter();
             // ... any one time initialization goes here ...
         }

@@ -1,4 +1,4 @@
-import { Engine } from '../../Engine/Engine';
+import { System } from '../../System/System';
 import { BlueprintBuilder} from '../../Foundation/Builder/BlueprintBuilder';
 /**
  * What have I done? 
@@ -29,7 +29,7 @@ export class SceneManager {
         return this._sceneMap[name];
     }
     preloadScene(name:string) {  
-         return Engine.getInstance().getSystem("resource").preloadManifest(this._sceneMap[name].manifest);
+         return System.getInstance().getSystem("resource").preloadManifest(this._sceneMap[name].manifest);
     }
     
     switchScenesTo(inScene,outScene){
