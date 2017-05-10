@@ -1,8 +1,8 @@
 import * as PIXI from 'pixi.js'
 import { IWGObject} from './IWGObject';
 import {WGObject} from './WGObject';
-import { GameObject } from './GameObject';
-export interface IGameObject extends IWGObject{
+import { View } from './View';
+export interface IView extends IWGObject{
     $view;
     _x;
     _left;
@@ -20,5 +20,5 @@ export interface IGameObject extends IWGObject{
 
 
 
-    gameObjects;
+    views;
 }

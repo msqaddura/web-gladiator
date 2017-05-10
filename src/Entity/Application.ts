@@ -1,12 +1,12 @@
 import * as PIXI from 'pixi.js'
 
-import { SpaceContainer } from "./SpaceContainer";
+import { Entity } from "./Entity";
 import { SceneManager } from '../Foundation/Manager/SceneManager';
 import { Engine } from "../Engine/Engine";
 import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
 
 
-export class Application extends SpaceContainer {
+export class Application extends Entity {
 
     _application;
     _loading;

@@ -1,9 +1,9 @@
 import * as PIXI from 'pixi.js'
 
-import { GameObject } from '../Foundation/Core/GameObject';
+import { View } from '../Foundation/Core/View';
 import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
 
-export class AnimatedSprite extends GameObject {
+export class AnimatedSprite extends View {
 
     constructor(owner, params) {
         super(owner, params);

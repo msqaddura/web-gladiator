@@ -1,14 +1,14 @@
 import * as Rx from 'rxjs';
 
 
-import { IGameObject } from './IGameObject';
+import { IView } from './IView';
 import { WGObject } from './WGObject';
 import { LayoutFacade } from '../../Engine/Layout/LayoutFacade';
 import { IHID } from '../../Engine/HID/IHID';
-import { Scene } from '../../GameObjects/Scene';
+import { Scene } from '../../Entity/Scene';
 import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
 import { EventFacade } from '../../Engine/Event/EventFacade';
-export class GameObject extends WGObject implements IGameObject, IHID {
+export class View extends WGObject implements IView, IHID {
     
     _proxy=["x","y","width","height","scaleX","scaleY","anchorX","anchorY","visible","alpha","interactive"]
     $view;
@@ -28,7 +28,7 @@ export class GameObject extends WGObject implements IGameObject, IHID {
     _autolayout;
     _registeredHIDEvents = {};
     _visible:boolean;
-    gameObjects = {};
+    views = {};
     params;
     readonly config: Object;
     constructor(owner, params) {
@@ -79,7 +79,7 @@ export class GameObject extends WGObject implements IGameObject, IHID {
         //TODO: save LayoutViews and dont update if it is the same
         const layoutViews = this._autolayout.setSize(this.$width, this.$height)
         for (const key in layoutViews.subViews) {
-            const component = this.gameObjects[key];
+            const component = this.views[key];
             if (component) {
                 const {width,height,left,top} = layoutViews.subViews[key];
                
@@ -90,14 +90,14 @@ export class GameObject extends WGObject implements IGameObject, IHID {
 
     addNode(node) {
         super.addNode(node);
-        if (node instanceof GameObject)
-            this.addGameObject(node);
+        if (node instanceof View)
+            this.addView(node);
             
 
     }
-    addGameObject(gameObject: GameObject) {
-        this.gameObjects[gameObject.name] = gameObject;
-        this.$view.addChild(gameObject.$view);
+    addView(view: View) {
+        this.views[view.name] = view;
+        this.$view.addChild(view.$view);
     }
 
     registerHIDEvent(name: string) {
