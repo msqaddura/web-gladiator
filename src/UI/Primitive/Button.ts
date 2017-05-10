@@ -1,25 +1,46 @@
 import { Entity } from '../../Entity/Entity';
 import * as Rx from 'rxjs';
-const STATES={
-    DISABLED:0
-}
-class Button extends Entity{
-    _stateMachine;
-    _state;
+import { StateMachine } from '../../Foundation/Base/StateMachine';
+  
+export class Button extends Entity{
+    
+    executeStateMachine() {
+        const stateMap = {
+            initial: 'idle',
+            events: [
+                { name: 'pointerover', from: ['idle','tapped'], to: 'hover' },
+                { name: 'pointerout', from: 'hover', to: 'idle' },
+                { name: 'pointertap', from: '*', to: 'tapped' }
+            ],
+            callbacks: {
+                onidle: this.onIdle.bind(this),
+                onhover: this.onHover.bind(this), 
+                ontapped: this.onTapped.bind(this), 
+            }
+        }
+        this._fsm = new StateMachine(stateMap);
+    }
     listenToHIDEvents() {
         super.listenToHIDEvents(true);
         Rx.Observable.merge(
-        this.registerHIDEvent('pointertap').mapTo(event=>{return {event,state:"Tap"}}),
-        this.registerHIDEvent('pointerdown').mapTo(event=>{return {event,state:"Down"}}),
-        this.registerHIDEvent('pointerup').mapTo(event=>{return {event,state:"Up"}})
+        this.registerHIDEvent('pointerover').do(e =>{ this._fsm.token.pointerover(e)}),
+        this.registerHIDEvent('pointerout').do(e => this._fsm.token.pointerout(e)),
+        this.registerHIDEvent('pointertap').do(e => this._fsm.token.pointertap(e)),
         )
-        .filter(_ => this._state !== STATES.DISABLED )
         .subscribe(data=>{
             this._handleEvent(data);
         })
     }
+    onIdle(...args){
+        console.info("Idle now ;)",...args);
+    }
+    onHover(...args){
+        console.info("Hovered now ;)",...args);
+    }
+    onTapped(...args){
+        console.info("I am tapped",...args);
+    }
     _handleEvent(data){
-        const {event,state} = data;
-        console.info(`Event ${event} Transits${this._state} to ${state}`);
+        console.info("Handled");
     }
 }

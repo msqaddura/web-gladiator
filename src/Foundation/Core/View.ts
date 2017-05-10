@@ -41,12 +41,14 @@ export class View extends WGObject implements IView, IHID {
     bootstrap(bootstrap) {
         if(!bootstrap)
             return;
+        this.executeStateMachine();
         this.initialize();
-
         this.preCreateTree();
         this.createTree();
         this.postCreateTree();
+        this.listenToBusEvents();
         this.listenToHIDEvents(false);
+        this.start();
         
     }
 

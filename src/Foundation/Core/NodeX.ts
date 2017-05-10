@@ -12,7 +12,7 @@ import { IStateMachine } from '../Base/IStateMachine';
 export class NodeX implements INode, IEvent,IStateMachine{
     readonly owner: Node;
     readonly name:string;
-    _stateMachine;
+    _fsm;
     registeredEvents={};
     constructor(owner=null,name="NoNameGiven") {
         this.owner = owner;

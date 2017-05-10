@@ -17,15 +17,16 @@ export class GameObjectBuilder {
     
     createObject(owner,blueprint,bootstrap=true){
         let obj:View = new blueprint.ctor(owner,blueprint);
+        obj.bootstrap(bootstrap);
         obj.initialize();
-        if(bootstrap){
-            obj.preCreateTree();
-            obj.createTree();
-            obj.postCreateTree();
-            obj.listenToBusEvents();
-            obj.listenToHIDEvents(false);
-            obj.start();
-        }
+        // if(bootstrap){
+        //     obj.preCreateTree();
+        //     obj.createTree();
+        //     obj.postCreateTree();
+        //     obj.listenToBusEvents();
+        //     obj.listenToHIDEvents(false);
+        //     obj.start();
+        // }
         //return new this._registeredGameObjects[ctorName]()
         //.setOwner(owner)
         //.setParams(params)

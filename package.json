@@ -26,6 +26,7 @@
     "pixi.js": "*",
     "resource-loader": "*",
     "rxjs": "*",
-    "colyseus.js": "*"
+    "colyseus.js": "*",
+    "javascript-state-machine": "*"
   }
 }
