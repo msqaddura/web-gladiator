@@ -1,8 +1,8 @@
 import * as Rx from 'rxjs';
 import { Bus } from "./Bus"
 //extends Facade
-export class EventFacade {
-    private static instance: EventFacade;
+export class EventSystem {
+    private static instance: EventSystem;
     _adapter;
     private constructor() {
         // do something construct...
@@ -10,7 +10,7 @@ export class EventFacade {
     }
     static getInstance() {
         if (!this.instance) {
-            this.instance = new EventFacade();
+            this.instance = new EventSystem();
             // ... any one time initialization goes here ...
         }
         return this.instance;

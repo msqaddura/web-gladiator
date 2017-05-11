@@ -36,17 +36,17 @@ export class Button extends Entity{
             this._handleEvent(data);
         })
     }
-    onIdle(...args){
+    protected onIdle(...args){
         console.info("QQQonIdle");
     }
-    onHover(...args){
+    protected onHover(...args){
         console.info("QQQonHover");
     }
-    onTapped(...args){
+    protected onTapped(...args){
         console.info("QQQonTapped");
         this._fsm.token.pointerup();
     }
-    onActive(...args){
+    protected onActive(...args){
         console.info("QQQonActive")
     }
     _handleEvent(data){

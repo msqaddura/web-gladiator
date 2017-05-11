@@ -1,0 +1,1 @@
+adapters are used when communicting to singleton rather than instance

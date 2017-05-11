@@ -27,6 +27,7 @@
     "resource-loader": "*",
     "rxjs": "*",
     "colyseus.js": "*",
-    "javascript-state-machine": "*"
+    "javascript-state-machine": "*",
+    "tween.js": "*"
   }
 }

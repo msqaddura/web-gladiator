@@ -3,11 +3,11 @@ import * as Rx from 'rxjs';
 
 import { IView } from './IView';
 import { WGObject } from './WGObject';
-import { LayoutFacade } from '../../System/Layout/LayoutFacade';
+import { LayoutSystem } from '../../System/Layout/LayoutSystem';
 import { IHID } from '../../System/HID/IHID';
 import { Scene } from '../../Entity/Scene';
 import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
-import { EventFacade } from '../../System/Event/EventFacade';
+import { EventSystem } from '../../System/Event/EventSystem';
 export class View extends WGObject implements IView, IHID {
     
     _proxy=["x","y","width","height","scaleX","scaleY","anchorX","anchorY","visible","alpha","interactive"]
@@ -71,7 +71,7 @@ export class View extends WGObject implements IView, IHID {
         this.$height = height;
         this.$left = left;
         this.$top = top;
-        this._autolayout = LayoutFacade.getInstance()
+        this._autolayout = LayoutSystem.getInstance()
         .parseEVFL(this._vfl)
         this.parseTreeLayout();
         

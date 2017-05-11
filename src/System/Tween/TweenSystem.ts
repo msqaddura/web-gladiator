@@ -1,14 +1,14 @@
 import * as Rx from 'rxjs';
-import { DeviceAdapter } from "./DeviceAdapter"
-export class DeviceFacade {
-    private static instance: DeviceFacade;
+//shouldnt this be animation system
+export class TweenSystem {
+    private static instance: TweenSystem;
     _adapter = null;
     private constructor() {
         // do something construct...
     }
     static getInstance() {
         if (!this.instance) {
-            this.instance = new DeviceFacade();
+            this.instance = new TweenSystem();
             // ... any one time initialization goes here ...
         }
         return this.instance;
@@ -16,7 +16,7 @@ export class DeviceFacade {
     use(adapter){
         this._adapter = adapter;
     }
-    getResizeObs(){
-        return this._adapter.getResizeObs();
+    create(from,to,duration){
+        return this._adapter.create(from,to,duration);
     }
 } 

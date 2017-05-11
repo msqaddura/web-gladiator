@@ -1,11 +1,11 @@
-export class ResourceFacade  {
-    static instance: ResourceFacade;
+export class ResourceSystem  {
+    static instance: ResourceSystem;
     _adapter;
     constructor() {
     }
     static getInstance() {
         if (!this.instance) {
-            this.instance = new ResourceFacade();
+            this.instance = new ResourceSystem();
             //this.instance._adapter = new PixiResourceAdapter();
             // ... any one time initialization goes here ...
         }

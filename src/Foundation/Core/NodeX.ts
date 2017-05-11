@@ -6,7 +6,7 @@
 
 import { INode } from './INode';
 import { IEvent } from '../../System/Event/IEvent';
-import { EventFacade } from '../../System/Event/EventFacade';
+import { EventSystem } from '../../System/Event/EventSystem';
 import { IStateMachine } from '../Base/IStateMachine';
 
 export class NodeX implements INode, IEvent,IStateMachine{
@@ -21,11 +21,11 @@ export class NodeX implements INode, IEvent,IStateMachine{
     listenToBusEvents(){}
 
     registerEvent(ctor){
-        this.registeredEvents[ctor.name] = EventFacade.getInstance().registerEvent(ctor)
+        this.registeredEvents[ctor.name] = EventSystem.getInstance().registerEvent(ctor)
         return this.registeredEvents[ctor.name];
     }
     sendEvent(obj){
-        EventFacade.getInstance().sendEvent(obj);
+        EventSystem.getInstance().sendEvent(obj);
     }
     executeStateMachine(){
         
