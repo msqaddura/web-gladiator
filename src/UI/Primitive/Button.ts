@@ -9,13 +9,17 @@ export class Button extends Entity{
             initial: 'idle',
             events: [
                 { name: 'pointerover', from: ['idle','tapped'], to: 'hover' },
-                { name: 'pointerout', from: 'hover', to: 'idle' },
-                { name: 'pointertap', from: '*', to: 'tapped' }
+                { name: 'pointerout', from: ['active','hover'], to: 'idle' },
+                { name: 'pointertap', from: ['hover','active'], to: 'tapped' },
+                { name: 'pointerdown', from:'hover',to:'active'},
+                { name: 'pointerup', from:['active','tapped'],to:'hover'},
+                { name: 'disabled', from:'*',to:'idle'}
             ],
             callbacks: {
                 onidle: this.onIdle.bind(this),
                 onhover: this.onHover.bind(this), 
                 ontapped: this.onTapped.bind(this), 
+                onactive: this.onActive.bind(this)
             }
         }
         this._fsm = new StateMachine(stateMap);
@@ -26,21 +30,26 @@ export class Button extends Entity{
         this.registerHIDEvent('pointerover').do(e =>{ this._fsm.token.pointerover(e)}),
         this.registerHIDEvent('pointerout').do(e => this._fsm.token.pointerout(e)),
         this.registerHIDEvent('pointertap').do(e => this._fsm.token.pointertap(e)),
+        this.registerHIDEvent('pointerdown').do(e => this._fsm.token.pointerdown(e)),
         )
         .subscribe(data=>{
             this._handleEvent(data);
         })
     }
     onIdle(...args){
-        console.info("Idle now ;)",...args);
+        console.info("QQQonIdle");
     }
     onHover(...args){
-        console.info("Hovered now ;)",...args);
+        console.info("QQQonHover");
     }
     onTapped(...args){
-        console.info("I am tapped",...args);
+        console.info("QQQonTapped");
+        this._fsm.token.pointerup();
+    }
+    onActive(...args){
+        console.info("QQQonActive")
     }
     _handleEvent(data){
-        console.info("Handled");
+        //console.info("Handled");
     }
 }
