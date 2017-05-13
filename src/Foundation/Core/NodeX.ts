@@ -4,10 +4,16 @@
  * adding IEvent and IStateFull is more or less a workaround here but that is more than fine....for now
  */
 
-import { INode } from './INode';
 import { IEvent } from '../../System/Event/IEvent';
 import { EventSystem } from '../../System/Event/EventSystem';
 import { IStateMachine } from '../Base/IStateMachine';
+
+
+export interface INode{
+    readonly owner: Node;
+    readonly name:string;
+    destroy();
+}
 
 export class NodeX implements INode, IEvent,IStateMachine{
     readonly owner: Node;

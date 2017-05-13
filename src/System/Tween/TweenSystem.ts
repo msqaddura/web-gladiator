@@ -16,7 +16,14 @@ export class TweenSystem {
     use(adapter){
         this._adapter = adapter;
     }
-    create(from,to,duration){
-        return this._adapter.create(from,to,duration);
+    fadeIn(target,duration = 200){
+        return this._adapter.fadeIn(target,duration);
+    }
+    fadeOut(target,duration = 200){
+        return this._adapter.fadeOut(target,duration);
+    }
+    create(bag){
+        console.info(this);
+        return this._adapter.createNew(bag);
     }
 } 
