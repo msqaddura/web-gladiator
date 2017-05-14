@@ -28,6 +28,7 @@
     "rxjs": "*",
     "colyseus.js": "*",
     "javascript-state-machine": "*",
-    "tween.js": "*"
+    "tween.js": "*",
+    "pixi-audio": "*"
   }
 }

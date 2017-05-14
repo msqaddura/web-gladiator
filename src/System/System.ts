@@ -5,7 +5,7 @@ import { NetSystem} from './Net/NetSystem';
 import { EventSystem } from './Event/EventSystem';
 import { DeviceSystem} from './Device/DeviceSystem';
 import { TweenSystem } from './Tween/TweenSystem';
-
+import { SoundSystem } from './Sound/SoundSystem';
 export class System  {
     static instance: System;
     
@@ -16,7 +16,7 @@ export class System  {
         event:EventSystem.getInstance(),
         device:DeviceSystem.getInstance(),
         tween:TweenSystem.getInstance(),
-
+        sound:SoundSystem.getInstance()
     }
     static getInstance() {
         if (!this.instance) {
