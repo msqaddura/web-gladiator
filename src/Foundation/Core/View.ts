@@ -74,7 +74,7 @@ export class View extends WGObject implements IView, IHID {
         this._autolayout = LayoutSystem.getInstance()
         .parseEVFL(this._vfl)
         this.parseTreeLayout();
-        
+        this.postLayout();
         
     }
     parseTreeLayout() {
@@ -89,7 +89,7 @@ export class View extends WGObject implements IView, IHID {
             }
         }
     }
-
+    postLayout(){}
     addNode(node) {
         super.addNode(node);
         if (node instanceof View)
