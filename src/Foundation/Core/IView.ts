@@ -3,7 +3,7 @@ import { IWGObject} from './IWGObject';
 import {WGObject} from './WGObject';
 import { View } from './View';
 export interface IView extends IWGObject{
-    $view;
+    view;
     _x;
     _left;
     _y;

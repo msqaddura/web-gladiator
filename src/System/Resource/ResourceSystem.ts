@@ -17,5 +17,7 @@ export class ResourceSystem  {
     preloadManifest(manifest){
       return this._adapter.preloadManifest(manifest);
     }
-    
+    preload(file){
+        return this._adapter.preload(file);
+    }
 }

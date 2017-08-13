@@ -32,6 +32,7 @@
     "colyseus.js": "*",
     "javascript-state-machine": "*",
     "tween.js": "*",
-    "pixi-audio": "*"
+    "pixi-audio": "*",
+    "@alizurchik/ts-mixin":"*"
   }
 }

@@ -12,7 +12,7 @@ import { IStateMachine } from '../Base/IStateMachine';
 export interface INode{
     readonly owner: Node;
     readonly name:string;
-    destroy();
+    kill();
 }
 
 export class NodeX implements INode, IEvent,IStateMachine{
@@ -23,6 +23,11 @@ export class NodeX implements INode, IEvent,IStateMachine{
     constructor(owner=null,name="NoNameGiven") {
         this.owner = owner;
         this.name = name;
+    }
+    bootstrap(bootstrap=true){
+        if(bootstrap == false) return;
+        this.executeStateMachine();
+        this.listenToBusEvents();
     }
     listenToBusEvents(){}
 
@@ -36,7 +41,7 @@ export class NodeX implements INode, IEvent,IStateMachine{
     executeStateMachine(){
         
     }
-    destroy(){
+    kill(){
         for (const key in this.registeredEvents){
             this.registeredEvents[key].unsubscribe();
             delete this.registeredEvents[key];

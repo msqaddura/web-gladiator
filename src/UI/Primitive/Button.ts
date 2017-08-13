@@ -6,9 +6,9 @@ export class Button extends Entity{
     
     executeStateMachine() {
         const stateMap = {
-            initial: 'idle',
+            initial: 'none',
             events: [
-                { name: 'pointerover', from: ['idle','tapped'], to: 'hover' },
+                { name: 'pointerover', from: ['none','idle','tapped'], to: 'hover' },
                 { name: 'pointerout', from: ['active','hover'], to: 'idle' },
                 { name: 'pointertap', from: ['hover','active'], to: 'tapped' },
                 { name: 'pointerdown', from:'hover',to:'active'},
@@ -52,4 +52,22 @@ export class Button extends Entity{
     _handleEvent(data){
         //console.info("Handled");
     }
+}
+
+export class ConsoleButton extends Button {
+    onIdle() {
+        console.warn("Idle")
+    }
+
+    onTapped() {
+        alert("TAPPED")
+    }
+
+    onActive() {
+        console.info("ACTIVE")
+    }
+    onHover() {
+        console.log("HOVERED")
+    }
+
 }

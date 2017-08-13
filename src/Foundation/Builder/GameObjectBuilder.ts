@@ -18,7 +18,7 @@ export class GameObjectBuilder {
     createObject(owner,blueprint,bootstrap=true){
         let obj:View = new blueprint.ctor(owner,blueprint);
         obj.bootstrap(bootstrap);
-        obj.initialize();
+
         // if(bootstrap){
         //     obj.preCreateTree();
         //     obj.createTree();

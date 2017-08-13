@@ -48,22 +48,22 @@ export class TweenJSAdapter implements ITweenJSAdapter {
     }
     fadeIn(target, duration = 200) {
         let tween = this.createNew({
-            from: { alpha: target.$alpha },
+            from: { alpha: target.alpha },
             to: { alpha: 1 },
             duration
         }).onUpdate(function(){
-            target.$alpha = this.alpha;
+            target.alpha = this.alpha;
         })
         return tween.start();
     }
 
     fadeOut(target, duration = 200) {
         let tween = this.createNew({
-            from: { alpha: target.$alpha },
+            from: { alpha: target.alpha },
             to: { alpha: 0.2 },
             duration
         }).onUpdate(function(){
-            target.$alpha = this.alpha;
+            target.alpha = this.alpha;
         })
         return tween.start();
     }
