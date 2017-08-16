@@ -1,25 +1,73 @@
 import { Entity } from '../../Entity/Entity';
 import * as Rx from 'rxjs';
-const STATES={
-    DISABLED:0
-}
-class Button extends Entity{
-    _stateMachine;
-    _state;
+import { StateMachine } from '../../Foundation/Base/StateMachine';
+  
+export class Button extends Entity{
+    
+    executeStateMachine() {
+        const stateMap = {
+            initial: 'none',
+            events: [
+                { name: 'pointerover', from: ['none','idle','tapped'], to: 'hover' },
+                { name: 'pointerout', from: ['active','hover'], to: 'idle' },
+                { name: 'pointertap', from: ['hover','active'], to: 'tapped' },
+                { name: 'pointerdown', from:'hover',to:'active'},
+                { name: 'pointerup', from:['active','tapped'],to:'hover'},
+                { name: 'disabled', from:'*',to:'idle'}
+            ],
+            callbacks: {
+                onidle: this.onIdle.bind(this),
+                onhover: this.onHover.bind(this), 
+                ontapped: this.onTapped.bind(this), 
+                onactive: this.onActive.bind(this)
+            }
+        }
+        this._fsm = new StateMachine(stateMap);
+    }
     listenToHIDEvents() {
         super.listenToHIDEvents(true);
         Rx.Observable.merge(
-        this.registerHIDEvent('pointertap').mapTo(event=>{return {event,state:"Tap"}}),
-        this.registerHIDEvent('pointerdown').mapTo(event=>{return {event,state:"Down"}}),
-        this.registerHIDEvent('pointerup').mapTo(event=>{return {event,state:"Up"}})
+        this.registerHIDEvent('pointerover').do(e =>{ this._fsm.token.pointerover(e)}),
+        this.registerHIDEvent('pointerout').do(e => this._fsm.token.pointerout(e)),
+        this.registerHIDEvent('pointertap').do(e => this._fsm.token.pointertap(e)),
+        this.registerHIDEvent('pointerdown').do(e => this._fsm.token.pointerdown(e)),
         )
-        .filter(_ => this._state !== STATES.DISABLED )
         .subscribe(data=>{
             this._handleEvent(data);
         })
     }
-    _handleEvent(data){
-        const {event,state} = data;
-        console.info(`Event ${event} Transits${this._state} to ${state}`);
+    protected onIdle(...args){
+        console.info("QQQonIdle");
     }
+    protected onHover(...args){
+        console.info("QQQonHover");
+    }
+    protected onTapped(...args){
+        console.info("QQQonTapped");
+        this._fsm.token.pointerup();
+    }
+    protected onActive(...args){
+        console.info("QQQonActive")
+    }
+    _handleEvent(data){
+        //console.info("Handled");
+    }
+}
+
+export class ConsoleButton extends Button {
+    onIdle() {
+        console.warn("Idle")
+    }
+
+    onTapped() {
+        alert("TAPPED")
+    }
+
+    onActive() {
+        console.info("ACTIVE")
+    }
+    onHover() {
+        console.log("HOVERED")
+    }
+
 }

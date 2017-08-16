@@ -16,13 +16,7 @@ export class StrategyBuilder {
     }
     createObject(owner,blueprint,bootstrap=true){
         let obj:Strategy = new blueprint.ctor(owner,blueprint,bootstrap);
-        
-        obj.executeStateMachine();
-        obj.listenToBusEvents();
-        obj.execute();
-        if(bootstrap){
-
-        }
+        obj.bootstrap(bootstrap);
         //return new this._registeredGameObjects[ctorName]()
         //.setOwner(owner)
         //.setParams(params)

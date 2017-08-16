@@ -8,7 +8,7 @@ $$$scaleOnly = false;
 $$$visited = false;
  constructor(owner, params){
      super(owner,params);
-     this.$view = new PIXI.Container();
+     this.view = new PIXI.Container();
  }
 
     initialize(){
@@ -16,23 +16,23 @@ $$$visited = false;
         this.$$$scaleOnly = !!this.params["scaleOnly"];
         
     }
-     get $width() {
+     get width() {
         return this._width;
     }
 
-    set $width(value) {
+    set width(value) {
         if(this.$$$scaleModeActive)
-            this.$view.width = value;
+            this.view.width = value;
         this._width = value;
     }
 
-    get $height() {
+    get height() {
         return this._height;
     }
 
-    set $height(value) {
+    set height(value) {
         if(this.$$$scaleModeActive)
-            this.$view.height = value;
+            this.view.height = value;
         this._height = value;
     }
     parseTreeLayout() {

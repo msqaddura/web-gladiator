@@ -1,20 +1,22 @@
 //Multition holding many singletons
-import { ResourceFacade } from './Resource/ResourceFacade';
-import { LayoutFacade } from './Layout/LayoutFacade';
-import { NetFacade } from './Net/NetFacade';
-import { EventFacade } from './Event/EventFacade';
-import { DeviceFacade} from './Device/DeviceFacade';
-
+import { ResourceSystem } from './Resource/ResourceSystem';
+import { LayoutSystem} from './Layout/LayoutSystem';
+import { NetSystem} from './Net/NetSystem';
+import { EventSystem } from './Event/EventSystem';
+import { DeviceSystem} from './Device/DeviceSystem';
+import { TweenSystem } from './Tween/TweenSystem';
+import { SoundSystem } from './Sound/SoundSystem';
 export class System  {
     static instance: System;
     
     _instances={
-        net:NetFacade.getInstance(),
-        resource:ResourceFacade.getInstance(),
-        layout:LayoutFacade.getInstance(),
-        event:EventFacade.getInstance(),
-        device:DeviceFacade.getInstance(),
-
+        net:NetSystem.getInstance(),
+        resource:ResourceSystem.getInstance(),
+        layout:LayoutSystem.getInstance(),
+        event:EventSystem.getInstance(),
+        device:DeviceSystem.getInstance(),
+        tween:TweenSystem.getInstance(),
+        sound:SoundSystem.getInstance()
     }
     static getInstance() {
         if (!this.instance) {

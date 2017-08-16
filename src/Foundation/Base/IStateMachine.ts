@@ -1,4 +1,4 @@
 export interface IStateMachine{
-    _stateMachine;
+    _fsm;
     executeStateMachine();
 }

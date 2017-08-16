@@ -16,14 +16,7 @@ export class WGObjectBuilder {
     }
     createObject(owner,blueprint,bootstrap=true){
         let obj:WGObject = new blueprint.ctor(owner,blueprint,bootstrap);
-        obj.initialize();
-        if(bootstrap){
-        obj.preCreateTree();
-        obj.createTree();
-        obj.postCreateTree();
-        obj.listenToBusEvents();
-        obj.start();
-        }
+        obj.bootstrap(bootstrap);
         //return new this._registeredGameObjects[ctorName]()
         //.setOwner(owner)
         //.setParams(params)

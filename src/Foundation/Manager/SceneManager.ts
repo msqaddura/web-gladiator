@@ -10,6 +10,7 @@ export class SceneManager {
     _sceneMap={};
     _target;
     _activeScene;
+    _resources;
     static getInstance() {
         if (!this.instance) {
             this.instance = new SceneManager();
@@ -21,6 +22,7 @@ export class SceneManager {
     setTarget(target){
         this._target = target;
         this._sceneMap = target.sceneMap;
+        this._resources = target.resource;
     }
     registerScene(name,scene){
         this._sceneMap[name]=scene;
@@ -31,22 +33,27 @@ export class SceneManager {
     preloadScene(name:string) {  
          return System.getInstance().getSystem("resource").preloadManifest(this._sceneMap[name].manifest);
     }
-    
+    preload(name:string) {  
+         return System.getInstance().getSystem("resource").preload(this._resources);
+    }
     switchScenesTo(inScene,outScene){
-        this._activeScene.destroy();
+        this._activeScene.kill();
         
         this.loadScene(inScene,true);
+        this._target.refresh();
     }
 
     loadScene(name, bootstrap = true){
         this._activeScene = BlueprintBuilder.getInstance().createAndAddObject(this._target,this._sceneMap[name],bootstrap);
+        this._target.refresh();
+        
         //this._target.addNode(this._target.createNode(blueprint,bootstrap))
         //this._activeScene = this._target.createTree(blueprint,bootstrap);
         //this._target.addComponent(this._activeScene);
     }
 
     unloadScene(scene){
-        scene.destroy();
+        scene.kill();
     }
     
 } 

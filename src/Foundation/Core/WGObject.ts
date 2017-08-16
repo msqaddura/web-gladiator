@@ -7,7 +7,7 @@ import { BlueprintBuilder } from '../Builder/BlueprintBuilder';
 export class WGObject extends Composite implements IWGObject{
     
     readonly blueprint;
-    readonly blueprints;
+readonly blueprints;
     readonly repeatableBlueprints;
     
     constructor(owner=null,{name="N/A", blueprints=[],repeatableBlueprints=[]}) {
@@ -20,6 +20,12 @@ export class WGObject extends Composite implements IWGObject{
         if(!bootstrap)
             return;
         this.initialize();
+        this.preCreateTree();
+        this.createTree();
+        this.postCreateTree();
+        this.listenToBusEvents();
+        this.start();
+        
 
     }
 
