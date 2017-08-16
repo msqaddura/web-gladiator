@@ -26,18 +26,20 @@ export class BlueprintBuilder {
         return obj;
     }
     createObject(owner,blueprint,bootstrap=true){
-        let builder = null;
+        //let builder = null;
+        let obj = new blueprint.ctor(owner,blueprint);
+        obj.bootstrap(bootstrap);
+        return obj;
+        // if (View.isPrototypeOf(blueprint.ctor))
+        //     builder = GameObjectBuilder.getInstance()
+        // else if(WGObject.isPrototypeOf(blueprint.ctor))
+        //     builder = WGObjectBuilder.getInstance()
+        // else if(Strategy.isPrototypeOf(blueprint.ctor))
+        //     builder = StrategyBuilder.getInstance()
+        // else 
+        //      builder = GameObjectBuilder.getInstance()
 
-        if (View.isPrototypeOf(blueprint.ctor))
-            builder = GameObjectBuilder.getInstance()
-        else if(WGObject.isPrototypeOf(blueprint.ctor))
-            builder = WGObjectBuilder.getInstance()
-        else if(Strategy.isPrototypeOf(blueprint.ctor))
-            builder = StrategyBuilder.getInstance()
-        else 
-            throw new Error('congrats bitch!');
-
-        return builder.createObject(owner,blueprint,bootstrap);
+        // return builder.createObject(owner,blueprint,bootstrap);
     }
     
 } 

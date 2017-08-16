@@ -1,6 +1,6 @@
 import * as AutoLayout from 'autolayout';
-export class LayoutFacade {
-    private static instance: LayoutFacade;
+export class LayoutSystem {
+    private static instance: LayoutSystem;
     _adapter;
     private constructor() {
         // do something construct...
@@ -8,7 +8,7 @@ export class LayoutFacade {
     }
     static getInstance() {
         if (!this.instance) {
-            this.instance = new LayoutFacade();
+            this.instance = new LayoutSystem();
 
             // ... any one time initialization goes here ...
         }

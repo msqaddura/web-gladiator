@@ -1,11 +1,11 @@
-export class ResourceFacade  {
-    static instance: ResourceFacade;
+export class ResourceSystem  {
+    static instance: ResourceSystem;
     _adapter;
     constructor() {
     }
     static getInstance() {
         if (!this.instance) {
-            this.instance = new ResourceFacade();
+            this.instance = new ResourceSystem();
             //this.instance._adapter = new PixiResourceAdapter();
             // ... any one time initialization goes here ...
         }
@@ -17,5 +17,7 @@ export class ResourceFacade  {
     preloadManifest(manifest){
       return this._adapter.preloadManifest(manifest);
     }
-    
+    preload(file){
+        return this._adapter.preload(file);
+    }
 }

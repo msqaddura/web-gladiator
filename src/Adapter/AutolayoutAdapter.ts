@@ -1,7 +1,9 @@
 import * as AutoLayout from 'autolayout';
 
 export class AutolayoutAdapter {
-    constructor() {}
+    constructor() {
+        console.info(AutoLayout);
+    }
 
     parseEVFL(evfl=['']){
         const constraints = AutoLayout.VisualFormat.parse(evfl, {extended: true});

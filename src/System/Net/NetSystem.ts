@@ -1,9 +1,9 @@
-export class NetFacade  {
-    static instance: NetFacade;
+export class NetSystem  {
+    static instance: NetSystem;
     _adapter;
     static getInstance() {
         if (!this.instance) {
-            this.instance = new NetFacade();
+            this.instance = new NetSystem();
             //this.instance._adapter = new SocketIOAdapter();
             // ... any one time initialization goes here ...
         }

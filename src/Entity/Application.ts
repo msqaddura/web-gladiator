@@ -27,7 +27,7 @@ export class Application extends Entity {
         );
         this.renderer = this._application.renderer;
         this.canvas = this._application.view;
-        this.$view = this._application.stage;
+        this.view = this._application.stage;
 
         //this.$height = window.innerHeight;
         //this.$width = window.innerWidth;

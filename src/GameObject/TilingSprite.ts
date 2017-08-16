@@ -8,7 +8,7 @@ export class TilingSprite extends View{
  constructor(owner, params){
      super(owner, params);
      var texture = PIXI.utils.TextureCache[params.source];
-     this.$view = new PIXI.extras.TilingSprite(texture);
+     this.view = new PIXI.extras.TilingSprite(texture);
  }
 } 
 
