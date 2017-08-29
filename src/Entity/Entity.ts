@@ -35,9 +35,15 @@ $$$visited = false;
             this.view.height = value;
         this._height = value;
     }
-    parseTreeLayout() {
+    // parseTreeLayout() {
+    //     if(!this.$$$scaleModeActive)
+    //         super.parseTreeLayout();
+    //     this.$$$visited = true;
+    // }
+
+    updateLayoutTree() {
         if(!this.$$$scaleModeActive)
-            super.parseTreeLayout();
+            super.updateLayoutTree();
         this.$$$visited = true;
     }
 

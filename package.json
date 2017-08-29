@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-"engines": {
-  "node":"6.10.2"
-},
+  "engines": {
+    "node": "6.10.2"
+  },
   "author": "Mohamad Qaddura",
   "license": "UNLICENSED",
   "private": true,
@@ -29,10 +29,10 @@
     "pixi.js": "*",
     "resource-loader": "*",
     "rxjs": "*",
-    "colyseus.js": "*",
-    "javascript-state-machine": "*",
+    "colyseus.js": "0.6.x",
+    "javascript-state-machine": "2.x",
     "tween.js": "*",
     "pixi-audio": "*",
-    "@alizurchik/ts-mixin":"*"
+    "@alizurchik/ts-mixin": "*"
   }
 }

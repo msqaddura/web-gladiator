@@ -40,12 +40,15 @@ export class SceneManager {
         this._activeScene.kill();
         
         this.loadScene(inScene,true);
-        this._target.refresh();
+        //this._target.refresh();
     }
 
     loadScene(name, bootstrap = true){
+        System.getInstance().getSystem("layout").parseLayout(this._sceneMap[name].sceneLayout);
         this._activeScene = BlueprintBuilder.getInstance().createAndAddObject(this._target,this._sceneMap[name],bootstrap);
-        this._target.refresh();
+        this._target.currentScene=this._activeScene;
+        this._target.currentScene.updateLayout();
+        //this._target.refresh();
         
         //this._target.addNode(this._target.createNode(blueprint,bootstrap))
         //this._activeScene = this._target.createTree(blueprint,bootstrap);

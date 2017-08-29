@@ -8,7 +8,7 @@ import { TweenSystem } from './Tween/TweenSystem';
 import { SoundSystem } from './Sound/SoundSystem';
 export class System  {
     static instance: System;
-    
+    target;
     _instances={
         net:NetSystem.getInstance(),
         resource:ResourceSystem.getInstance(),
@@ -17,6 +17,9 @@ export class System  {
         device:DeviceSystem.getInstance(),
         tween:TweenSystem.getInstance(),
         sound:SoundSystem.getInstance()
+    }
+    setTarget(target){
+        this.target=target;
     }
     static getInstance() {
         if (!this.instance) {

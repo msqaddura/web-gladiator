@@ -10,7 +10,7 @@ export class Application extends Entity {
 
     _application;
     _loading;
-    _currentScene;
+    currentScene;
     sceneMap;
     canvas;
     renderer;
@@ -32,22 +32,25 @@ export class Application extends Entity {
         //this.$height = window.innerHeight;
         //this.$width = window.innerWidth;
         document.body.appendChild(this.canvas);
-        System.getInstance().getSystem("device").getResizeObs().subscribe(this.resize.bind(this))
+        System.getInstance().setTarget(this);
+        //System.getInstance().getSystem("device").getResizeObs().subscribe(this.resize.bind(this))
         SceneManager.getInstance().setTarget(this);
     }
 
-    refresh(){
-        let dimensions = {
-            width:window.innerWidth,
-            height:window.innerHeight
-        }
-        this.resize(dimensions);
-    }
-    resize(dimensions) {
-        if (!this.canResize) return;
-        this.renderer.resize(dimensions.width, dimensions.height);
-        this.parseLayout(dimensions.width, dimensions.height, 0, 0);
-    }
+    // refresh(){
+    //     let dimensions = {
+    //         width:window.innerWidth,
+    //         height:window.innerHeight
+    //     }
+    //     this.resize(dimensions);
+    // }
+     resize(width,height) {
+         if (!this.canResize) return;
+         this.renderer.resize(width, height);
+         this.width = width;
+         this.height = height;
+         this.updateLayoutTree();
+     }
 
 }
 
