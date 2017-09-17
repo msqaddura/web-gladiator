@@ -24,6 +24,7 @@ export class Text extends View {
     }
     set text(value){
         this.view.text=value;
+        this.updateLayout();
     }
 } 
 

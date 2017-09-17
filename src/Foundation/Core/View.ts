@@ -9,6 +9,7 @@ import { IHID } from '../../System/HID/IHID';
 import { Scene } from '../../Entity/Scene';
 import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
 import { EventSystem } from '../../System/Event/EventSystem';
+import { MathUtil } from '../../Util/MathUtil';
 export class View extends WGObject implements IView, IHID {
 
     _proxy = ["x", "y", "width", "height", "scaleX", "scaleY", "anchorX", "anchorY", "visible", "alpha", "interactive"]
@@ -189,6 +190,7 @@ export class View extends WGObject implements IView, IHID {
         return this._x;
     }
     set x(value) {
+        value = MathUtil.toFixed(value);
         this.view.position.x = value + this.left;
         this._x = value;
     }
@@ -198,6 +200,7 @@ export class View extends WGObject implements IView, IHID {
     }
     set left(value) {
         //const gl = value - (this.owner["globalLeft"] || 0);
+        value = MathUtil.toFixed(value);
         this.view.position.x = value + this.x;
         this.globalLeft = value + (this.owner["globalLeft"] || 0);;
         this._left = value;
@@ -207,6 +210,7 @@ export class View extends WGObject implements IView, IHID {
         return this._y;
     }
     set y(value) {
+        value = MathUtil.toFixed(value);
         this.view.position.y = value + this.top;
         this._y = value;
 
@@ -216,6 +220,7 @@ export class View extends WGObject implements IView, IHID {
         return this._top;
     }
     set top(value) {
+        value = MathUtil.toFixed(value);
         this.view.position.y = value + this.y;
         this.globalTop = value + (this.owner["globalTop"] || 0);
         this._top = value;
@@ -226,6 +231,7 @@ export class View extends WGObject implements IView, IHID {
         return this._width;
     }
     set width(value) {
+        value = MathUtil.toFixed(value);
         this.view.width = value;
         this._width = value;
     }
@@ -234,6 +240,7 @@ export class View extends WGObject implements IView, IHID {
         return this._height;
     }
     set height(value) {
+        value = MathUtil.toFixed(value);
         this.view.height = value;
         this._height = value;
     }
@@ -242,6 +249,7 @@ export class View extends WGObject implements IView, IHID {
         return this._anchorX;
     }
     set anchorX(value) {
+        value = MathUtil.toFixed(value);
         this._anchorX = value;
         this.view.anchor.x = value;
     }
@@ -250,6 +258,7 @@ export class View extends WGObject implements IView, IHID {
         return this._anchorY;
     }
     set anchorY(value) {
+        value = MathUtil.toFixed(value);
         this._anchorY = value;
         this.view.anchor.y = value;
     }
@@ -258,6 +267,7 @@ export class View extends WGObject implements IView, IHID {
         return this._scaleX;
     }
     set scaleX(value) {
+        value = MathUtil.toFixed(value);
         this._scaleX = value;
         this.view.width = this.width * this._scaleX;
     }
@@ -266,6 +276,7 @@ export class View extends WGObject implements IView, IHID {
         return this._scaleY;
     }
     set scaleY(value) {
+        value = MathUtil.toFixed(value);
         this._scaleY = value;
         this.view.height = this.height * this._scaleY;
     }
@@ -287,6 +298,7 @@ export class View extends WGObject implements IView, IHID {
     }
 
     set alpha(value) {
+        value = MathUtil.toFixed(value);
         this._alpha = value;
         this.view.alpha = value;
     }

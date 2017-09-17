@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js'
 
 import { View } from '../Foundation/Core/View';
 import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
-
+import { MathUtil } from '../Util/MathUtil';
 export class Entity extends View {
 $$$scaleOnly = false;
 $$$visited = false;
@@ -21,6 +21,7 @@ $$$visited = false;
     }
 
     set width(value) {
+        value = MathUtil.toFixed(value);
         if(this.$$$scaleModeActive)
             this.view.width = value;
         this._width = value;
@@ -31,6 +32,7 @@ $$$visited = false;
     }
 
     set height(value) {
+        value = MathUtil.toFixed(value);
         if(this.$$$scaleModeActive)
             this.view.height = value;
         this._height = value;
