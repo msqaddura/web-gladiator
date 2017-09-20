@@ -6,6 +6,7 @@ import { EventSystem } from './Event/EventSystem';
 import { DeviceSystem} from './Device/DeviceSystem';
 import { TweenSystem } from './Tween/TweenSystem';
 import { SoundSystem } from './Sound/SoundSystem';
+import { GraphicsSystem } from './Graphics/GraphicsSystem';
 export class System  {
     static instance: System;
     target;
@@ -16,7 +17,14 @@ export class System  {
         event:EventSystem.getInstance(),
         device:DeviceSystem.getInstance(),
         tween:TweenSystem.getInstance(),
-        sound:SoundSystem.getInstance()
+        sound:SoundSystem.getInstance(),
+        graphics:GraphicsSystem.getInstance()
+    }
+    static get Graphics():GraphicsSystem{
+        return this.getInstance().getSystem("graphics");
+    }
+    static get Net():NetSystem{
+        return this.getInstance().getSystem("net");
     }
     setTarget(target){
         this.target=target;
