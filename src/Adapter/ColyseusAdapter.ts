@@ -11,7 +11,7 @@ export class ColyseusAdapter {
         this._stream = new Rx.Subject();
         this._url = url;
         console.info(Colyseus);
-        this._client =  new Colyseus.Client(`${window.location.origin.replace("http","ws")}`);
+        this._client =  new Colyseus.Client(this._url);
         this._roomName = roomName;
     }
 
