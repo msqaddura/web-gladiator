@@ -45,7 +45,8 @@ export class View extends WGObject implements IView, IHID {
         super(owner, { name: params.name, blueprints: params.blueprints, repeatableBlueprints: params.repeatableBlueprints });
         this.config = params.config || {};
         this._vfl = params.vfl || this._vfl;
-        this.layout = Object.assign(this.layout, params.layout || {});
+        for(const key in params.layout)
+            this.layout[key] = params.layout[key];// = Object.assign(this.layout, params.layout || {});
         this.params = params;
     }
 
