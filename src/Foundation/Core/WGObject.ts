@@ -36,8 +36,8 @@ readonly blueprints;
         this.repeatableBlueprints.forEach(tuple=>{ 
             tuple.repeats.forEach(repeat=>{ 
                 for (const key in repeat)
-                    tuple.repeat[key]=repeat[key];
-                this.addNode(this.createNode(tuple,bootstrap)); 
+                    tuple.repeatable[key]=repeat[key];
+                this.addNode(this.createNode(tuple.repeatable,bootstrap)); 
             }) 
         }); 
         this.blueprints.forEach(blueprint=>{
