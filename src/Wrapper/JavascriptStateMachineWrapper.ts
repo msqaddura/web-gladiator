@@ -1,29 +1,16 @@
-import * as JavascriptStateMachine from 'javascript-state-machine';
+import * as StateMachine from 'javascript-state-machine';
+console.info(StateMachine);
 import * as Rx from 'rxjs';
 
 interface IStateMachineWrapper {
     token;
-    _stream;
-    getStream();
 }
 
-export class JavascriptStateMachineWrapper implements IStateMachineWrapper{
+export class JavascriptStateMachineWrapper extends StateMachine implements IStateMachineWrapper{
     public token;
-    _stream;
-    constructor({initial,events,callbacks}, stream=false){
-        this.token = JavascriptStateMachine.create({initial,events,callbacks});
-        this._stream = new Rx.Subject().startWith(initial); 
-        
-        if(stream){
-            this.token.onenterstate = function(event,from,to){
-                this._stream.next({event,from,to});
-            }
-        }  
+    constructor(init,transitions,methods,data){
+       super({init,transitions,methods,data});
     }
 
-    getStream(){
-        return this._stream;
-    }
 
-    goToState(){}
 }

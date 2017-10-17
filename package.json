@@ -13,6 +13,8 @@
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
+    "@types/pixi.js": "^4.5.7",
+    "@types/socket.io-client": "^1.4.31",
     "browserify": "^13.1.1",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.1.3",
@@ -20,19 +22,16 @@
     "tsify": "^3.0.0",
     "typescript": "*",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.8.0",
-    "@types/pixi.js": "*",
-    "@types/socket.io-client": "*"
+    "watchify": "^3.8.0"
   },
   "dependencies": {
     "autolayout": "*",
+    "colyseus.js": "^0.7.4",
+    "javascript-state-machine": "^3.0.1",
+    "pixi-audio": "^0.9.4",
     "pixi.js": "*",
     "resource-loader": "*",
     "rxjs": "*",
-    "colyseus.js": "0.6.x",
-    "javascript-state-machine": "2.x",
-    "tween.js": "*",
-    "pixi-audio": "*",
-    "@alizurchik/ts-mixin": "*"
+    "tween.js": "*"
   }
 }

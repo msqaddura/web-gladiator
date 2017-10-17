@@ -5,12 +5,7 @@ import * as Rx from 'rxjs';
 
 export class StateMachine extends JavascriptStateMachineWrapper{
 
-    constructor({initial,events,callbacks}, stream=false){
-        super({initial,events,callbacks},stream)
-
-    }
-
-    getStream(){
-        return this._stream;
+    constructor(init,transitions,methods,data=null){
+        super(init,transitions,methods,data)
     }
 }
