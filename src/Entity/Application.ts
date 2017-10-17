@@ -18,13 +18,12 @@ export class Application extends Entity {
     constructor(owner = null, params) {
         super(owner, params);
         this.sceneMap = params.sceneMap;
-        this._application = new PIXI.Application(window.innerWidth, window.innerHeight,
-            {
-                antialiasing: false,
-                transparent: false,
-                autoResize: true
-            }
-        );
+        const options = {
+            antialiasing: false,
+            transparent: false,
+            autoResize: true
+        }
+        this._application = new PIXI.Application(window.innerWidth, window.innerHeight, options);
         this.renderer = this._application.renderer;
         this.canvas = this._application.view;
         this.view = this._application.stage;
@@ -44,13 +43,13 @@ export class Application extends Entity {
     //     }
     //     this.resize(dimensions);
     // }
-     resize(width,height) {
-         if (!this.canResize) return;
-         this.renderer.resize(width, height);
-         this.width = width;
-         this.height = height;
-         this.updateLayoutTree();
-     }
+    resize(width, height) {
+        if (!this.canResize) return;
+        this.renderer.resize(width, height);
+        this.width = width;
+        this.height = height;
+        this.updateLayoutTree();
+    }
 
 }
 
