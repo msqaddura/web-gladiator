@@ -32,6 +32,7 @@
     "pixi.js": "*",
     "resource-loader": "*",
     "rxjs": "*",
-    "tween.js": "*"
+    "tween.js": "*",
+    "gsap": "*"
   }
 }

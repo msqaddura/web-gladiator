@@ -7,16 +7,16 @@ export class ColyseusAdapter {
     _room;//client connects, resides in a room
     _nameSpace;//the namespace usually never used
     _stream;
-    constructor(url,roomName="whatever") {
+    constructor(url) {
         this._stream = new Rx.Subject();
         this._url = url;
         console.info(Colyseus);
         this._client =  new Colyseus.Client(this._url);
-        this._roomName = roomName;
     }
 
-    connect() {
+    connect(room="normal") {
         var self=this;
+        this._roomName=room;
         this._room = this._client.join(this._roomName);
         this._room.onJoin.add(function(){
             self._stream.next({type:'join',data:{room:self._room,client:self._client}})
