@@ -48,6 +48,8 @@ export class SceneManager {
         this._activeScene = BlueprintBuilder.getInstance().createAndAddObject(this._target,this._sceneMap[name],bootstrap);
         this._target.currentScene=this._activeScene;
         this._target.currentScene.updateLayout();
+        //QQQQQHack
+        this._target.currentScene.updateLayout();
         //this._target.refresh();
         
         //this._target.addNode(this._target.createNode(blueprint,bootstrap))

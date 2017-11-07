@@ -19,6 +19,7 @@ readonly blueprints;
     bootstrap(bootstrap){
         if(!bootstrap)
             return;
+        this.preInitalize();
         this.initialize();
         this.preCreateTree();
         this.createTree();
@@ -28,7 +29,7 @@ readonly blueprints;
         
 
     }
-
+    preInitalize(){}
     initialize(){}
 
     preCreateTree(){};

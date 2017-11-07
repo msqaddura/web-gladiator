@@ -46,7 +46,7 @@ export class Button extends Entity{
     }
     protected onTapped(...args){
         console.info("QQQonTapped");
-        this._fsm.pointerup();
+        //this._fsm.pointerup();
     }
     protected onActive(...args){
         console.info("QQQonActive")

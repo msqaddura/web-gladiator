@@ -11,8 +11,8 @@ $$$visited = false;
      this.view = new PIXI.Container();
  }
 
-    initialize(){
-        super.initialize();
+    preInitialize(){
+        super.preInitialize();
         this.$$$scaleOnly = !!this.params["scaleOnly"];
         
     }
@@ -22,8 +22,10 @@ $$$visited = false;
 
     set width(value) {
         value = MathUtil.toFixed(value);
-        if(this.$$$scaleModeActive)
+        if(this.$$$scaleModeActive){
             this.view.width = value;
+            this.anchorX = this.anchorX;
+        }
         this._width = value;
     }
 
@@ -33,9 +35,29 @@ $$$visited = false;
 
     set height(value) {
         value = MathUtil.toFixed(value);
-        if(this.$$$scaleModeActive)
+        if(this.$$$scaleModeActive){
             this.view.height = value;
+            this.anchorY=this.anchorY;
+        }
         this._height = value;
+    }
+
+    get anchorX(){
+        return this._anchorX;
+    }
+
+    set anchorX(value){
+        this._anchorX = value;
+        this.view.pivot.x = this.view.width/this.view.scale.x * value;
+    }
+
+    get anchorY(){
+        return this._anchorY;
+    }
+
+    set anchorY(value){
+        this._anchorY = value;
+        this.view.pivot.y = this.view.height/this.view.scale.y * value;
     }
     // parseTreeLayout() {
     //     if(!this.$$$scaleModeActive)
@@ -47,6 +69,10 @@ $$$visited = false;
         if(!this.$$$scaleModeActive)
             super.updateLayoutTree();
         this.$$$visited = true;
+        this.anchorX=this.anchorX;
+        this.anchorY=this.anchorY;
+        this.width = this.width;
+        this.height=this.height;
     }
 
     get $$$scaleModeActive(){

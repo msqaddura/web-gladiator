@@ -10,6 +10,7 @@ import { Scene } from '../../Entity/Scene';
 import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
 import { EventSystem } from '../../System/Event/EventSystem';
 import { MathUtil } from '../../Util/MathUtil';
+import { LayoutComponent } from '../../Component/LayoutComponent';
 export class View extends WGObject implements IView, IHID {
 
     _proxy = ["x", "y", "width", "height", "scaleX", "scaleY", "anchorX", "anchorY", "visible", "alpha", "interactive"]
@@ -28,6 +29,7 @@ export class View extends WGObject implements IView, IHID {
     _anchorY = 0;
     _scaleX = 1;
     _scaleY = 1;
+    _rotation = 0;
     _vfl = [""];
     layout = {
         name: null,
@@ -40,20 +42,25 @@ export class View extends WGObject implements IView, IHID {
     views = {};
     params;
     subView;
+    layoutComponent;
     readonly config: Object;
     constructor(owner, params) {
         super(owner, { name: params.name, blueprints: params.blueprints, repeatableBlueprints: params.repeatableBlueprints });
         this.config = params.config || {};
         this._vfl = params.vfl || this._vfl;
-        for(const key in params.layout)
-            this.layout[key] = params.layout[key];// = Object.assign(this.layout, params.layout || {});
+        if(params.layout)
+            this.layoutComponent = new LayoutComponent(this,params.layout)
+        //for (const key in params.layout)
+        //    this.layout[key] = params.layout[key];// = Object.assign(this.layout, params.layout || {});
         this.params = params;
     }
 
     bootstrap(bootstrap) {
         if (bootstrap == false) return;
-        this.executeStateMachine();
+
+        this.preInitialize();
         this.initialize();
+        this.executeStateMachine();
         this.preCreateTree();
         this.createTree();
         this.postCreateTree();
@@ -67,17 +74,17 @@ export class View extends WGObject implements IView, IHID {
         this.interactive = isInteractive || this.interactive;
     }
 
-    initialize() {
+    preInitialize() {
         if (this.view)
             this.view.name = this.name;
-        if (this.params.hasOwnProperty("visible"))
-            this.visible = this.params.visible;
-        if (this.params.hasOwnProperty("alpha"))
-            this.alpha = this.params.alpha;
         if (this.params.hasOwnProperty("width"))
             this.width = this.params.width;
         if (this.params.hasOwnProperty("height"))
             this.height = this.params.height;
+        if (this.params.hasOwnProperty("visible"))
+            this.visible = this.params.visible;
+        if (this.params.hasOwnProperty("alpha"))
+            this.alpha = this.params.alpha;
         if (this.params.hasOwnProperty("scaleX"))
             this.scaleX = this.params.scaleX;
         if (this.params.hasOwnProperty("scaleY"))
@@ -86,27 +93,35 @@ export class View extends WGObject implements IView, IHID {
             this.x = this.params.x;
         if (this.params.hasOwnProperty("y"))
             this.y = this.params.y;
+        if (this.params.hasOwnProperty("left"))
+            this.x = this.params.left;
+        if (this.params.hasOwnProperty("top"))
+            this.y = this.params.top;
         if (this.params.hasOwnProperty("anchorX"))
             this.anchorX = this.params.anchorX;
         if (this.params.hasOwnProperty("anchorY"))
             this.anchorY = this.params.anchorY;
+        if (this.params.hasOwnProperty("rotation"))
+            this.rotation = this.params.rotation;
         this.view.twin = this;
     }
 
     //use iterator or visitor
     updateLayout() {
-        if (this.layout.name != null) {
-            let subView = LayoutSystem.getInstance().getSubView(this.layout.name)
-            if (subView) {
-                this.subView=subView;
-                this.width = subView["width"];
-                this.height = subView["height"];
-                if (this.layout.left != null)
-                    this.left = subView[this.layout.left] - (this.owner["globalLeft"] || 0);
-                if (this.layout.top != null)
-                    this.top = subView[this.layout.top] - (this.owner["globalTop"] || 0);
-            }
-        }
+        if(this.layoutComponent != null)
+            this.layoutComponent.update();
+        // if (this.layout.name != null) {
+        //     let subView = LayoutSystem.getInstance().getSubView(this.layout.name)
+        //     if (subView) {
+        //         this.subView = subView;
+        //         this.width = subView["width"];
+        //         this.height = subView["height"];
+        //         //if (this.layout.left != null)
+        //             this.left = subView[this.layout.left] - (this.owner["globalLeft"] || 0);
+        //         //if (this.layout.top != null)
+        //             this.top = subView[this.layout.top] - (this.owner["globalTop"] || 0);
+        //     }
+        // }
         this.updateLayoutTree();
     }
 
@@ -305,6 +320,14 @@ export class View extends WGObject implements IView, IHID {
     }
     get alpha() {
         return this._alpha;
+    }
+
+    get rotation() {
+        return this._rotation;
+    }
+    set rotation(value) {
+        this._rotation = value;
+        this.view.rotation = value;
     }
 
 }

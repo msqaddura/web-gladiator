@@ -22,8 +22,12 @@ export class TweenSystem {
     fadeOut(target,duration = 200){
         return this._adapter.fadeOut(target,duration);
     }
-    create(bag){
+    createNew(bag){
         console.info(this);
         return this._adapter.createNew(bag);
+    }
+    create(bag){
+        console.info(this);
+        return this._adapter.create(bag);
     }
 } 
