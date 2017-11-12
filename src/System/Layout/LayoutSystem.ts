@@ -8,7 +8,9 @@ export class LayoutSystem {
     _layout;
     _width;
     _height;
+    layouts={
 
+    }
     private constructor() {
         // do something construct...
         //this.layoutAdapter = new AutoLayoutAdapter();
@@ -32,15 +34,24 @@ export class LayoutSystem {
         }
         return this.instance;
     }
-    parseLayout(vfl) {
-        this._layout = this._adapter.parseEVFL(vfl);
+    parseLayout(vfl,name) {
+        //this._layout = this._adapter.parseEVFL(vfl);
+        this.layouts[name] = this._adapter.parseEVFL(vfl);
         this.updateLayoutSize();
     }
     updateLayoutSize() {
-        this._layout.setSize(this._width, this._height);
+        for (const key in this.layouts)
+        this.layouts[key].setSize(this._width,this._height);
+        //this._layout.setSize(this._width, this._height);
     }
     getSubView(name) {
-        return this._layout.subViews[name]
+        let result = null;
+        for (const key in this.layouts) {
+            if (this.layouts[key].subViews[name]) {
+                return this.layouts[key].subViews[name]
+            }
+        }
+        return result;
     }
     //use here visitor or iterator pattern
     //for now we are happy by Views taking care of themselves
@@ -49,7 +60,7 @@ export class LayoutSystem {
         System.getInstance().target.resize(this._width,this._height)
 
     }
-
+    
     use(adapter) {
         this._adapter = adapter;
     }

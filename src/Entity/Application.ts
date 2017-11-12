@@ -4,7 +4,7 @@ import { Entity } from "./Entity";
 import { SceneManager } from '../Foundation/Manager/SceneManager';
 import { System } from "../System/System";
 import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
-
+import { BlueprintBuilder} from '../Foundation/Builder/BlueprintBuilder';
 
 export class Application extends Entity {
 
@@ -15,27 +15,35 @@ export class Application extends Entity {
     canvas;
     renderer;
     canResize = true;
+    gameLayout;
     constructor(owner = null, params) {
         super(owner, params);
         this.sceneMap = params.sceneMap;
         const options = {
             antialiasing: false,
             transparent: false,
-            autoResize: true
+            autoResize: true,
+            resolution: window.devicePixelRatio || 1 
         }
         this._application = new PIXI.Application(window.innerWidth, window.innerHeight, options);
         this.renderer = this._application.renderer;
         this.canvas = this._application.view;
         this.view = this._application.stage;
-
+        this.gameLayout = params.gameLayout;
         //this.$height = window.innerHeight;
         //this.$width = window.innerWidth;
         document.body.appendChild(this.canvas);
         System.getInstance().setTarget(this);
-        //System.getInstance().getSystem("device").getResizeObs().subscribe(this.resize.bind(this))
+        System.getInstance().getSystem("layout").parseLayout(this.gameLayout,'game');
         SceneManager.getInstance().setTarget(this);
     }
 
+    create(items){
+        this.params.directChildren.forEach(key => {
+            BlueprintBuilder.getInstance().createAndAddObject(this,this.params.blueprints.find(item=>item.name==key))
+        });
+        this.updateLayoutTree();    
+    }
     // refresh(){
     //     let dimensions = {
     //         width:window.innerWidth,

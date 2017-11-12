@@ -44,7 +44,7 @@ export class SceneManager {
     }
 
     loadScene(name, bootstrap = true){
-        System.getInstance().getSystem("layout").parseLayout(this._sceneMap[name].sceneLayout);
+        System.getInstance().getSystem("layout").parseLayout(this._sceneMap[name].sceneLayout,name);
         this._activeScene = BlueprintBuilder.getInstance().createAndAddObject(this._target,this._sceneMap[name],bootstrap);
         this._target.currentScene=this._activeScene;
         this._target.currentScene.updateLayout();
