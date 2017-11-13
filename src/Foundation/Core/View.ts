@@ -94,9 +94,9 @@ export class View extends WGObject implements IView, IHID {
         if (this.params.hasOwnProperty("y"))
             this.y = this.params.y;
         if (this.params.hasOwnProperty("left"))
-            this.x = this.params.left;
+            this.left = this.params.left;
         if (this.params.hasOwnProperty("top"))
-            this.y = this.params.top;
+            this.top = this.params.top;
         if (this.params.hasOwnProperty("anchorX"))
             this.anchorX = this.params.anchorX;
         if (this.params.hasOwnProperty("anchorY"))

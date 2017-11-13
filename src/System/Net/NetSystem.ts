@@ -15,8 +15,8 @@ export class NetSystem  {
     getStream(){
         return this._adapter.getStream();
     }
-    connect(){
-        this._adapter.connect();
+    connect(room){
+        this._adapter.connect(room);
     }
     send(data){
         this._adapter.send(data);

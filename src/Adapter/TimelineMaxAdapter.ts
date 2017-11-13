@@ -6,7 +6,7 @@ export class TimelineMaxAdapter  {
        
     }
     
-    create(){
-        return new TimelineMaxWrapper();
+    create(options){
+        return new TimelineMaxWrapper(options);
     }
 }
