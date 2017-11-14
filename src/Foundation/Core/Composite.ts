@@ -41,10 +41,34 @@ export class Composite extends NodeX implements IComposite {
             delete this.tree[key];
         }
     }
-    getNode(name){
-        return this.getNodeByName(name);
+    getNode(name) {
+        return this.getNestedNode(this, name);
     }
-    getNodeByName(name){
+
+    getNodes(names){
+        let result = {}
+        names.forEach(name => {
+             result[name] = this.getNestedNode(this,name);
+        });
+        return result;
+    }  
+    getNestedNode(target, name) {
+        let node = null;
+        if (target.tree[name])
+            return target.tree[name];
+
+        for (const key in target.tree) {
+            if (target.tree[key] instanceof Composite) {
+                node = target.getNestedNode(target.tree[key], name)
+                if (node != null)
+                    return node;
+            }
+
+        }
+
+        return null;
+    }
+    getNodeByName(name) {
         return this.tree[name];
     }
     iterateTree(fn: Function) {

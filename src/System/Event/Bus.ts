@@ -6,7 +6,7 @@ export class Bus{
     registerEvent(ctor){
         if(!this._registeredEvents[ctor.name])
             this._registeredEvents[ctor.name]= new Rx.Subject();
-        return this._registeredEvents[ctor.name];
+        return this._registeredEvents[ctor.name].asObservable();
     }
 
 

@@ -51,6 +51,15 @@ export class Application extends Entity {
     //     }
     //     this.resize(dimensions);
     // }
+    loadScene(name){
+        SceneManager.getInstance().loadScene(name);
+        
+    }
+
+    switchScenesTo(name, kill=true){
+        this.removeNode(this.currentScene.name);
+        SceneManager.getInstance().switchScenesTo(name,kill);
+    }
     resize(width, height) {
         if (!this.canResize) return;
         this.renderer.resize(width, height);
