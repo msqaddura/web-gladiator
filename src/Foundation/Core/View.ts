@@ -173,7 +173,7 @@ export class View extends WGObject implements IView, IHID {
 
     registerHIDEvent(name: string) {
         this._registeredHIDEvents[name] = Rx.Observable.fromEvent(this.view, name);
-        return this._registeredHIDEvents[name];
+        return this._registeredHIDEvents[name].takeWhile(()=>this.isActive);
     }
 
     kill() {
