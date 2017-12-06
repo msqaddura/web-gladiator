@@ -21,7 +21,7 @@ export class LayoutSystem {
             .subscribe(() => {
                 this._width = window.innerWidth;
                 this._height = window.innerHeight;
-                this.resizeLayout();
+                this.updateLayoutSize();
                 this.iterateTree();
 
             });
@@ -37,22 +37,18 @@ export class LayoutSystem {
     parseLayout(vfl,name) {
         //this._layout = this._adapter.parseEVFL(vfl);
         this.layouts[name] = this._adapter.parseEVFL(vfl);
-        this.resizeLayout();
+        this.updateLayoutSize();
     }
-    resizeLayout(){
+    updateLayoutSize() {
         for (const key in this.layouts)
-        this.layouts[key].resize(this._width,this._height);
+        this.layouts[key].setSize(this._width,this._height);
+        //this._layout.setSize(this._width, this._height);
     }
-    // updateLayoutSize() {
-    //     for (const key in this.layouts)
-    //     this.layouts[key].setSize(this._width,this._height);
-    //     //this._layout.setSize(this._width, this._height);
-    // }
     getSubView(name) {
         let result = null;
         for (const key in this.layouts) {
-            if (this.layouts[key].viewMap[name]) {
-                return this.layouts[key].compute(name)
+            if (this.layouts[key].subViews[name]) {
+                return this.layouts[key].subViews[name]
             }
         }
         return result;
