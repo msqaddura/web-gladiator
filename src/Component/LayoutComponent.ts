@@ -26,11 +26,13 @@ export class LayoutComponent {
     }
     update() {
         let subView = System.getInstance().getSystem('layout').getSubView(this.name)
+        if(this.name=="IntroScene")
+            console.info(subView)
         if (subView) {
             let width = subView["width"];
             let height = subView["height"];
-            this.owner.left = subView[this.left] - (this.globalOwner["globalLeft"] || 0);
-            this.owner.top = subView[this.top] - (this.globalOwner["globalTop"] || 0);
+            this.owner.left = subView[this.left];
+            this.owner.top = subView[this.top];
 
             if (this.dominant === 'height')
                 width *= this.ratio;

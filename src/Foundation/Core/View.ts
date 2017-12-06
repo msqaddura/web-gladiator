@@ -330,5 +330,11 @@ export class View extends WGObject implements IView, IHID {
         this.view.rotation = value;
     }
 
+    get tint(){
+        return this.view.tint;
+    }
+    set tint(value){
+        this.view.tint = value;
+    }
 }
 
