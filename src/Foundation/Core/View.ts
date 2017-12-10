@@ -103,6 +103,10 @@ export class View extends WGObject implements IView, IHID {
             this.anchorY = this.params.anchorY;
         if (this.params.hasOwnProperty("rotation"))
             this.rotation = this.params.rotation;
+        if (this.params.hasOwnProperty("accessible"))
+            this.accessible = this.params.accessible;
+        if (this.params.hasOwnProperty("accessibleTitle"))
+            this.accessibleTitle = this.params.accessibleTitle;
         this.view.twin = this;
     }
 
@@ -335,6 +339,22 @@ export class View extends WGObject implements IView, IHID {
     }
     set tint(value){
         this.view.tint = value;
+    }
+
+    get accessible (){
+        return this.view.accessible ;
+    }
+    set accessible (value){
+        this.view.accessible=value;
+    }
+
+    get accessibleTitle(){
+        return this.view.accessibleTitle;
+    }
+
+    set accessibleTitle (value){
+        this.view.accessibleTitle=value;
+        this.view._accessibleActive = false;
     }
 }
 
