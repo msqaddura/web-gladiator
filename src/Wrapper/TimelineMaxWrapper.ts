@@ -1,7 +1,7 @@
-import {TimelineMax}  from 'gsap';
+import { TimelineMax } from "gsap";
 
 export class TimelineMaxWrapper extends TimelineMax {
-    constructor(options){
+    constructor(options) {
         super(options);
     }
 }
