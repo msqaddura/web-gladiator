@@ -1,31 +1,30 @@
+import * as Rx from "rxjs";
 import * as io from "socket.io-client";
-import * as Rx from 'rxjs';
 
 export class SocketIOAdapter {
-    _socket;
-    _url;
-    _stream;
+    socket;
+    url;
+    stream;
     constructor(url) {
-        this._stream = new Rx.Subject();
-        this._url = url;
+        this.stream = new Rx.Subject();
+        this.url = url;
     }
 
     connect() {
-        
-        this._socket = io.connect(this._url);
-        var self = this;
-        this._socket.on('connect',function(){
-            self._stream.next({type:'connect'});
-        })
-        this._socket.on('event', function (data) {
-            self._stream.next({type:'event',...data})
+
+        this.socket = io.connect(this.url);
+        this.socket.on("connect", () => {
+            this.stream.next({type: "connect"});
         });
-        this._socket.on('disconnect',function(){
-            self._stream.next({type:'disconnect'})
-        })
+        this.socket.on("event",  (data) => {
+            this.stream.next({type: "event", ...data});
+        });
+        this.socket.on("disconnect", () => {
+            this.stream.next({type: "disconnect"});
+        });
     }
 
     getStream() {
-        return this._stream;
+        return this.stream;
     }
 }

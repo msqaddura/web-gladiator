@@ -1,57 +1,55 @@
-//import * as Loader from 'resource-loader';
-import * as Rx from 'rxjs';
-import * as PIXI from 'pixi.js';
+// import * as Loader from 'resource-loader';
+import * as PIXI from "pixi.js";
+import * as Rx from "rxjs";
 
 export class PixiResourceAdapter {
 
-    _loader;
+    loader;
     constructor() {
-        this._loader = PIXI.loader;
+        this.loader = PIXI.loader;
     }
 
-    preload(file){
-        var self = this;
-        return Rx.Observable.create(observer=>{
-            this._loader
+    preload(file) {
+        return Rx.Observable.create((observer) => {
+            this.loader
                 .add(file)
-                .load(function (loader, resources) {
+                .load((loader, resources) => {
                     loader.progress = 0;
-                    loader.onProgress.add(function(loader,resource){
-                        //console.info(loader.progress);
+                    loader.onProgress.add((loader, resource) => {
+                        // console.info(loader.progress);
                         observer.next(loader.progress);
-                    })
-                    loader.onComplete.add(function(loader,resObj){
-                        //console.info(loader.progress)
+                    });
+                    loader.onComplete.add((loader, resObj) => {
+                        // console.info(loader.progress)
                         observer.complete();
-                    })
+                    });
                     loader
-                    .add(resources[file]["data"])
-                    .load(function (loader, resources){});
-            })    
+                        .add(resources[file]["data"])
+                        .load((loader, resources) => { });
+                });
 
-            });
+        });
     }
     preloadManifest(manifest, cb) {
-        var self = this;
-        return Rx.Observable.create(observer=>{
-            this._loader
+        return Rx.Observable.create((observer) => {
+            this.loader
                 .add(manifest)
-                .load(function (loader, resources) {
+                .load((loader, resources) => {
                     loader.progress = 0;
-                    loader.onProgress.add(function(loader,resource){
-                        //console.info(loader.progress);
+                    loader.onProgress.add((loader, resource) => {
+                        // console.info(loader.progress);
                         observer.next(loader.progress);
-                    })
-                    loader.onComplete.add(function(loader,resObj){
-                        //console.info(loader.progress)
+                    });
+                    loader.onComplete.add((loader, resObj) => {
+                        // console.info(loader.progress)
                         observer.complete();
-                    })
+                    });
                     loader
-                    .add(resources[manifest]["data"])
-                    .load(function (loader, resources){});
-            })    
+                        .add(resources[manifest]["data"])
+                        .load((loader, resources) => { });
+                });
 
-            });
+        });
     }
 
 }
