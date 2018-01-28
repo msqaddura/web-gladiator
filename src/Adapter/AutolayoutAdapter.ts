@@ -1,13 +1,13 @@
-import * as AutoLayout from 'autolayout';
+import * as AutoLayout from "autolayout";
 
 export class AutolayoutAdapter {
     constructor() {
-        console.info(AutoLayout);
+        // console.info(AutoLayout);
     }
 
-    parseEVFL(evfl=['']){
+    parseEVFL(evfl= [""]) {
         const constraints = AutoLayout.VisualFormat.parse(evfl, {extended: true});
-        const view = new AutoLayout.View({constraints: constraints});
+        const view = new AutoLayout.View({constraints});
         return view;
     }
-} 
+}

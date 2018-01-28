@@ -1,12 +1,12 @@
-import * as AutoLayout from 'autolayout';
-import { View } from '../Wrapper/AutolayoutWrapper';
+import * as AutoLayout from "autolayout";
+import { View } from "../Wrapper/AutolayoutWrapper";
 export class CEVFLAdapter {
     constructor() {
-        console.info(AutoLayout);
+        // console.info(AutoLayout);
     }
 
-    parseEVFL(options){
+    parseEVFL(options) {
         const view = new View(options);
         return view;
     }
-} 
+}

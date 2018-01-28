@@ -1,5 +1,5 @@
 import * as StateMachine from 'javascript-state-machine';
-console.info(StateMachine);
+// console.info(StateMachine);
 import * as Rx from 'rxjs';
 
 interface IStateMachineWrapper {

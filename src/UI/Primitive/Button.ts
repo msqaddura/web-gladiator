@@ -4,7 +4,7 @@ import { StateMachine } from "../../Foundation/Base/StateMachine";
 
 export class Button extends Entity {
 
-    executeStateMachine() {
+    executeStateMachineNone() {
         const init = "none";
         const transitions = [
                 { name: "pointerover", from: ["none", "idle", "tapped"], to: "hover" },
@@ -43,17 +43,17 @@ export class Button extends Entity {
         });
     }
     protected onIdle(...args) {
-        console.info("QQQonIdle");
+        // console.info("QQQonIdle");
     }
     protected onHover(...args) {
-        console.info("QQQonHover");
+        // console.info("QQQonHover");
     }
     protected onTapped(...args) {
-        console.info("QQQonTapped");
+        // console.info("QQQonTapped");
         // this._fsm.pointerup();
     }
     protected onActive(...args) {
-        console.info("QQQonActive");
+        // console.info("QQQonActive");
     }
     _handleEvent(data) {
         // console.info("Handled");

@@ -1,5 +1,5 @@
-import * as Rx from 'rxjs';
-//shouldnt this be animation system
+import * as Rx from "rxjs";
+// shouldnt this be animation system
 export class TweenSystem {
     private static instance: TweenSystem;
     _adapter = null;
@@ -13,21 +13,21 @@ export class TweenSystem {
         }
         return this.instance;
     }
-    use(adapter){
+    use(adapter) {
         this._adapter = adapter;
     }
-    fadeIn(target,duration = 200){
-        return this._adapter.fadeIn(target,duration);
+    fadeIn(target, duration = 200) {
+        return this._adapter.fadeIn(target, duration);
     }
-    fadeOut(target,duration = 200){
-        return this._adapter.fadeOut(target,duration);
+    fadeOut(target, duration = 200) {
+        return this._adapter.fadeOut(target, duration);
     }
-    createNew(bag){
-        console.info(this);
+    createNew(bag) {
+        // console.info(this);
         return this._adapter.createNew(bag);
     }
-    create(bag){
-        console.info(this);
+    create(bag) {
+        // console.info(this);
         return this._adapter.create(bag);
     }
-} 
+}

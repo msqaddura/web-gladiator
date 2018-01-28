@@ -10,7 +10,7 @@ export class ColyseusAdapter {
     constructor(url) {
         this.stream = new Rx.Subject();
         this.url = url;
-        console.info(Colyseus);
+        // console.info(Colyseus);
         this.client =  new Colyseus.Client(this.url);
     }
 
