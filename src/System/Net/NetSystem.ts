@@ -24,6 +24,10 @@ export class NetSystem  {
 
     }
 
+    disconnect(){
+        this.adapter.disconnect();
+    }
+    
     send(data) {
         this.adapter.send(data);
     }

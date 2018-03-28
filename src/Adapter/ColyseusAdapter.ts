@@ -35,6 +35,11 @@ export class ColyseusAdapter {
             this.stream.next({type: "leave"});
         });
     }
+    
+    disconnect(){
+        this.room.leave();
+    }
+
     send(data) {
         this.room.send(data);
     }
