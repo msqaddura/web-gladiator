@@ -1,10 +1,10 @@
-import * as PIXI from 'pixi.js'
+import * as PIXI from "pixi.js";
 
-import { View } from '../Foundation/Core/View';
-import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
+import { GameObjectBuilder } from "../Foundation/Builder/GameObjectBuilder";
+import { View } from "../Foundation/Core/View";
 const setIntervalX = (callback, onDone, delay, repetitions) => {
-    var x = 0;
-    var intervalID = window.setInterval(function () {
+    let x = 0;
+    const intervalID = window.setInterval(() => {
 
         callback(x);
 
@@ -13,7 +13,7 @@ const setIntervalX = (callback, onDone, delay, repetitions) => {
             window.clearInterval(intervalID);
         }
     }, delay);
-}
+};
 export class Text extends View {
 
     constructor(owner, params) {
@@ -27,24 +27,24 @@ export class Text extends View {
         this.postLayout();
     }
     postLayout() {
-        let min = Math.min(this.view.scale.x, this.view.scale.y)
-        //this.view.scale.set(min)
+        const min = Math.min(this.view.scale.x, this.view.scale.y);
+        // this.view.scale.set(min)
     }
     get text() {
         return this.view.text;
     }
     set text(value) {
-        if (value == this.view.text) return;
-        setIntervalX((x) => { 
-            this.view.text = value.slice(0,x)+"|";
-        }, ()=>{
-            this.view.text = value; 
-        },
-         50,
-         value.length)
-        //this.view.text = value;
+        // if (value == this.view.text) return;
+        // setIntervalX((x) => {
+        //     this.view.text = value.slice(0,x)+"|";
+        // }, ()=>{
+        //     this.view.text = value;
+        // },
+        //  50,
+        //  value.length)
+        this.view.text = value;
         this.updateLayout();
     }
 }
 
-GameObjectBuilder.getInstance().registerGameObject('Text', Text);
+GameObjectBuilder.getInstance().registerGameObject("Text", Text);

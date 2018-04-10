@@ -21,7 +21,7 @@ export class Application extends Entity {
         this.sceneMap = params.sceneMap;
         const options = {
             antialiasing: false,
-            transparent: false,
+            transparent: true,
             autoResize: true,
             resolution: window.devicePixelRatio || 1 
         }
