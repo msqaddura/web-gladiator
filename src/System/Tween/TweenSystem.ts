@@ -31,3 +31,5 @@ export class TweenSystem {
         return this._adapter.create(bag);
     }
 }
+
+export const tweenSystem=TweenSystem.getInstance();

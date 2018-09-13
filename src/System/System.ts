@@ -19,7 +19,16 @@ export class System  {
         tween:TweenSystem.getInstance(),
         sound:SoundSystem.getInstance(),
         graphics:GraphicsSystem.getInstance()
-    }
+    };
+    static net=NetSystem.getInstance();
+    static resource=ResourceSystem.getInstance();
+    static layout=LayoutSystem.getInstance();
+    static event=EventSystem.getInstance();
+    static device=DeviceSystem.getInstance();
+    static tween=TweenSystem.getInstance();
+    static sound=SoundSystem.getInstance();
+    static graphics=GraphicsSystem.getInstance();
+
     static get Graphics():GraphicsSystem{
         return this.getInstance().getSystem("graphics");
     }

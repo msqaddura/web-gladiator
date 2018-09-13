@@ -60,5 +60,8 @@ export class SceneManager {
     unloadScene(scene){
         scene.kill();
     }
+  
     
 } 
+
+export let sceneManager = SceneManager.getInstance();

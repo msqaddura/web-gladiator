@@ -10,13 +10,13 @@ import { IStateMachine } from '../Base/IStateMachine';
 import * as RX from 'rxjs';
 
 export interface INode{
-    readonly owner: Node;
+    readonly owner: NodeX;
     readonly name:string;
     kill();
 }
 
 export class NodeX implements INode, IEvent,IStateMachine{
-    readonly owner: Node;
+    readonly owner: NodeX;
     readonly name:string;
     _fsm;
     registeredEvents={};

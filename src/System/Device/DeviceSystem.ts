@@ -20,3 +20,5 @@ export class DeviceSystem {
         return this._adapter.getResizeObs();
     }
 } 
+
+export let deviceSystem = DeviceSystem.getInstance();

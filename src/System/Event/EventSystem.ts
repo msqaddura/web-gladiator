@@ -25,3 +25,5 @@ export class EventSystem {
         this._adapter.sendEvent(obj);
     }
 } 
+
+export const eventSystem = EventSystem.getInstance();

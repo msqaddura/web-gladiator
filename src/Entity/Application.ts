@@ -38,7 +38,7 @@ export class Application extends Entity {
         SceneManager.getInstance().setTarget(this);
     }
 
-    create(items){
+    create(){
         this.params.directChildren.forEach(key => {
             BlueprintBuilder.getInstance().createAndAddObject(this,this.params.blueprints.find(item=>item.name==key))
         });
