@@ -1,12 +1,7 @@
-import { TimelineMaxWrapper } from '../Wrapper/TimelineMaxWrapper'; 
+import { TimelineMaxWrapper } from "../Wrapper/TimelineMaxWrapper";
 
-
-export class TimelineMaxAdapter  {
-    constructor() {
-       
-    }
-    
-    create(options){
+export class TimelineMaxAdapter {
+    create(options) {
         return new TimelineMaxWrapper(options);
     }
 }

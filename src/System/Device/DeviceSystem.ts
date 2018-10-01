@@ -1,11 +1,6 @@
-import * as Rx from 'rxjs';
-import { DeviceAdapter } from "./DeviceAdapter"
+import * as Rx from "rxjs";
+import { DeviceAdapter } from "./DeviceAdapter";
 export class DeviceSystem {
-    private static instance: DeviceSystem;
-    _adapter = null;
-    private constructor() {
-        // do something construct...
-    }
     static getInstance() {
         if (!this.instance) {
             this.instance = new DeviceSystem();
@@ -13,12 +8,17 @@ export class DeviceSystem {
         }
         return this.instance;
     }
-    use(adapter){
+    private static instance: DeviceSystem;
+    _adapter = null;
+    private constructor() {
+        // do something construct...
+    }
+    use(adapter) {
         this._adapter = adapter;
     }
-    getResizeObs(){
+    getResizeObs() {
         return this._adapter.getResizeObs();
     }
-} 
+}
 
 export let deviceSystem = DeviceSystem.getInstance();

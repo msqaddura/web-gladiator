@@ -1,20 +1,21 @@
-import {Leaf} from '../Core/Leaf';
-import { ILeaf } from '../Core/ILeaf';
+import { ILeaf, Leaf } from "../Core";
 
-export interface IStrategy extends ILeaf{
+export interface IStrategy extends ILeaf {
     execute();
 }
-export class Strategy extends Leaf implements IStrategy{
-    constructor(owner,params){
-        super(owner,params.name);
+export class Strategy extends Leaf implements IStrategy {
+    constructor(owner, params) {
+        super(owner, params.name);
     }
-    bootstrap(bootstrap=true){
+    bootstrap(bootstrap = true) {
         this.execute();
         this.executeStateMachine();
-        this.listenToBusEvents()
+        this.listenToBusEvents();
     }
-    start(){}
-    execute(){
+    start() {
+        //
+    }
+    execute() {
         this.start();
     }
 }

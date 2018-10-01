@@ -1,19 +1,18 @@
-import * as Rx from 'rxjs';
+import * as Rx from "rxjs";
 
-
-import { IView } from './IView';
-import { WGObject } from './WGObject';
-import { LayoutSystem } from '../../System/Layout/LayoutSystem';
-import { System } from '../../System/System';
-import { IHID } from '../../System/HID/IHID';
-import { Scene } from '../../Entity/Scene';
-import { GameObjectBuilder } from '../Builder/GameObjectBuilder';
-import { EventSystem } from '../../System/Event/EventSystem';
-import { MathUtil } from '../../Util/MathUtil';
-import { LayoutComponent } from '../../Component/LayoutComponent';
+import { LayoutComponent } from "../../Component/LayoutComponent";
+import { Scene } from "../../Entity/Scene";
+import { EventSystem } from "../../System/Event/EventSystem";
+import { IHID } from "../../System/HID/IHID";
+import { LayoutSystem } from "../../System/Layout/LayoutSystem";
+import { System } from "../../System/System";
+import { MathUtil } from "../../Util/MathUtil";
+import { GameObjectBuilder } from "../Builder/GameObjectBuilder";
+import { IView } from "./IView";
+import { WGObject } from "./WGObject";
 export class View extends WGObject implements IView, IHID {
 
-    _proxy = ["x", "y", "width", "height", "scaleX", "scaleY", "anchorX", "anchorY", "visible", "alpha", "interactive"]
+    _proxy = ["x", "y", "width", "height", "scaleX", "scaleY", "anchorX", "anchorY", "visible", "alpha", "interactive"];
     globalLeft = 0;
     globalTop = 0;
     view;
@@ -35,7 +34,7 @@ export class View extends WGObject implements IView, IHID {
         name: null,
         left: "left",
         top: "top"
-    }
+    };
     _autolayout;
     _registeredHIDEvents = {};
     _visible: boolean = true;
@@ -43,20 +42,22 @@ export class View extends WGObject implements IView, IHID {
     params;
     subView;
     layoutComponent;
-    readonly config: Object;
+    readonly config: object;
     constructor(owner, params) {
+        // tslint:disable-next-line:max-line-length
         super(owner, { name: params.name, blueprints: params.blueprints, repeatableBlueprints: params.repeatableBlueprints });
         this.config = params.config || {};
         this._vfl = params.vfl || this._vfl;
-        if(params.layout)
-            this.layoutComponent = new LayoutComponent(this,params.layout)
-        //for (const key in params.layout)
+        if (params.layout) {
+            this.layoutComponent = new LayoutComponent(this, params.layout);
+        }
+        // for (const key in params.layout)
         //    this.layout[key] = params.layout[key];// = Object.assign(this.layout, params.layout || {});
         this.params = params;
     }
 
     bootstrap(bootstrap) {
-        if (bootstrap == false) return;
+        if (bootstrap === false) { return; }
 
         this.preInitialize();
         this.initialize();
@@ -75,45 +76,62 @@ export class View extends WGObject implements IView, IHID {
     }
 
     preInitialize() {
-        if (this.view)
+        if (this.view) {
             this.view.name = this.name;
-        if (this.params.hasOwnProperty("width"))
+        }
+        if (this.params.hasOwnProperty("width")) {
             this.width = this.params.width;
-        if (this.params.hasOwnProperty("height"))
+        }
+        if (this.params.hasOwnProperty("height")) {
             this.height = this.params.height;
-        if (this.params.hasOwnProperty("visible"))
+        }
+        if (this.params.hasOwnProperty("visible")) {
             this.visible = this.params.visible;
-        if (this.params.hasOwnProperty("alpha"))
+        }
+        if (this.params.hasOwnProperty("alpha")) {
             this.alpha = this.params.alpha;
-        if (this.params.hasOwnProperty("scaleX"))
+        }
+        if (this.params.hasOwnProperty("scaleX")) {
             this.scaleX = this.params.scaleX;
-        if (this.params.hasOwnProperty("scaleY"))
+        }
+        if (this.params.hasOwnProperty("scaleY")) {
             this.scaleY = this.params.scaleY;
-        if (this.params.hasOwnProperty("x"))
+        }
+        if (this.params.hasOwnProperty("x")) {
             this.x = this.params.x;
-        if (this.params.hasOwnProperty("y"))
+        }
+        if (this.params.hasOwnProperty("y")) {
             this.y = this.params.y;
-        if (this.params.hasOwnProperty("left"))
+        }
+        if (this.params.hasOwnProperty("left")) {
             this.left = this.params.left;
-        if (this.params.hasOwnProperty("top"))
+        }
+        if (this.params.hasOwnProperty("top")) {
             this.top = this.params.top;
-        if (this.params.hasOwnProperty("anchorX"))
+        }
+        if (this.params.hasOwnProperty("anchorX")) {
             this.anchorX = this.params.anchorX;
-        if (this.params.hasOwnProperty("anchorY"))
+        }
+        if (this.params.hasOwnProperty("anchorY")) {
             this.anchorY = this.params.anchorY;
-        if (this.params.hasOwnProperty("rotation"))
+        }
+        if (this.params.hasOwnProperty("rotation")) {
             this.rotation = this.params.rotation;
-        if (this.params.hasOwnProperty("accessible"))
+        }
+        if (this.params.hasOwnProperty("accessible")) {
             this.accessible = this.params.accessible;
-        if (this.params.hasOwnProperty("accessibleTitle"))
+        }
+        if (this.params.hasOwnProperty("accessibleTitle")) {
             this.accessibleTitle = this.params.accessibleTitle;
+        }
         this.view.twin = this;
     }
 
-    //use iterator or visitor
+    // use iterator or visitor
     updateLayout() {
-        if(this.layoutComponent != null)
+        if (this.layoutComponent != null) {
             this.layoutComponent.update();
+        }
         // if (this.layout.name != null) {
         //     let subView = LayoutSystem.getInstance().getSubView(this.layout.name)
         //     if (subView) {
@@ -131,7 +149,9 @@ export class View extends WGObject implements IView, IHID {
 
     updateLayoutTree() {
         for (const key in this.views) {
-            this.views[key].updateLayout();
+            if (this.views.hasOwnProperty) {
+                this.views[key].updateLayout();
+            }
         }
     }
 
@@ -159,33 +179,38 @@ export class View extends WGObject implements IView, IHID {
     //         }
     //     }
     // }
-    postLayout() { }
+    postLayout() {
+        //
+    }
     addNode(node) {
         super.addNode(node);
-        if (node instanceof View)
+        if (node instanceof View) {
             this.addView(node);
-
+        }
 
     }
     addView(aview: View) {
         this.views[aview.name] = aview;
-        if (aview.view)
+        if (aview.view) {
             this.view.addChild(aview.view);
-        else
+        } else {
             this.view.addChild(aview);
+        }
     }
 
     registerHIDEvent(name: string) {
         this._registeredHIDEvents[name] = Rx.Observable.fromEvent(this.view, name);
-        return this._registeredHIDEvents[name].takeWhile(()=>this.isActive);
+        return this._registeredHIDEvents[name].takeWhile(() => this.isActive);
     }
 
     kill() {
         super.kill();
         this.view.twin = null;
         for (const key in this._registeredHIDEvents) {
-            //this._registeredHIDEvents[key].unsubscribe();
-            delete this._registeredHIDEvents[key];
+            if (this._registeredHIDEvents.hasOwnProperty(key)) {
+                // this._registeredHIDEvents[key].unsubscribe();
+                delete this._registeredHIDEvents[key];
+            }
         }
         this.view.parent.removeChild(this.view);
     }
@@ -196,13 +221,13 @@ export class View extends WGObject implements IView, IHID {
             w: this.width,
             h: this.height,
 
-        }
+        };
         const info2 = {
             Px: this.view.x,
             Py: this.view.y,
             Ph: this.view.height,
             Pw: this.view.width
-        }
+        };
         console.info(this.name, info, info2);
         return info;
     }
@@ -219,10 +244,10 @@ export class View extends WGObject implements IView, IHID {
         return this._left;
     }
     set left(value) {
-        //const gl = value - (this.owner["globalLeft"] || 0);
+        // const gl = value - (this.owner["globalLeft"] || 0);
         value = MathUtil.toFixed(value);
         this.view.position.x = value + this.x;
-        this.globalLeft = value + (this.owner["globalLeft"] || 0);;
+        this.globalLeft = value + (this.owner["globalLeft"] || 0);
         this._left = value;
     }
 
@@ -245,7 +270,6 @@ export class View extends WGObject implements IView, IHID {
         this.globalTop = value + (this.owner["globalTop"] || 0);
         this._top = value;
     }
-
 
     get width() {
         return this._width;
@@ -334,27 +358,26 @@ export class View extends WGObject implements IView, IHID {
         this.view.rotation = value;
     }
 
-    get tint(){
+    get tint() {
         return this.view.tint;
     }
-    set tint(value){
+    set tint(value) {
         this.view.tint = value;
     }
 
-    get accessible (){
-        return this.view.accessible ;
+    get accessible() {
+        return this.view.accessible;
     }
-    set accessible (value){
-        this.view.accessible=value;
+    set accessible(value) {
+        this.view.accessible = value;
     }
 
-    get accessibleTitle(){
+    get accessibleTitle() {
         return this.view.accessibleTitle;
     }
 
-    set accessibleTitle (value){
-        this.view.accessibleTitle=value;
+    set accessibleTitle(value) {
+        this.view.accessibleTitle = value;
         this.view._accessibleActive = false;
     }
 }
-

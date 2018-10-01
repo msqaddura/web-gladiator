@@ -1,10 +1,10 @@
-import * as PIXI from 'pixi.js'
+import * as PIXI from "pixi.js";
 
-import { Entity } from "./Entity";
-import { SceneManager } from '../Foundation/Manager/SceneManager';
+import { BlueprintBuilder } from "../Foundation/Builder/BlueprintBuilder";
+import { GameObjectBuilder } from "../Foundation/Builder/GameObjectBuilder";
+import { SceneManager } from "../Foundation/Manager/SceneManager";
 import { System } from "../System/System";
-import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
-import { BlueprintBuilder} from '../Foundation/Builder/BlueprintBuilder';
+import { Entity } from "./Entity";
 
 export class Application extends Entity {
 
@@ -23,26 +23,27 @@ export class Application extends Entity {
             antialiasing: false,
             transparent: true,
             autoResize: true,
-            resolution: window.devicePixelRatio || 1 
-        }
+            resolution: window.devicePixelRatio || 1
+        };
         this._application = new PIXI.Application(window.innerWidth, window.innerHeight, options);
         this.renderer = this._application.renderer;
         this.canvas = this._application.view;
         this.view = this._application.stage;
         this.gameLayout = params.gameLayout;
-        //this.$height = window.innerHeight;
-        //this.$width = window.innerWidth;
+        // this.$height = window.innerHeight;
+        // this.$width = window.innerWidth;
         document.body.appendChild(this.canvas);
         System.getInstance().setTarget(this);
-        System.getInstance().getSystem("layout").parseLayout(this.gameLayout,'game');
+        System.getInstance().getSystem("layout").parseLayout(this.gameLayout, "game");
         SceneManager.getInstance().setTarget(this);
     }
 
-    create(){
-        this.params.directChildren.forEach(key => {
-            BlueprintBuilder.getInstance().createAndAddObject(this,this.params.blueprints.find(item=>item.name==key))
+    create() {
+        this.params.directChildren.forEach((key) => {
+            BlueprintBuilder.getInstance()
+            .createAndAddObject(this, this.params.blueprints.find((item) => item.name === key));
         });
-        this.updateLayoutTree();    
+        this.updateLayoutTree();
     }
     // refresh(){
     //     let dimensions = {
@@ -51,17 +52,17 @@ export class Application extends Entity {
     //     }
     //     this.resize(dimensions);
     // }
-    loadScene(name){
+    loadScene(name) {
         SceneManager.getInstance().loadScene(name);
-        
+
     }
 
-    switchScenesTo(name, kill=true){
+    switchScenesTo(name, kill = true) {
         this.removeNode(this.currentScene.name);
-        SceneManager.getInstance().switchScenesTo(name,kill);
+        SceneManager.getInstance().switchScenesTo(name, kill);
     }
     resize(width, height) {
-        if (!this.canResize) return;
+        if (!this.canResize) { return; }
         this.renderer.resize(width, height);
         this.width = width;
         this.height = height;
@@ -70,4 +71,4 @@ export class Application extends Entity {
 
 }
 
-GameObjectBuilder.getInstance().registerGameObject('Application', Application);
+GameObjectBuilder.getInstance().registerGameObject("Application", Application);

@@ -1,24 +1,25 @@
 import { View as AutolayoutView, VisualFormat } from "autolayout";
 import { MathUtil } from "../Util/MathUtil";
-export class View {
+export class AutolayoutViewWrapper {
     proxy;
     viewMap = {};
-    rules= {};
+    rules = {};
 
     parent;
     children;
-    name= "";
+    name = "";
     target = null;
-    tree= {};
+    tree = {};
     width;
     height;
     left;
     top;
     EVFL;
     // constraints;
-    constructor({ EVFL, spacing = 8 , children= [], name= "", target= "", width, height, parent = null, left = 0, top = 0, rules= {} }) {
-        const constraints = VisualFormat.parse(EVFL, {extended: true});
-        this.proxy = new AutolayoutView({constraints});
+    // tslint:disable-next-line:max-line-length
+    constructor({ EVFL, spacing = 8, children = [], name = "", target = "", width, height, parent = null, left = 0, top = 0, rules = {} }) {
+        const constraints = VisualFormat.parse(EVFL, { extended: true });
+        this.proxy = new AutolayoutView({ constraints });
         this.rules = rules;
         this.parent = parent;
         this.children = children;
@@ -37,19 +38,19 @@ export class View {
     query(name) {
         return this.root.compute(name, this.rules[name]);
     }
-    compute(name, matches= null) {
+    compute(name, matches = null) {
         if (matches == null) {
             return this.getViewFromMap(name);
         }
 
-        const result = {name};
+        const result = { name };
         for (const key in matches) {
             if (matches.hasOwnProperty(key)) {
-            const target = matches[key]["target"];
-            const prop = matches[key]["prop"];
-            const value = this.getPropertyFromMap(target, prop);
-            result[prop] = value;
-        }
+                const target = matches[key]["target"];
+                const prop = matches[key]["prop"];
+                const value = this.getPropertyFromMap(target, prop);
+                result[prop] = value;
+            }
         }
         return result;
     }
@@ -81,8 +82,8 @@ export class View {
 
     normalizeSubViews() {
         for (const key in this.proxy.subViews) {
-            if (proxy.subViews.hasOwnProperty(key)) {
-            this.normalizeSubView(key);
+            if (this.proxy.subViews.subViews.hasOwnProperty(key)) {
+                this.normalizeSubView(key);
             }
         }
     }
@@ -91,7 +92,7 @@ export class View {
         this.root.viewMap[subView.name] = subView;
     }
 
-    resize(width, height, left= 0, top= 0) {
+    resize(width, height, left = 0, top = 0) {
         this.width = width;
         this.height = height;
         this.left = left;
@@ -101,7 +102,7 @@ export class View {
     }
     setSize(width, height) {
         if (!width || !height) {
-         return;
+            return;
         }
         this.width = width;
         this.height = height;
@@ -117,9 +118,10 @@ export class View {
             childParams.left = MathUtil.toFixed(target.left + this.left);
             childParams.top = MathUtil.toFixed(target.top + this.top);
             if (this.tree[childParams.name]) {
+                // tslint:disable-next-line:max-line-length
                 this.tree[childParams.name].resize(childParams.width, childParams.height, childParams.left, childParams.top);
             } else {
-                this.tree[childParams.name] = new View (childParams);
+                this.tree[childParams.name] = new AutolayoutViewWrapper(childParams);
             }
 
         });

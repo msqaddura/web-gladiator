@@ -1,14 +1,11 @@
-//not to confuse with the name... this more like parser/iterator
-import { WGObject } from '../Core/WGObject';
-import { WGObjectBuilder } from './WGObjectBuilder';
-import { Strategy } from '../Base/Strategy';
-import { View } from '../Core/View';
-import { GameObjectBuilder } from './GameObjectBuilder';
-import { StrategyBuilder } from './StrategyBuilder';
+// not to confuse with the name... this more like parser/iterator
+import { Strategy } from "../Base/Strategy";
+import { View } from "../Core/View";
+import { WGObject } from "../Core/WGObject";
+import { GameObjectBuilder } from "./GameObjectBuilder";
+import { StrategyBuilder } from "./StrategyBuilder";
+import { WGObjectBuilder } from "./WGObjectBuilder";
 export class BlueprintBuilder {
-    private static instance: BlueprintBuilder;
-    
-    _registerObjects={};
     static getInstance() {
         if (!this.instance) {
             this.instance = new BlueprintBuilder();
@@ -16,18 +13,21 @@ export class BlueprintBuilder {
         }
         return this.instance;
     }
+    private static instance: BlueprintBuilder;
 
-    registerObject(ctorName,ctor){
-        this._registerObjects[ctorName]=ctor;
+    registerObjects = {};
+
+    registerObject(ctorName, ctor) {
+        this.registerObjects[ctorName] = ctor;
     }
-    createAndAddObject(owner,blueprint,bootstrap=true){
-        let obj = this.createObject(owner,blueprint,bootstrap);
-        owner.addNode(obj)
+    createAndAddObject(owner, blueprint, bootstrap = true) {
+        const obj = this.createObject(owner, blueprint, bootstrap);
+        owner.addNode(obj);
         return obj;
     }
-    createObject(owner,blueprint,bootstrap=true){
-        //let builder = null;
-        let obj = new blueprint.ctor(owner,blueprint);
+    createObject(owner, blueprint, bootstrap = true) {
+        // let builder = null;
+        const obj = new blueprint.ctor(owner, blueprint);
         obj.bootstrap(bootstrap);
         return obj;
         // if (View.isPrototypeOf(blueprint.ctor))
@@ -36,10 +36,10 @@ export class BlueprintBuilder {
         //     builder = WGObjectBuilder.getInstance()
         // else if(Strategy.isPrototypeOf(blueprint.ctor))
         //     builder = StrategyBuilder.getInstance()
-        // else 
+        // else
         //      builder = GameObjectBuilder.getInstance()
 
         // return builder.createObject(owner,blueprint,bootstrap);
     }
-    
-} 
+
+}

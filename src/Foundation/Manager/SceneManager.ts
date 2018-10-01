@@ -1,16 +1,10 @@
-import { System } from '../../System/System';
-import { BlueprintBuilder} from '../../Foundation/Builder/BlueprintBuilder';
+import { BlueprintBuilder } from "../../Foundation/Builder/BlueprintBuilder";
+import { System } from "../../System/System";
 /**
- * What have I done? 
+ * What have I done?
  * REFACTOR EVERY SINGLE LINE OF CODE... although function names are right
  */
 export class SceneManager {
-    private static instance: SceneManager;
-    
-    _sceneMap={};
-    _target;
-    _activeScene;
-    _resources;
     static getInstance() {
         if (!this.instance) {
             this.instance = new SceneManager();
@@ -18,50 +12,56 @@ export class SceneManager {
         }
         return this.instance;
     }
-    
-    setTarget(target){
-        this._target = target;
-        this._sceneMap = target.sceneMap;
-        this._resources = target.resource;
+    private static instance: SceneManager;
+
+    sceneMap = {};
+    target;
+    activeScene;
+    resources;
+
+    setTarget(target) {
+        this.target = target;
+        this.sceneMap = target.sceneMap;
+        this.resources = target.resource;
     }
-    registerScene(name,scene){
-        this._sceneMap[name]=scene;
+    registerScene(name, scene) {
+        this.sceneMap[name] = scene;
     }
-    getScene(name){
-        return this._sceneMap[name];
+    getScene(name) {
+        return this.sceneMap[name];
     }
-    preloadScene(name:string) {  
-         return System.getInstance().getSystem("resource").preloadManifest(this._sceneMap[name].manifest);
+    preloadScene(name: string) {
+        return System.getInstance().getSystem("resource").preloadManifest(this.sceneMap[name].manifest);
     }
-    preload(name:string) {  
-         return System.getInstance().getSystem("resource").preload(this._resources);
+    preload(name: string) {
+        return System.getInstance().getSystem("resource").preload(this.resources);
     }
-    switchScenesTo(inScene,outScene){
-        this._activeScene.kill();
-        
-        this.loadScene(inScene,true);
-        //this._target.refresh();
+    switchScenesTo(inScene, outScene) {
+        this.activeScene.kill();
+
+        this.loadScene(inScene, true);
+        // this._target.refresh();
     }
 
-    loadScene(name, bootstrap = true){
-        System.getInstance().getSystem("layout").parseLayout(this._sceneMap[name].sceneLayout,name);
-        this._activeScene = BlueprintBuilder.getInstance().createAndAddObject(this._target,this._sceneMap[name],bootstrap);
-        this._target.currentScene=this._activeScene;
-        this._target.currentScene.updateLayout();
-        //QQQQQHack
-        this._target.currentScene.updateLayout();
-        //this._target.refresh();
-        
-        //this._target.addNode(this._target.createNode(blueprint,bootstrap))
-        //this._activeScene = this._target.createTree(blueprint,bootstrap);
-        //this._target.addComponent(this._activeScene);
+    loadScene(name, bootstrap = true) {
+        System.getInstance().getSystem("layout").parseLayout(this.sceneMap[name].sceneLayout, name);
+        this.activeScene = BlueprintBuilder.getInstance()
+            .createAndAddObject(this.target, this.sceneMap[name], bootstrap);
+        this.target.currentScene = this.activeScene;
+        this.target.currentScene.updateLayout();
+        // QQQQQHack
+        this.target.currentScene.updateLayout();
+        // this._target.refresh();
+
+        // this._target.addNode(this._target.createNode(blueprint,bootstrap))
+        // this._activeScene = this._target.createTree(blueprint,bootstrap);
+        // this._target.addComponent(this._activeScene);
     }
 
-    unloadScene(scene){
+    unloadScene(scene) {
         scene.kill();
     }
-  
-    
-} 
 
-export let sceneManager = SceneManager.getInstance();
+}
+
+export let sceneManager: SceneManager = SceneManager.getInstance();

@@ -1,8 +1,5 @@
-import { View } from '../Core/View';
+import { View } from "../Core/View";
 export class GameObjectBuilder {
-    private static instance: GameObjectBuilder;
-    
-    _registeredGameObjects={};
     static getInstance() {
         if (!this.instance) {
             this.instance = new GameObjectBuilder();
@@ -10,13 +7,16 @@ export class GameObjectBuilder {
         }
         return this.instance;
     }
+    private static instance: GameObjectBuilder;
 
-    registerGameObject(ctorName,ctor){
-        this._registeredGameObjects[ctorName]=ctor;
+    _registeredGameObjects = {};
+
+    registerGameObject(ctorName, ctor) {
+        this._registeredGameObjects[ctorName] = ctor;
     }
-    
-    createObject(owner,blueprint,bootstrap=true){
-        let obj:View = new blueprint.ctor(owner,blueprint);
+
+    createObject(owner, blueprint, bootstrap = true) {
+        const obj: View = new blueprint.ctor(owner, blueprint);
         obj.bootstrap(bootstrap);
 
         // if(bootstrap){
@@ -27,11 +27,11 @@ export class GameObjectBuilder {
         //     obj.listenToHIDEvents(false);
         //     obj.start();
         // }
-        //return new this._registeredGameObjects[ctorName]()
-        //.setOwner(owner)
-        //.setParams(params)
-        //.bootstrap(bootstrap);
+        // return new this._registeredGameObjects[ctorName]()
+        // .setOwner(owner)
+        // .setParams(params)
+        // .bootstrap(bootstrap);
         return obj;
     }
-    
-} 
+
+}

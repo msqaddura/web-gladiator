@@ -3,17 +3,13 @@
 * DEPRICATED
 */
 
+import * as PIXI from "pixi.js";
 
-
-
-
-import * as PIXI from 'pixi.js'
-
-import { Entity } from './Entity';
-import { GameObjectBuilder } from '../Foundation/Builder/GameObjectBuilder';
+import { GameObjectBuilder } from "../Foundation/Builder/GameObjectBuilder";
+import { Entity } from "./Entity";
 
 export class SpaceContainer extends Entity {
-    $$$scaleOnly=false;
-} 
+    $$$scaleOnly = false;
+}
 
-GameObjectBuilder.getInstance().registerGameObject('SpaceContainer',SpaceContainer);
+GameObjectBuilder.getInstance().registerGameObject("SpaceContainer", SpaceContainer);

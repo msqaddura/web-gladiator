@@ -1,6 +1,6 @@
-export interface IEvent{
+export interface IEvent {
     registeredEvents;
     listenToBusEvents();
-    registerEvent(ctor)
-    sendEvent(obj)
+    registerEvent(ctor);
+    sendEvent(obj);
 }

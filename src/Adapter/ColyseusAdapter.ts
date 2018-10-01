@@ -19,30 +19,34 @@ export class ColyseusAdapter {
     }
 
     connect(room = "normal") {
-        this.isConnected=false;
+        this.isConnected = false;
+        console.log("Net::Connecting");
         try {
 
             this.client = new Colyseus.Client(this.url);
             this.client.onError.add((error) => {
-                console.info("NET", { type: "error", error });
+                console.log("Net::Error");
+                // console.info("NET", { type: "error", error });
                 this.stream.next({ type: "error", data: STATUS.SERVER_UNAVAILABLE });
                 this.client.close();
-                this.isConnected=false;
+                this.isConnected = false;
             });
             this.client.onClose.add((event) => {
-                console.info("NET", { type: "close", event });
+                console.log("Net::Closed");
+                // console.info("NET", { type: "close", event });
                 this.stream.next({ type: "close" });
-                this.isConnected=false;
+                this.isConnected = false;
             });
 
             this.client.onOpen.add((event) => {
-                console.info("NET", { type: "open", event });
+                console.log("Net::Open");
+                // console.info("NET", { type: "open", event });
                 this.stream.next({ type: "open " });
                 this._joinRoom(room);
             });
         } catch (error) {
             console.info("NET", { type: "ERROR", error });
-            this.isConnected=false;
+            this.isConnected = false;
             this.stream.next({ type: "error", data: STATUS.SECURITY_ERROR });
         }
 
@@ -53,26 +57,31 @@ export class ColyseusAdapter {
         this.room = this.client.join(this.roomName);
 
         this.room.onJoin.add(() => {
-            this.isConnected=true;
-            console.info("NET", { type: "join" });
+            this.isConnected = true;
+            // console.info("NET", { type: "join" });
+            console.log("Net::Joined");
             this.stream.next({ type: "join", data: { room: this.room, client: this.client } });
         });
         this.room.onStateChange.add((state) => {
-            console.info("NET", { type: "update", state });
+            console.log("Net::Update");
+            // console.info("NET", { type: "update", state });
             this.stream.next({ type: "update", state });
         });
         this.room.onMessage.add((data) => {
-            console.info("NET", { type: "data", data });
+            console.log("Net::Message");
+            // console.info("NET", { type: "data", data });
             this.stream.next({ type: "data", data });
         });
         this.room.onError.add((data) => {
             // stream.error() //<--- error the whole stream... new room
-            console.info("NET", { type: "error" });
+            // console.info("NET", { type: "error" });
+            console.log("Net::Room_Error");
             this.stream.next({ type: "error", data: STATUS_CODES.GAME_ERROR });
         });
         this.room.onLeave.add((client) => {
             // strand you eam.complete() //<--- complete the whole stream... new player
-            console.info("NET", { type: "leave", data: { client, timedOut: client.code === 8 } });
+            // console.info("NET", { type: "leave", data: { client, timedOut: client.code === 8 } });
+            console.log("Net::Left", client.code === 8);
             this.stream.next({ type: "leave", data: client.code === 8 ? STATUS.TIMED_OUT : null });
             this.client.close();
             this.room.removeAllListeners();
