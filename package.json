@@ -16,18 +16,13 @@
     "@types/pixi.js": "^4.7.2",
     "@types/socket.io-client": "^1.4.32",
     "browserify": "^13.1.1",
-    "gulp": "^3.9.1",
-    "gulp-typescript": "^3.2.4",
-    "gulp-util": "^3.0.8",
     "tsify": "^3.0.4",
     "typescript": "^2.8.1",
-    "vinyl-source-stream": "^1.1.2",
     "watchify": "^3.11.0"
   },
   "dependencies": {
     "autolayout": "*",
     "colyseus.js": "^0.9.1",
-    "firebase": "^4.12.1",
     "gsap": "^1.20.4",
     "javascript-state-machine": "^3.0.1",
     "pixi-audio": "^0.9.4",
