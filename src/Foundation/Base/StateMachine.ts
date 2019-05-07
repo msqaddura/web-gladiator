@@ -1,11 +1,7 @@
-import { JavascriptStateMachineWrapper } from '../../Wrapper/JavascriptStateMachineWrapper';
-import * as Rx from 'rxjs';
+import { JavascriptStateMachineWrapper } from "../../Wrapper/JavascriptStateMachineWrapper";
 
-
-
-export class StateMachine extends JavascriptStateMachineWrapper{
-
-    constructor(init,transitions,methods,data=null){
-        super(init,transitions,methods,data)
-    }
+export class StateMachine extends JavascriptStateMachineWrapper {
+  constructor(init, transitions, methods, data = null) {
+    super(init, transitions, methods, data);
+  }
 }
