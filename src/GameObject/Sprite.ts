@@ -4,6 +4,7 @@ import { GameObjectBuilder } from "../Foundation/Builder/GameObjectBuilder";
 import { View } from "../Foundation/Core/View";
 
 export class Sprite extends View {
+  _fromImage: string;
   constructor(owner, params) {
     super(owner, params);
     const texture = PIXI.Texture.EMPTY;
@@ -22,9 +23,10 @@ export class Sprite extends View {
 
   set fromImage(value) {
     this.view.texture = PIXI.Texture.from(value);
+    this.fromImage = value;
   }
   get fromImage() {
-    return this.view.texture;
+    return this._fromImage;
   }
 }
 
