@@ -15,10 +15,10 @@ export class Sprite extends View {
   }
 
   preInitialize() {
-    super.preInitialize();
     if (this.params.hasOwnProperty("fromImage")) {
       this.view.texture = PIXI.Texture.from(this.params.fromImage);
     }
+    super.preInitialize();
   }
 
   set fromImage(value) {

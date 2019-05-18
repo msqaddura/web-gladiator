@@ -146,6 +146,8 @@ export class View extends WGObject implements IView, IHID {
     this.view.twin = this;
   }
 
+  preUpdateLayout() {}
+
   // use iterator or visitor
   updateLayout() {
     if (this.layoutComponent != null) {
@@ -166,14 +168,30 @@ export class View extends WGObject implements IView, IHID {
     this.updateLayoutTree();
   }
 
+  postUpdateLayout() {}
+
+  preUpdateLayoutTree() {
+    for (const key in this.views) {
+      if (this.views.hasOwnProperty(key)) {
+        this.views[key].preUpdateLayout();
+      }
+    }
+  }
   updateLayoutTree() {
     for (const key in this.views) {
-      if (this.views.hasOwnProperty) {
+      if (this.views.hasOwnProperty(key)) {
         this.views[key].updateLayout();
       }
     }
   }
 
+  postUpdateLayoutTree() {
+    for (const key in this.views) {
+      if (this.views.hasOwnProperty(key)) {
+        this.views[key].postUpdateLayout();
+      }
+    }
+  }
   // parseLayout(width, height, left, top) {
 
   //     this.width = width;

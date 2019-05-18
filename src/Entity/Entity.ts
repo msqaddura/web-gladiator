@@ -67,6 +67,7 @@ export class Entity extends View {
   // }
 
   updateLayoutTree() {
+    this.preUpdateLayoutTree();
     if (!this.$$$scaleModeActive) {
       super.updateLayoutTree();
     }
@@ -75,6 +76,7 @@ export class Entity extends View {
     this.anchorY = this.anchorY;
     this.width = this.width;
     this.height = this.height;
+    this.postUpdateLayoutTree();
   }
 
   get $$$scaleModeActive() {
