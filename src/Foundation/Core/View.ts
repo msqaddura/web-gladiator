@@ -36,6 +36,7 @@ export class View extends WGObject implements IView, IHID {
   _scaleY = 1;
   _rotation = 0;
   _vfl = [""];
+  _mask = null;
   layout = {
     name: null,
     left: "left",
@@ -382,6 +383,15 @@ export class View extends WGObject implements IView, IHID {
   }
   get alpha() {
     return this._alpha;
+  }
+
+  get mask() {
+    return this.view.mask;
+  }
+
+  set mask(value) {
+    this.view.mask = value.view;
+    this._mask = value;
   }
 
   get rotation() {
