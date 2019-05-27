@@ -13,6 +13,18 @@ export class PixiAudioAdapter {
     console.log(":)" || PixiAudio);
   }
   play(name) {
-    PIXI["audioManager"].getAudio(name).play();
+    const audio = PIXI["audioManager"].getAudio(name);
+    return audio.play();
+  }
+
+  loop(name) {
+    const audio = PIXI["audioManager"].getAudio(name);
+    audio.loop = true;
+    audio.play();
+    return audio;
+  }
+
+  getAudio(name) {
+    return PIXI["audioManager"].getAudio(name);
   }
 }

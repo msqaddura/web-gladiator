@@ -18,4 +18,13 @@ export class SoundSystem {
   play(name) {
     return this._adapter.play(name);
   }
+
+  getAudio(name) {
+    return this._adapter.getAudio(name);
+  }
+
+  loop(name) {
+    //this._adapter.loop(name);
+    return this._adapter.loop(name);
+  }
 }

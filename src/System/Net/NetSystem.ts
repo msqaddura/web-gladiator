@@ -1,64 +1,64 @@
-export const STATUS = {
-    SERVER_UNAVAILABLE: {
-        text: "Error Connecting to Server!",
-        log: " SERVER_UNAVAILABLE "
-    },
-    SECURITY_ERROR: {
-        text: "Error Connecting to Server!",
-        log: "SECURITY_ERROR"
-    },
-    GAME_ERROR: {
-        text: "OOOPS! Something went wrong",
-        log: "GAME_ERROR"
-    },
+import { Observable } from "rxjs";
 
-    TIMED_OUT: {
-        text: "Timed out",
-        log: "Timed_OUT"
-    },
-    CLOSED: {
-        text: "CLOSED"
-    }
+export const STATUS = {
+  SERVER_UNAVAILABLE: {
+    text: "Error Connecting to Server!",
+    log: " SERVER_UNAVAILABLE "
+  },
+  SECURITY_ERROR: {
+    text: "Error Connecting to Server!",
+    log: "SECURITY_ERROR"
+  },
+  GAME_ERROR: {
+    text: "OOOPS! Something went wrong",
+    log: "GAME_ERROR"
+  },
+
+  TIMED_OUT: {
+    text: "Timed out",
+    log: "Timed_OUT"
+  },
+  CLOSED: {
+    text: "CLOSED"
+  }
 };
 
 export class NetSystem {
-    public static instance: NetSystem;
+  public static instance: NetSystem;
 
-    static getInstance() {
-        if (!this.instance) {
-            this.instance = new NetSystem();
-            // this.instance._adapter = new SocketIOAdapter();
-            // ... any one time initialization goes here ...
-        }
-        return this.instance;
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new NetSystem();
+      // this.instance._adapter = new SocketIOAdapter();
+      // ... any one time initialization goes here ...
     }
-    get isConnected() {
-        return this.adapter.isConnected;
-    }
+    return this.instance;
+  }
+  get isConnected() {
+    return this.adapter.isConnected;
+  }
 
-    private adapter;
+  private adapter;
 
-    use(adapter) {
-        this.adapter = adapter;
-    }
+  use(adapter) {
+    this.adapter = adapter;
+  }
 
-    getStream() {
-        return this.adapter.getStream();
-    }
+  getStream(): Observable<any> {
+    return this.adapter;
+  }
 
-    connect(room) {
-        this.adapter.connect(room);
+  connect(room: any, query?: any) {
+    return this.adapter.connect(room, query);
+  }
 
-    }
+  disconnect() {
+    this.adapter.disconnect();
+  }
 
-    disconnect() {
-        this.adapter.disconnect();
-    }
-
-    send(data) {
-        this.adapter.send(data);
-    }
-
+  send(data) {
+    this.adapter.send(data);
+  }
 }
 
 export let netSystem = NetSystem.getInstance();
