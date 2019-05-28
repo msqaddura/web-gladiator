@@ -1,3 +1,5 @@
+import { Observable, Subject } from "rxjs";
+
 //extends Facade
 export class EventSystem {
   static getInstance() {
@@ -8,21 +10,25 @@ export class EventSystem {
     return this.instance;
   }
   private static instance: EventSystem;
-  _adapter;
+
+  registeredEvents: { [key: string]: Subject<any> } = {};
+
   private constructor() {
     // do something construct...
     //this._adapter = new Bus();
   }
 
-  use(adapter) {
-    this._adapter = adapter;
+  registerEvent(ctor): Observable<any> {
+    if (!this.registeredEvents[ctor.uName]) {
+      this.registeredEvents[ctor.uName] = new Subject();
+    }
+    return this.registeredEvents[ctor.uName].asObservable();
   }
-  registerEvent(ctor) {
-    return this._adapter.registerEvent(ctor);
-  }
+
   sendEvent(obj) {
-    // RODO: rename to dispatchEvent
-    this._adapter.sendEvent(obj);
+    if (this.registeredEvents[obj.name]) {
+      this.registeredEvents[obj.name].next(obj);
+    }
   }
 }
 

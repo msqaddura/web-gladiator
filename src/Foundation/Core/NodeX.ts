@@ -35,7 +35,7 @@ export class NodeX implements INode, IEvent, IStateMachine {
   }
   listenToBusEvents() {}
 
-  registerEvent(ctor: InstanceType<any>) {
+  registerEvent(ctor: InstanceType<any>): Observable<any> {
     this.registeredEvents[ctor.name] = EventSystem.getInstance().registerEvent(
       ctor
     );
