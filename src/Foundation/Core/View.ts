@@ -32,8 +32,8 @@ export class View extends WGObject implements IView, IHID {
   _alpha = 1;
   _anchorX = 0;
   _anchorY = 0;
-  _scaleX = 1;
-  _scaleY = 1;
+  _scaleX = 0;
+  _scaleY = 0;
   _rotation = 0;
   _vfl = [""];
   _mask = null;
@@ -307,7 +307,7 @@ export class View extends WGObject implements IView, IHID {
   }
 
   get width() {
-    return this._width;
+    return this._width || this.view.width;
   }
   set width(value) {
     value = MathUtil.toFixed(value);
@@ -316,7 +316,7 @@ export class View extends WGObject implements IView, IHID {
   }
 
   get height() {
-    return this._height;
+    return this._height || this.view.height;
   }
   set height(value) {
     value = MathUtil.toFixed(value);
@@ -343,7 +343,7 @@ export class View extends WGObject implements IView, IHID {
   }
 
   get scaleX() {
-    return this._scaleX;
+    return this._scaleX || this.view.scale.x;
   }
   set scaleX(value) {
     value = MathUtil.toFixed(value);
@@ -352,7 +352,7 @@ export class View extends WGObject implements IView, IHID {
   }
 
   get scaleY() {
-    return this._scaleY;
+    return this._scaleY || this.view.scale.y;
   }
   set scaleY(value) {
     value = MathUtil.toFixed(value);
