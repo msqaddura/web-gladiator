@@ -7,14 +7,13 @@ export class Sprite extends View {
   _fromImage: string;
   constructor(owner, params) {
     super(owner, params);
-    const texture = PIXI.Texture.EMPTY;
-    //PIXI.utils.TextureCache[params.fromImage];
+    const texture = PIXI.Texture.from(this.params.fromImage);
 
     this.view = new PIXI.Sprite(texture);
     this.view.twin = this;
   }
 
-  preInitialize() {
+  preInitializeXX() {
     if (this.params.hasOwnProperty("fromImage")) {
       this.view.texture = PIXI.Texture.from(this.params.fromImage);
     }
@@ -27,6 +26,20 @@ export class Sprite extends View {
   }
   get fromImage() {
     return this._fromImage;
+  }
+
+  get scaleX() {
+    return this.view.scale.x;
+  }
+  set scaleX(value) {
+    this.view.scale.x = value;
+  }
+
+  get scaleY() {
+    return this.view.scale.y;
+  }
+  set scaleY(value) {
+    this.view.scale.y = value;
   }
 }
 

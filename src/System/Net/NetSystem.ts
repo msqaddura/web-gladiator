@@ -48,8 +48,8 @@ export class NetSystem {
     return this.adapter;
   }
 
-  connect(room: any, query?: any) {
-    return this.adapter.connect(room, query);
+  connect(room: any) {
+    return this.adapter.connect(room);
   }
 
   disconnect() {
