@@ -25,12 +25,13 @@ export class WebSocketAdapter extends Subject<SocketEvent> {
     this.socket.onerror = error => {
       console.error(error);
       this.next({ type: "error", payload: error });
-    };
 
+    };
     this.socket.onmessage = payload => {
       console.log(payload);
       this.next({ type: "message", payload });
     };
+
     return new Observable(observer => {
       this.socket.onmessage = payload => {
         if (this.hack) {
@@ -39,6 +40,13 @@ export class WebSocketAdapter extends Subject<SocketEvent> {
           this.hack = false;
         } else {
           this.next({ type: "message", payload });
+        }
+      };
+
+      this.socket.onerror = payload => {
+        if (this.hack) {
+          observer.error(payload);
+          this.hack = false;
         }
       };
     });
