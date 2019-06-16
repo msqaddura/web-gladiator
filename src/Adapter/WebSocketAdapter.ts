@@ -18,8 +18,13 @@ export class WebSocketAdapter extends Subject<SocketEvent> {
       this.next({ type: "open", payload });
     };
 
-    this.socket.onclose = payload => {
-      this.next({ type: "close", payload });
+    this.socket.onclose = event => {
+      console.log(event)
+      this.next({ type: "close", payload: event });
+      if (event.code === 1000) {
+        console.log("reconnecting");
+        setTimeout(() => this.connect(this.url), 0);
+      }
     };
 
     this.socket.onerror = error => {
