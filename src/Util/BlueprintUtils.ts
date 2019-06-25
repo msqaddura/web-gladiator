@@ -15,4 +15,8 @@ export class BlueprintUtil {
     }
     return result;
   }
+
+  clone(blueprint) {
+    return JSON.parse(JSON.stringify(blueprint))
+  }
 }
