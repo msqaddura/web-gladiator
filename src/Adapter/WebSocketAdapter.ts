@@ -33,10 +33,6 @@ export class WebSocketAdapter extends Subject<SocketEvent> {
       this.open = false;
       console.log(event)
       this.next({ type: "close", payload: event });
-      if (event.code === 1000) {
-        console.log("can do reconnecting");
-
-      }
     };
 
     this.socket.onerror = error => {
@@ -78,7 +74,9 @@ export class WebSocketAdapter extends Subject<SocketEvent> {
   }
 
   disconnect() {
-    this.socket.close();
+    if (this.open) {
+      this.socket.close();
+    }
   }
 
   send(data) {
