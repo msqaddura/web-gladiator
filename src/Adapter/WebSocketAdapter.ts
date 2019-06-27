@@ -51,26 +51,24 @@ export class WebSocketAdapter extends Subject<SocketEvent> {
     };
 
     return new Observable(observer => {
-      this.socket.onmessage = payload => {
+      this.socket.addEventListener('message', payload => {
         if (this.hack) {
           const data = JSON.parse(payload.data)
-          if (data.type === "GAME_INIT") {
+          if (data.type === "GAME_INIT" || data.type === "FATAL_ERROR") {
             observer.next({ type: "message", payload });
             //observer.complete();
             this.hack = false;
           }
-        } else {
-          this.next({ type: "message", payload });
         }
-      };
+      });
 
-      this.socket.onerror = event => {
-        console.log(event)
+      this.socket.addEventListener('close', event => {
         if (this.hack) {
-          observer.error(event);
+          observer.error(event.code);
           this.hack = false;
         }
-      };
+      });
+
     });
   }
 
