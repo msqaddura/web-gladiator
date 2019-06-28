@@ -1,12 +1,9 @@
 import * as io from "socket.io-client";
 import { Subject, Observable } from "rxjs";
 
-interface SocketEvent {
-  type: "open" | "close" | "error" | "message";
-  payload: Event;
-}
 
-export class WebSocketAdapter extends Subject<SocketEvent> {
+
+export class WebSocketAdapter extends Subject<Event> {
   private socket: WebSocket;
   private url: string;
   private open = false;
@@ -19,50 +16,39 @@ export class WebSocketAdapter extends Subject<SocketEvent> {
     super();
   }
 
-  connect(url): Observable<SocketEvent> {
+  connect(url): Observable<Event> {
     console.log(url);
     this.url = url;
     this.socket = new WebSocket(url);
-    this.socket.onopen = payload => {
-      this.next({ type: "open", payload });
+    this.socket.onopen = event => {
+      this.next(event);
       this.open = true;
-      setInterval(() => { this.ping() }, this.pingInterval)
+      setInterval(() => { this.ping(); }, this.pingInterval)
     };
 
     this.socket.onclose = event => {
       this.open = false;
       console.log(event)
-      this.next({ type: "close", payload: event });
+      this.next(event);
     };
 
-    this.socket.onerror = error => {
-      console.error(error);
-      this.next({ type: "error", payload: error });
+    this.socket.onerror = event => {
+      this.next(event);
       this.open = false;
-
     };
-    this.socket.onmessage = payload => {
-      console.log(payload);
-      this.next({ type: "message", payload });
+
+    this.socket.onmessage = event => {
+      console.log(event);
+      this.next(event);
     };
 
     return new Observable(observer => {
-      this.socket.addEventListener('message', payload => {
-        if (this.hack) {
-          const data = JSON.parse(payload.data)
-          if (data.type === "GAME_INIT" || data.type === "FATAL_ERROR") {
-            observer.next({ type: "message", payload });
-            //observer.complete();
-            this.hack = false;
-          }
-        }
+      this.socket.addEventListener('message', event => {
+        observer.next(event);
       });
 
       this.socket.addEventListener('close', event => {
-        if (this.hack) {
-          observer.error(event.code);
-          this.hack = false;
-        }
+        observer.error(event.code);
       });
 
     });
