@@ -7,7 +7,6 @@ export class WebSocketAdapter extends Subject<Event> {
   private socket: WebSocket;
   private url: string;
   private open = false;
-  private hack = true;
 
   constructor(
     public readonly pingCommand = {},
@@ -17,9 +16,8 @@ export class WebSocketAdapter extends Subject<Event> {
   }
 
   connect(url): Observable<Event> {
-    console.log(url);
     this.url = url;
-    this.socket = new WebSocket(url);
+    this.socket = new WebSocket(this.url);
     this.socket.onopen = event => {
       this.next(event);
       this.open = true;
@@ -28,7 +26,6 @@ export class WebSocketAdapter extends Subject<Event> {
 
     this.socket.onclose = event => {
       this.open = false;
-      console.log(event)
       this.next(event);
     };
 
@@ -38,7 +35,6 @@ export class WebSocketAdapter extends Subject<Event> {
     };
 
     this.socket.onmessage = event => {
-      console.log(event);
       this.next(event);
     };
 
