@@ -33,9 +33,9 @@ export class NodeX implements INode, IEvent, IStateMachine {
     this.executeStateMachine();
     this.listenToBusEvents();
   }
-  listenToBusEvents() {}
+  listenToBusEvents() { }
 
-  registerEvent(ctor: InstanceType<any>): Observable<any> {
+  registerEvent(ctor: InstanceType<any>): any {
     this.registeredEvents[ctor.name] = EventSystem.getInstance().registerEvent(
       ctor
     );
@@ -45,7 +45,7 @@ export class NodeX implements INode, IEvent, IStateMachine {
   sendEvent(obj) {
     EventSystem.getInstance().sendEvent(obj);
   }
-  executeStateMachine() {}
+  executeStateMachine() { }
   //when she mentions boys
   kill() {
     this.isActive.next();
