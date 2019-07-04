@@ -27,4 +27,10 @@ export class SoundSystem {
     //this._adapter.loop(name);
     return this._adapter.loop(name);
   }
+  mute() {
+    this._adapter.mute()
+  }
+  unmute() {
+    this._adapter.unmute()
+  }
 }

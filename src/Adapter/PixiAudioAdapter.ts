@@ -9,12 +9,15 @@ Resource.setExtensionLoadType("ogg", Resource.LOAD_TYPE.XHR);
 Resource.setExtensionLoadType("webm", Resource.LOAD_TYPE.XHR);
 import * as PixiAudio from "pixi-audio";
 export class PixiAudioAdapter {
+  muted = false;
   constructor() {
     console.log(":)" || PixiAudio);
   }
   play(name) {
+
     const audio = PIXI["audioManager"].getAudio(name);
-    return audio.play();
+    return this.muted ? audio : audio.play();
+
   }
 
   loop(name) {
@@ -27,4 +30,7 @@ export class PixiAudioAdapter {
   getAudio(name) {
     return PIXI["audioManager"].getAudio(name);
   }
+
+  mute() { this.muted = true; PIXI["audioManager"].mute() }
+  unmute() { this.muted = false; PIXI["audioManager"].unmute() }
 }
