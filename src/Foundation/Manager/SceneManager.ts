@@ -36,7 +36,7 @@ export class SceneManager {
     preload(name: string) {
         return System.getInstance().getSystem("resource").preload(this.resources);
     }
-    switchScenesTo(inScene, outScene) {
+    switchScenesTo(inScene, outScene?) {
         this.activeScene.kill();
 
         this.loadScene(inScene, true);
