@@ -1,0 +1,1 @@
+export { particlesSystem } from "./ParticlesSystem";

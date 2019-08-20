@@ -8,3 +8,4 @@ export * from "./Net";
 export * from "./Resource";
 export * from "./Sound";
 export * from "./Tween";
+export * from "./Particles";
