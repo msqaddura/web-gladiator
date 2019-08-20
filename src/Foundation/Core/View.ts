@@ -35,6 +35,7 @@ export class View extends WGObject implements IView, IHID {
   _scaleX = 0;
   _scaleY = 0;
   _rotation = 0;
+  _zIndex = 0;
   _vfl = [""];
   _mask = null;
   layout = {
@@ -127,6 +128,9 @@ export class View extends WGObject implements IView, IHID {
     if (this.params.hasOwnProperty("anchorY")) {
       this.anchorY = this.params.anchorY;
     }
+    if (this.params.hasOwnProperty("tint")) {
+      this.tint = this.params.tint;
+    }
     if (this.params.hasOwnProperty("rotation")) {
       this.rotation = this.params.rotation;
     }
@@ -144,10 +148,11 @@ export class View extends WGObject implements IView, IHID {
     if (this.params.hasOwnProperty("accessibleHint")) {
       this.accessibleHint = this.params.accessibleHint;
     }
+
     this.view.twin = this;
   }
 
-  preUpdateLayout() {}
+  preUpdateLayout() { }
 
   // use iterator or visitor
   updateLayout() {
@@ -169,7 +174,7 @@ export class View extends WGObject implements IView, IHID {
     this.updateLayoutTree();
   }
 
-  postUpdateLayout() {}
+  postUpdateLayout() { }
 
   preUpdateLayoutTree() {
     for (const key in this.views) {
@@ -358,6 +363,15 @@ export class View extends WGObject implements IView, IHID {
     value = MathUtil.toFixed(value);
     this._scaleY = value;
     this.view.height = this.height * this._scaleY;
+  }
+
+  get zIndex() {
+    return this._zIndex;
+  }
+  set zIndex(value: number) {
+    this._zIndex = value;
+    this.view.zIndex = value;
+    this.view.parent.sortChildren(0)
   }
 
   get visible() {

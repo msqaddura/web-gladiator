@@ -1,15 +1,16 @@
 // import * as Loader from 'resource-loader';
-import * as PIXI from "pixi.js";
+import { Loader } from "pixi.js";
 import { Observable } from "rxjs";
 
 export class PixiResourceAdapter {
   loader;
   constructor() {
-    this.loader = PIXI.loader;
+    this.loader = Loader.shared;
   }
 
   preload(file) {
-    return new Observable(observer => {
+
+    return new Observable((observer) => {
       this.loader.add(file).load((loader, resources) => {
         loader.progress = 0;
         loader.onProgress.add((loader, resource) => {
@@ -20,12 +21,12 @@ export class PixiResourceAdapter {
           // console.info(loader.progress)
           observer.complete();
         });
-        loader.add(resources[file]["data"]).load((loader, resources) => {});
+        loader.add(resources[file]["data"]).load((loader, resources) => { });
       });
     });
   }
   preloadManifest(manifest, cb) {
-    return new Observable(observer => {
+    return new Observable((observer) => {
       this.loader.add(manifest).load((loader, resources) => {
         loader.progress = 0;
         loader.onProgress.add((loader, resource) => {
@@ -36,7 +37,7 @@ export class PixiResourceAdapter {
           // console.info(loader.progress)
           observer.complete();
         });
-        loader.add(resources[manifest]["data"]).load((loader, resources) => {});
+        loader.add(resources[manifest]["data"]).load((loader, resources) => { });
       });
     });
   }

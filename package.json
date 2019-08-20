@@ -13,7 +13,6 @@
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
-    "@types/pixi.js": "^4.7.2",
     "@types/socket.io-client": "^1.4.32",
     "browserify": "^13.1.1",
     "tsify": "^3.0.4",
@@ -25,8 +24,8 @@
     "colyseus.js": "^0.9.1",
     "gsap": "^1.20.4",
     "javascript-state-machine": "^3.0.1",
-    "pixi-audio": "0.9.4",
-    "pixi.js": "4.7.3",
+    "pixi-sound": "^3.0.3",
+    "pixi.js": "^5.1.1",
     "resource-loader": "^2.1.1",
     "rxjs": "^6.5.1",
     "tween.js": "*"

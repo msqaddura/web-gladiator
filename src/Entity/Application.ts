@@ -1,4 +1,8 @@
-import * as PIXI from "pixi.js";
+import { Application as $Application } from "pixi.js";
+import * as PIXI from 'pixi.js';
+window["PIXI"] = PIXI;
+
+
 
 import { BlueprintBuilder } from "../Foundation/Builder/BlueprintBuilder";
 import { GameObjectBuilder } from "../Foundation/Builder/GameObjectBuilder";
@@ -21,11 +25,11 @@ export class Application extends Entity {
         this.sceneMap = params.sceneMap;
         const options = {
             antialiasing: false,
-            transparent: true,
+            transparent: false,
             autoResize: true,
             resolution: window.devicePixelRatio || 1
         };
-        this._application = new PIXI.Application(window.innerWidth, window.innerHeight, options);
+        this._application = new $Application({ width: window.innerWidth, height: window.innerHeight, ...options });
         this.renderer = this._application.renderer;
         this.canvas = this._application.view;
         this.view = this._application.stage;
@@ -41,7 +45,7 @@ export class Application extends Entity {
     create() {
         this.params.directChildren.forEach((key) => {
             BlueprintBuilder.getInstance()
-            .createAndAddObject(this, this.params.blueprints.find((item) => item.name === key));
+                .createAndAddObject(this, this.params.blueprints.find((item) => item.name === key));
         });
         this.updateLayoutTree();
     }
