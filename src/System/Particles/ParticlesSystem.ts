@@ -1,6 +1,6 @@
-import * as PIXI from "pixi.js";
+
 import * as PARTICLES from "pixi-particles";
-console.log(PARTICLES)
+
 class ParticleSystem {
     emit(target, images, options) {
         const emitter = new PARTICLES.Emitter(
