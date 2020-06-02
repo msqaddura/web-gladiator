@@ -32,15 +32,21 @@ export class WGObject extends Composite implements IWGObject {
 
   preCreateTree() {}
   createTree(bootstrap = true) {
-    this.repeatableBlueprints.forEach(tuple => {
-      tuple.repeats.forEach(repeat => {
+    this.repeatableBlueprints.forEach((tuple) => {
+      tuple.repeats.forEach((repeat) => {
         for (const key in repeat) tuple.repeatable[key] = repeat[key];
         this.addNode(this.createNode(tuple.repeatable, bootstrap));
       });
     });
     this.blueprints
-      .flatMap(item => (typeof item === "function" ? item() : item))
-      .forEach(blueprint => {
+      .flatMap((item) => (typeof item === "function" ? item() : item))
+      .forEach((blueprint) => {
+        if (typeof blueprint === "function") {
+          blueprint().forEach((bp) => {
+            this.addNode(this.createNode(bp, bootstrap));
+          });
+          return;
+        }
         if (!!!blueprint.lazy)
           this.addNode(this.createNode(blueprint, bootstrap));
       });
