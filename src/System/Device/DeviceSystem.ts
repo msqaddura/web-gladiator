@@ -17,6 +17,10 @@ export class DeviceSystem {
   getResizeObs() {
     return this._adapter.getResizeObs();
   }
+
+  isMobile() {
+    return true;
+  }
 }
 
 export let deviceSystem = DeviceSystem.getInstance();
