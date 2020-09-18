@@ -51,6 +51,10 @@ export class DeviceSystem {
     })(navigator.userAgent || navigator.vendor || window["opera"]);
     return check;
   }
+
+  isPortrait() {
+    return window.innerWidth / window.innerHeight <= 1.5;
+  }
 }
 
 export let deviceSystem = DeviceSystem.getInstance();
