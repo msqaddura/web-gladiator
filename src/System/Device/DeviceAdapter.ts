@@ -3,6 +3,8 @@ import { debounceTime } from "rxjs/operators";
 
 export class DeviceAdapter {
   resizeObs: Subject<object> = new Subject();
+
+  visibilityObs: Subject<boolean> = new Subject();
   constructor() {
     // do something construct...
     fromEvent(window, "resize")
@@ -12,8 +14,17 @@ export class DeviceAdapter {
         const height = window.innerHeight;
         this.resizeObs.next({ width, height });
       });
+
+    this.visibilityObs.next(true);
+    fromEvent(document, "visibilitychange").subscribe(() => {
+      this.visibilityObs.next(document.visibilityState === "visible");
+    });
   }
   getResizeObs() {
     return this.resizeObs;
+  }
+
+  getVisibilityObs() {
+    return this.visibilityObs;
   }
 }

@@ -1,4 +1,8 @@
+import { Subject } from "rxjs";
+
 export class DeviceSystem {
+  visibility = new Subject();
+
   static getInstance() {
     if (!this.instance) {
       this.instance = new DeviceSystem();
@@ -16,6 +20,10 @@ export class DeviceSystem {
   }
   getResizeObs() {
     return this._adapter.getResizeObs();
+  }
+
+  getVisibilityObs() {
+    return this._adapter.getVisibilityObs();
   }
 
   isMobile() {
